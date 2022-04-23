@@ -1,6 +1,6 @@
 import { Form } from '../../components/pages/Dash/Form';
 import { UseFood } from '../../hooks/Food';
-import CardContent from '../../components/core/CardContent';
+import { CardContent } from '../../components/core/CardContent';
 
 import { Container } from '../../styles/theme';
 

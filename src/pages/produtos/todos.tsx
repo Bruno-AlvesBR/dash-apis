@@ -1,6 +1,7 @@
 import { GetStaticProps, NextPage } from 'next';
+import { memo } from 'react';
 
-import CardContent from '../../components/core/CardContent';
+import { CardContent } from '../../components/core/CardContent';
 import { IFoods } from '../../interfaces/IFoodsProps';
 import { api } from '../../services/api';
 
@@ -25,7 +26,7 @@ const todos: NextPage<IFoods> = ({ foods }) => {
   );
 };
 
-export default todos;
+export default memo(todos);
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await api.get('/foods', {
@@ -60,7 +61,7 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: 60 * 60 * 24,
     };
   } catch (err) {
-    console.log(err); 
+    console.log(err);
 
     return {
       props: {

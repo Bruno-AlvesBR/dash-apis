@@ -10,7 +10,7 @@ import { IFoodProps } from '../../../interfaces/IFoodsProps';
 
 import { Card, Title, Description } from './styles';
 
-const CardContent: NextPage<IFoodProps> = ({
+export const CardContent: NextPage<IFoodProps> = ({
   id,
   name,
   description,
@@ -63,5 +63,3 @@ const CardContent: NextPage<IFoodProps> = ({
     </Card>
   );
 };
-
-export default memo(CardContent);
