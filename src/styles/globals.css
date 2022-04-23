@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Barlow', sans-serif;
+  scroll-behavior: smooth;
+  list-style: none;
+  text-decoration: none;
+}
+
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  font-size: 92.5%;
+  background: #aaaaaa30 !important;
+  overflow-x: hidden;
+}
+
+.body-no-wrap {
+  display: flex;
+  flex-direction: row;
+}
