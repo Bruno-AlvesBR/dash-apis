@@ -1,4 +1,5 @@
 import { Button, TextField } from '@material-ui/core';
+import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -6,9 +7,11 @@ import * as yup from 'yup';
 import { UseUser } from '../../../hooks/User';
 
 import { FormContent } from './styles';
+import { UseLogin } from '../../../hooks/Login';
 
 export const FormLogin = () => {
   const { onsubmit } = UseUser();
+  const { handleCloseDialog } = UseLogin();
 
   const validationForm = yup.object({
     email: yup
@@ -30,6 +33,9 @@ export const FormLogin = () => {
 
   return (
     <FormContent onSubmit={handleSubmit(onsubmit)}>
+      <Button onClick={handleCloseDialog}>
+        <CloseIcon />
+      </Button>
       <h1 style={{ textAlign: 'center' }}>Login</h1>
       <TextField
         label={errors.email?.message || 'Email'}

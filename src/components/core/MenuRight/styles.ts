@@ -44,10 +44,17 @@ export const ContainerUserInfos = styled('div')(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  position: 'relative',
 
   '& button': {
     background: '#fff',
     color: '#6674BB',
+    margin: 'auto',
+
+    '&:hover': {
+      opacity: .7,
+      background: '#fff',
+    },
   },
 }));
 
