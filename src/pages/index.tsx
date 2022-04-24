@@ -1,13 +1,21 @@
 import { GetStaticProps, NextPage } from 'next';
 
-import { Home as LoggedHome } from '../components/pages/Home';
+import { LoggedHome } from '../components/pages/Home/LoggedHome';
+import { UnloggedHome } from '../components/pages/Home/UnloggedHome';
+import { UseUser } from '../hooks/User';
 import { IFoods } from '../interfaces/IFoodsProps';
 import { api } from '../services/api';
 
 const index: NextPage<IFoods> = ({ foods }) => {
+  const { userId } = UseUser();
+
   return (
     <>
-      <LoggedHome />
+      {userId ? (
+        <LoggedHome />
+      ) : (
+        <UnloggedHome foods={foods} />
+      )}
     </>
   );
 };
@@ -33,7 +41,7 @@ export const getStaticProps: GetStaticProps = async () => {
         updatedAt: foods?.updatedAt,
       };
     });
-  
+
     return {
       props: {
         foods,
