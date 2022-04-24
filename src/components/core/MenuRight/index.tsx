@@ -1,7 +1,8 @@
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import { useState } from 'react';
+import { Button } from '@material-ui/core';
 
+import { UseLogin } from '../../../hooks/Login';
 import { Configs } from '../Configs';
 import { UseUser } from '../../../hooks/User';
 
@@ -14,9 +15,7 @@ import {
 
 export const MenuRight = () => {
   const { user, userId } = UseUser();
-  const [openDialog, setOpenDialog] = useState(false);
-
-  const handleClose = () => setOpenDialog(false);
+  const { setOpenDialog } = UseLogin();
 
   return (
     <>
@@ -24,19 +23,20 @@ export const MenuRight = () => {
         <Content>
           <ContentConfigs>
             <HelpOutlineIcon />
-            <SettingsOutlinedIcon
-              onClick={() => setOpenDialog(true)}
-            />
+            <SettingsOutlinedIcon />
           </ContentConfigs>
           <ContainerUserInfos>
-            {userId && user && user?.name}
+            {userId ? (
+              user?.name
+            ) : (
+              <Button onClick={() => setOpenDialog(true)}>
+                Logar
+              </Button>
+            )}
           </ContainerUserInfos>
         </Content>
       </Container>
-      <Configs
-        openDialog={openDialog}
-        onClose={handleClose}
-      />
+      <Configs openDialog={false} />
     </>
   );
 };
