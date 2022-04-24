@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { Skeleton } from '@mui/material';
 
