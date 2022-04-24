@@ -10,6 +10,7 @@ import { UseUser } from './User';
 
 interface ISnackbarContext {
   openSnackbar: boolean;
+  setOpenSnackBar?(type: boolean): void;
   handleCloseSnackBar?(): void;
 }
 
@@ -39,6 +40,7 @@ export const SnackbarProvider = ({
     <SnackbarContext.Provider
       value={{
         openSnackbar,
+        setOpenSnackBar,
         handleCloseSnackBar,
       }}
     >

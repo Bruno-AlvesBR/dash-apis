@@ -10,6 +10,8 @@ import { UseUser } from './User';
 
 export interface ILoginContext {
   openDialog: boolean;
+  setOpenDialog?(type: boolean): void;
+  handleCloseDialog?(): void;
 }
 
 export interface ILoginProvider {
@@ -26,6 +28,10 @@ export const LoginContextProvider = ({
   const { userId } = UseUser();
   const [openDialog, setOpenDialog] = useState(false);
 
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  }
+
   useEffect(() => {
     if (!userId) {
       setOpenDialog(true);
@@ -38,6 +44,8 @@ export const LoginContextProvider = ({
     <UseContextProvider.Provider
       value={{
         openDialog,
+        setOpenDialog,
+        handleCloseDialog,
       }}
     >
       {children}
