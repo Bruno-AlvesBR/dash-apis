@@ -1,11 +1,13 @@
+import { IUser } from '../../../../interfaces/IUserProps';
+
 import {
   ContainerApresentation,
   Title,
   Description,
 } from './styles';
-import { Container } from '../../../styles/theme';
+import { Container } from '../../../../styles/theme';
 
-export const Home = () => {
+export const LoggedHome = ({ user }: IUser) => {
   const handleRedirect = () => {
     window.open(
       process.env.NEXT_PUBLIC_URL_FOODS,
