@@ -5,6 +5,8 @@ import * as yup from 'yup';
 
 import { UseFood } from '../../../../hooks/Food';
 
+import { Container, BoxInputs } from './styles';
+
 export const Form = () => {
   const validateForm = yup.object({
     name: yup.string().required('O nome é obrigatório!'),
@@ -26,6 +28,7 @@ export const Form = () => {
       .string()
       .required('A quantidade é obrigatória!'),
   });
+
   const {
     register,
     handleSubmit,
@@ -37,69 +40,78 @@ export const Form = () => {
   const { onsubmit } = UseFood();
 
   return (
-    <form onSubmit={handleSubmit(onsubmit)}>
-      <TextField
-        variant="outlined"
-        name="name"
-        type="text"
-        label={errors.name?.message || 'Nome'}
-        {...register('name')}
-      />
-      <TextField
-        variant="outlined"
-        name="description"
-        type="text"
-        label={errors.description?.message || 'Descrição'}
-        {...register('description')}
-      />
-      <TextField
-        variant="outlined"
-        name="price"
-        type="number"
-        label={errors.price?.message || 'Price'}
-        {...register('price')}
-      />
-      <TextField
-        variant="outlined"
-        name="thumbnail"
-        type="text"
-        label={errors.thumbnail?.message || 'Thumbnail'}
-        {...register('thumbnail')}
-      />
-      <TextField
-        variant="outlined"
-        name="category"
-        type="text"
-        label={errors.category?.message || 'Categoria'}
-        {...register('category')}
-      />
-      <TextField
-        variant="outlined"
-        name="brand"
-        type="text"
-        label={errors.brand?.message || 'Marca'}
-        {...register('brand')}
-      />
-      <TextField
-        variant="outlined"
-        name="monthInstallment"
-        type="number"
-        label={
-          errors.monthInstallment?.message ||
-          'Parcelamento (meses)'
-        }
-        {...register('monthInstallment')}
-      />
-      <TextField
-        variant="outlined"
-        name="quantity"
-        type="number"
-        label={errors.quantity?.message || 'Quantidade'}
-        {...register('quantity')}
-      />
+    <Container onSubmit={handleSubmit(onsubmit)}>
+      <BoxInputs>
+        <TextField
+          variant="outlined"
+          name="name"
+          type="text"
+          label={errors.name?.message || 'Nome'}
+          {...register('name')}
+        />
+        <TextField
+          variant="outlined"
+          name="description"
+          type="text"
+          label={errors.description?.message || 'Descrição'}
+          {...register('description')}
+        />
+      </BoxInputs>
+      <BoxInputs>
+        <TextField
+          variant="outlined"
+          name="price"
+          type="number"
+          label={errors.price?.message || 'Price'}
+          {...register('price')}
+        />
+        <TextField
+          variant="outlined"
+          name="thumbnail"
+          type="text"
+          label={errors.thumbnail?.message || 'Thumbnail'}
+          {...register('thumbnail')}
+        />
+      </BoxInputs>
+      <BoxInputs>
+        <TextField
+          variant="outlined"
+          name="category"
+          type="text"
+          label={errors.category?.message || 'Categoria'}
+          {...register('category')}
+        />
+        <TextField
+          variant="outlined"
+          name="brand"
+          type="text"
+          label={errors.brand?.message || 'Marca'}
+          {...register('brand')}
+        />
+      </BoxInputs>
+      <BoxInputs>
+        <TextField
+          variant="outlined"
+          name="monthInstallment"
+          type="number"
+          label={
+            errors.monthInstallment?.message ||
+            'Parcelamento (meses)'
+          }
+          {...register('monthInstallment')}
+        />
+        <TextField
+          variant="outlined"
+          name="quantity"
+          type="number"
+          label={errors.quantity?.message || 'Quantidade'}
+          {...register('quantity')}
+        />
+      </BoxInputs>
+
       <Button variant="contained" type="submit">
         Postar
       </Button>
-    </form>
+    </Container>
   );
 };
