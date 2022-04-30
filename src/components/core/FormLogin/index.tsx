@@ -10,8 +10,10 @@ import { FormContent } from './styles';
 import { UseLogin } from '../../../hooks/Login';
 
 export const FormLogin = () => {
-  const { onsubmit } = UseUser();
-  const { handleCloseDialog } = UseLogin();
+  const [{ onsubmit }, { handleCloseDialog }] = [
+    UseUser(),
+    UseLogin(),
+  ];
 
   const validationForm = yup.object({
     email: yup
