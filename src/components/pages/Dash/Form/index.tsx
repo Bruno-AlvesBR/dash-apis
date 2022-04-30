@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { UseFood } from '../../../../hooks/Food';
 
 import { Container, BoxInputs } from './styles';
+import { UseUser } from '../../../../hooks/User';
 
 export const Form = () => {
   const validateForm = yup.object({
@@ -37,7 +38,7 @@ export const Form = () => {
     resolver: yupResolver(validateForm),
   });
 
-  const { onsubmit } = UseFood();
+  const [{ onsubmit }, { user }] = [UseFood(), UseUser()];
 
   return (
     <Container onSubmit={handleSubmit(onsubmit)}>
@@ -109,9 +110,11 @@ export const Form = () => {
         />
       </BoxInputs>
 
-      <Button variant="contained" type="submit">
-        Postar
-      </Button>
+      {user?.admin && (
+        <Button variant="contained" type="submit">
+          Postar
+        </Button>
+      )}
     </Container>
   );
 };
