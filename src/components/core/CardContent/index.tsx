@@ -9,6 +9,7 @@ import { Skeleton } from '@mui/material';
 import { IFoodProps } from '../../../interfaces/IFoodsProps';
 
 import { Card, Title, Description } from './styles';
+import { UseUser } from '../../../hooks/User';
 
 export const CardContent: NextPage<IFoodProps> = ({
   id,
@@ -19,7 +20,8 @@ export const CardContent: NextPage<IFoodProps> = ({
   brand,
   createdAt,
 }) => {
-  const router = useRouter();
+  const [router, { user }] = [useRouter(), UseUser()];
+
   const [allItems, setAllItems] = useState([]);
 
   const handleRedirect = () => {
@@ -28,7 +30,7 @@ export const CardContent: NextPage<IFoodProps> = ({
 
   useEffect(() => {
     const formatData = [
-      dayjs(createdAt).format('DD MMM YYYY HH:mm:ss'),
+      dayjs(createdAt).format('DD MMM YYYY'),
     ];
 
     if (router.pathname === '/produtos/todos') {
@@ -39,7 +41,7 @@ export const CardContent: NextPage<IFoodProps> = ({
   return (
     <Card>
       {allItems}
-      {thumbnail ? (
+      {thumbnail && thumbnail == 'https://' ? (
         <Image
           src={thumbnail}
           alt={name}
@@ -57,9 +59,14 @@ export const CardContent: NextPage<IFoodProps> = ({
         <p>{brand}</p>
         <strong>R$ {price},00</strong>
       </Description>
-      <Button variant="contained" onClick={handleRedirect}>
-        Editar
-      </Button>
+      {user?.admin && (
+        <Button
+          variant="contained"
+          onClick={handleRedirect}
+        >
+          Editar
+        </Button>
+      )}
     </Card>
   );
 };
