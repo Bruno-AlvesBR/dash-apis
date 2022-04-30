@@ -8,8 +8,10 @@ import { UseUser } from '../../../hooks/User';
 import { Dialog } from './styles';
 
 export const Login = () => {
-  const { openDialog, handleCloseDialog } = UseLogin();
-  const { isInvalid, noAdmin } = UseUser();
+  const [
+    { openDialog, handleCloseDialog },
+    { isInvalid, noAdmin },
+  ] = [UseLogin(), UseUser()];
 
   return (
     <>

@@ -14,8 +14,10 @@ import {
 } from './styles';
 
 export const MenuRight = () => {
-  const { user, userId } = UseUser();
-  const { setOpenDialog } = UseLogin();
+  const [{ user, userId }, { setOpenDialog }] = [
+    UseUser(),
+    UseLogin(),
+  ];
 
   return (
     <>
