@@ -1,19 +1,23 @@
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  CircularProgress,
+  TextField,
+} from '@material-ui/core';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { UseUser } from '../../../hooks/User';
-
-import { FormContent } from './styles';
 import { UseLogin } from '../../../hooks/Login';
 
+import { FormContent } from './styles';
+
 export const FormLogin = () => {
-  const [{ onsubmit }, { handleCloseDialog }] = [
-    UseUser(),
-    UseLogin(),
-  ];
+  const [
+    { onsubmit, isLoadingUser },
+    { handleCloseDialog },
+  ] = [UseUser(), UseLogin()];
 
   const validationForm = yup.object({
     email: yup
@@ -52,9 +56,13 @@ export const FormLogin = () => {
         type="password"
         {...register('password')}
       />
-      <Button variant="contained" type="submit">
-        Access
-      </Button>
+      {isLoadingUser ? (
+        <CircularProgress style={{ margin: '10px auto' }} />
+      ) : (
+        <Button variant="contained" type="submit">
+          Access
+        </Button>
+      )}
     </FormContent>
   );
 };
