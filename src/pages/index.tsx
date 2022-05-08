@@ -1,12 +1,17 @@
+import { CircularProgress } from '@material-ui/core';
 import { GetStaticProps, NextPage } from 'next';
+import { useEffect, useState } from 'react';
 
 import { LoggedHome } from '../components/pages/Home/LoggedHome';
 import { UnloggedHome } from '../components/pages/Home/UnloggedHome';
 import { UseUser } from '../hooks/User';
-import { IFoods } from '../interfaces/IFoodsProps';
-import { api } from '../services/api';
+import {
+  IFoodProps,
+  IFoods,
+} from '../interfaces/IFoodsProps';
+import { foodService } from '../services';
 
-const index: NextPage<IFoods> = ({ foods }) => {
+const Index: NextPage<IFoods> = ({ foods }) => {
   const { userId } = UseUser();
 
   return (
@@ -14,29 +19,43 @@ const index: NextPage<IFoods> = ({ foods }) => {
       {userId ? (
         <LoggedHome />
       ) : (
-        <UnloggedHome foods={foods} />
+        <UnloggedHome />
       )}
     </>
   );
 };
 
-export default index;
+export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get('/foods');
-
   try {
-    const foods = data?.map(foods => {
+    const foodData: IFoodProps[] =
+      await foodService?.findAll();
+
+    const foods = foodData?.map(({ ...foods }) => {
       return {
         id: foods?.id,
-        name: foods?.name,
+        title: foods?.title,
         description: foods?.description,
-        price: foods?.price,
-        thumbnail: foods?.thumbnail,
+        price: {
+          number: foods?.price?.number,
+          installment: {
+            month: foods?.price?.installment?.month,
+            pricePerMonth:
+              foods?.price?.installment?.pricePerMonth,
+          },
+        },
+        image: {
+          mobileSrc: foods?.image?.mobileSrc,
+          desktopSrc: foods?.image?.desktopSrc,
+        },
+        slug: foods?.slug,
+        manufacturer: foods?.manufacture,
         category: foods?.category,
         brand: foods?.brand,
-        monthInstallment: foods?.monthInstallment,
-        quantity: foods?.quantity,
+        stock: foods?.stock,
+        freight: foods?.freight,
+        rating: foods?.rating,
         createdAt: foods?.createdAt,
         updatedAt: foods?.updatedAt,
       };

@@ -13,12 +13,11 @@ import { UseUser } from '../../../hooks/User';
 
 export const CardContent: NextPage<IFoodProps> = ({
   id,
-  name,
+  title,
   description,
-  price,
-  thumbnail,
   brand,
   createdAt,
+  image,
 }) => {
   const [router, { user }] = [useRouter(), UseUser()];
 
@@ -41,10 +40,10 @@ export const CardContent: NextPage<IFoodProps> = ({
   return (
     <Card>
       {allItems}
-      {thumbnail && thumbnail == 'https://' ? (
+      {image?.desktopSrc && image?.desktopSrc === 'https://' ? (
         <Image
-          src={thumbnail}
-          alt={name}
+          src={image?.desktopSrc}
+          alt={title}
           width={200}
           height={200}
         />
@@ -52,12 +51,11 @@ export const CardContent: NextPage<IFoodProps> = ({
         <Skeleton width={200} height={200} />
       )}
       <Title>
-        <h2>{name}</h2>
+        <h2>{title}</h2>
         <p>{description}</p>
       </Title>
       <Description>
         <p>{brand}</p>
-        <strong>R$ {price},00</strong>
       </Description>
       {user?.admin && (
         <Button
