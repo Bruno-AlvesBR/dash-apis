@@ -1,13 +1,25 @@
 export interface IFoodProps {
   id?: string;
-  name?: string;
+  title?: string;
   description?: string;
-  price?: number;
-  thumbnail?: string;
-  category?: string;
+  category?: string[];
+  price?: {
+    number?: number;
+    installment?: {
+      month?: number;
+      pricePerMonth?: number;
+    };
+  };
   brand?: string;
-  monthInstallment?: number;
-  quantity?: number;
+  rating?: number;
+  freight?: boolean;
+  stock?: number;
+  manufacture?: string;
+  slug?: string;
+  image?: {
+    mobileSrc?: string;
+    desktopSrc?: string;
+  };
   createdAt?: string;
   updatedAt?: string;
 }
