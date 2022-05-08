@@ -1,73 +1,64 @@
-import { GetStaticProps, NextPage } from 'next';
-import { memo } from 'react';
+import { CircularProgress } from '@material-ui/core';
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 import { CardContent } from '../../components/core/CardContent';
-import { IFoods } from '../../interfaces/IFoodsProps';
-import { api } from '../../services/api';
+import {
+  IFoodProps,
+  IFoods,
+  IFoodsSLug,
+} from '../../interfaces/IFoodsProps';
+import { foodService } from '../../services';
 
 import Container from './styles';
 
-const todos: NextPage<IFoods> = ({ foods }) => {
+const Todos = () => {
+  const [foodsData, setFoodsData] =
+    useState<IFoodProps[]>();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const getFoods = () => {
+    try {
+      const foodsOnbounce = setTimeout(async () => {
+        const foodResponse = await foodService?.findAll();
+
+        setFoodsData(foodResponse);
+        return () => clearTimeout(foodsOnbounce);
+      }, 1000);
+
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getFoods();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Container>
-      {foods &&
-        foods?.map(food => (
+      {foodsData && !loading ? (
+        foodsData?.map(food => (
           <CardContent
             key={food?.id}
             id={food?.id}
-            name={food?.name}
+            title={food?.title}
             description={food?.description}
-            price={food?.price}
-            thumbnail={food?.thumbnail}
+            image={food?.image}
             brand={food?.brand}
           />
-        ))}
+        ))
+      ) : (
+        <CircularProgress style={{ margin: 'auto' }} />
+      )}
     </Container>
   );
 };
 
-export default memo(todos);
-
-export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get('/foods', {
-    params: {
-      _limit: 20,
-      _sort: 'updatedAt',
-      _order: 'desc',
-    },
-  });
-
-  try {
-    const foods = data?.map(foods => {
-      return {
-        id: foods?.id,
-        name: foods?.name,
-        description: foods?.description,
-        price: foods?.price,
-        thumbnail: foods?.thumbnail,
-        category: foods?.category,
-        brand: foods?.brand,
-        monthInstallment: foods?.monthInstallment,
-        quantity: foods?.quantity,
-        createdAt: foods?.createdAt,
-        updatedAt: foods?.updatedAt,
-      };
-    });
-
-    return {
-      props: {
-        foods,
-      },
-      revalidate: 60 * 60 * 24,
-    };
-  } catch (err) {
-    console.log(err);
-
-    return {
-      props: {
-        foods: [],
-      },
-      revalidate: 60 * 60 * 24,
-    };
-  }
-};
+export default memo(Todos);
