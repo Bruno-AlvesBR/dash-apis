@@ -14,10 +14,10 @@ const index: React.FC = () => {
       {productData && (
         <CardContent
           id={productData?.id}
-          name={productData?.name}
+          title={productData?.title}
           description={productData?.description}
           price={productData?.price}
-          thumbnail={productData?.thumbnail}
+          image={productData?.image}
           brand={productData?.brand}
         />
       )}

@@ -10,7 +10,7 @@ export default function ProductContent({
 }: IFoodsSLug) {
   return (
     <Container>
-      {foods?.name}
+      {foods?.title}
       {foods?.description}
     </Container>
   );
