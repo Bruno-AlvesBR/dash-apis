@@ -12,6 +12,7 @@ import {
   ContainerUserInfos,
   ContentConfigs,
 } from './styles';
+import { useEffect } from 'react';
 
 export const MenuRight = () => {
   const [{ user, userId }, { setOpenDialog }] = [
@@ -29,7 +30,7 @@ export const MenuRight = () => {
           </ContentConfigs>
           <ContainerUserInfos>
             {userId ? (
-              user?.name
+              <h2>{user?.name?.firstName}</h2>
             ) : (
               <Button onClick={() => setOpenDialog(true)}>
                 Logar
