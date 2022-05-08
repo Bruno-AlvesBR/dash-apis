@@ -19,7 +19,7 @@ const Index: NextPage<IFoods> = ({ foods }) => {
       {userId ? (
         <LoggedHome />
       ) : (
-        <UnloggedHome foods={foods} />
+        <UnloggedHome />
       )}
     </>
   );

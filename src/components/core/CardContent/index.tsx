@@ -17,7 +17,7 @@ export const CardContent: NextPage<IFoodProps> = ({
   description,
   brand,
   createdAt,
-  thumbnail,
+  image,
 }) => {
   const [router, { user }] = [useRouter(), UseUser()];
 
