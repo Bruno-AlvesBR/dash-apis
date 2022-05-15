@@ -1,9 +1,22 @@
 import { styled } from '@material-ui/core';
 
 export const FormContent = styled('form')(() => ({
-  marginTop: 20,
-  gap: 20,
+  gap: 50,
   zIndex: 1000,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  margin: 'auto',
+  marginTop: 250,
+  width: '100%',
+  maxWidth: 500,
+  border: '1px solid #00000025',
+  padding: '50px 40px',
+  borderRadius: 5,
+
+  '& input': {
+    width: '100%',
+  },
 
   '& button:first-child': {
     paddingg: 5,
@@ -27,5 +40,9 @@ export const FormContent = styled('form')(() => ({
       background: '#6674BB',
       opacity: .6,
     }
+  },
+
+  '@media (max-width: 780px)': {
+    padding: '0px 20px'
   },
 }));
