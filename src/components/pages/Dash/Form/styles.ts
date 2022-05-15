@@ -6,7 +6,8 @@ export const Container = styled('form')(() => ({
   flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'center',
-  minWidth: 'calc(100vw - 400px)',
+  width: '100%',
+  maxWidth: 500,
 
   '& button': {
     margin: '10px 0',
@@ -15,17 +16,19 @@ export const Container = styled('form')(() => ({
 }));
 
 export const BoxInputs = styled(Box)(() => ({
-  width: '100%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   flexDirection: 'row',
   gap: 10,
   margin: '2.5px 0',
+  height: 'auto',
 
   '& input': {
-    minWidth: '100%',
-    maxWidth: 600,
     padding: '20px !important',
+  },
+
+  '@media (max-width: 780px)': {
+    flexDirection: 'column',
   },
 }));

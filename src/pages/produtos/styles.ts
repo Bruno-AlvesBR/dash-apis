@@ -5,9 +5,12 @@ const Container = styled('div')(() => ({
   display: 'flex',
   flexWrap: 'wrap',
   gap: 20,
-  padding: '20px 220px',
-  width: '100%',
-  height: '100%',
+  marginTop: 65,
+  marginLeft: 200,
+
+  '@media (max-width: 780px)': {
+    marginLeft: 0,
+  },
 }));
 
 export default Container;
