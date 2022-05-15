@@ -40,11 +40,11 @@ export const CardContent: NextPage<IFoodProps> = ({
   return (
     <Card>
       {allItems}
-      {image?.desktopSrc && image?.desktopSrc === 'https://' ? (
+      {image?.desktopSrc ? (
         <Image
           src={image?.desktopSrc}
           alt={title}
-          width={200}
+          width={100}
           height={200}
         />
       ) : (
