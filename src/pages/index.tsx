@@ -1,36 +1,22 @@
-import { CircularProgress } from '@material-ui/core';
 import { GetStaticProps, NextPage } from 'next';
-import { useEffect, useState } from 'react';
 
 import { LoggedHome } from '../components/pages/Home/LoggedHome';
-import { UnloggedHome } from '../components/pages/Home/UnloggedHome';
 import { UseUser } from '../hooks/User';
-import {
-  IFoodProps,
-  IFoods,
-} from '../interfaces/IFoodsProps';
+import { IFoodProps, IFoods } from '../interfaces/IFoodsProps';
 import { foodService } from '../services';
+import Login from '../components/core/Login';
 
 const Index: NextPage<IFoods> = ({ foods }) => {
   const { userId } = UseUser();
 
-  return (
-    <>
-      {userId ? (
-        <LoggedHome />
-      ) : (
-        <UnloggedHome />
-      )}
-    </>
-  );
+  return <>{!userId ? <Login /> : <LoggedHome />}</>;
 };
 
 export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const foodData: IFoodProps[] =
-      await foodService?.findAll();
+    const foodData: IFoodProps[] = await foodService?.findAll();
 
     const foods = foodData?.map(({ ...foods }) => {
       return {
@@ -41,8 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
           number: foods?.price?.number,
           installment: {
             month: foods?.price?.installment?.month,
-            pricePerMonth:
-              foods?.price?.installment?.pricePerMonth,
+            pricePerMonth: foods?.price?.installment?.pricePerMonth,
           },
         },
         image: {
