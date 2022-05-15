@@ -1,33 +1,68 @@
-import { styled, AppBar, Toolbar, MenuItem, Button, Switch } from '@material-ui/core';
+import { AppBar, Toolbar, styled, Button, Box } from '@material-ui/core';
 
 export const Container = styled(AppBar)(() => ({
+  left: 0,
   width: 200,
   height: '100vh',
-  background: '#6674BB',
+  top: 65,
+  background: '#fff',
   boxShadow: '0px 0px 10px #00000025',
-  color: '#fff',
+  color: '#000',
   position: 'fixed',
   zIndex: 100,
-  left: 0,
   display: 'flex',
 }));
 
 export const Content = styled(Toolbar)(() => ({
   display: 'flex',
   flexDirection: 'column',
+  position: 'relative',
   gap: 20,
-  padding: '20px 25px', 
-  '& svg': {
-    cursor: 'pointer',
+  padding: 20,
+  '& button': {
+    marginTop: 100,
   },
 }));
 
-export const MenuOptions = styled(MenuItem)(() => ({
-  gap: 10,
-  padding: '15px 5px',
-  width: '100%',
-  fontWeight: 500,
-  '&:first-child': {
-    marginBottom: 50,
+export const ContentConfigs = styled(Box)(() => ({
+  position: 'absolute',
+  top: 10,
+  right: 10,
+  '& svg': {
+    cursor: 'pointer',
   },
+  '& svg:first-child': {
+    marginRight: 15,
+  },
+}));
+
+export const ContainerUserInfos = styled('div')(() => ({
+  width: '100%',
+  height: 150,
+  background: '#00000035',
+  borderRadius: 10,
+  marginTop: 70,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'relative',
+
+  '& button': {
+    background: '#fff',
+    color: '#6674BB',
+    margin: 'auto',
+
+    '&:hover': {
+      opacity: .7,
+      background: '#fff',
+    },
+  },
+}));
+
+export const ContentFooter = styled('span')(() => ({
+  position: 'absolute',
+  bottom: 0,
+  width: '200px',
+  height: 500,
+  background: '#ffffff25',
 }));

@@ -1,57 +1,35 @@
-import BlurOnIcon from '@mui/icons-material/BlurOn';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import { SvgIcon } from '@material-ui/core';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
-import { Container, Content, MenuOptions } from './styles';
-import Link from 'next/link';
-import { useState } from 'react';
+import { Configs } from '../Configs';
+import { UseUser } from '../../../hooks/User';
 
-export const MenuLeft = () => {
-  const [checked, setChecked] = useState(false);
+import {
+  Container,
+  Content,
+  ContainerUserInfos,
+  ContentConfigs,
+} from './styles';
 
-  const MenuList = [
-    {
-      name: 'Logo',
-      icon: <BlurOnIcon />,
-      link: '/',
-    },
-    {
-      name: 'Dashboard',
-      icon: <DashboardIcon />,
-      link: '/dash/edit',
-    },
-    {
-      name: 'Produtos',
-      icon: <ProductionQuantityLimitsIcon />,
-      link: '/produtos/todos',
-    },
-    {
-      name: 'Estatísticas',
-      icon: <BarChartIcon />,
-      link: '/',
-    },
-    {
-      name: 'Avaliações',
-      icon: <AnalyticsOutlinedIcon />,
-      link: '/',
-    },
-  ];
+const MenuLeft = () => {
+  const [{ user }] = [UseUser()];
 
   return (
-    <Container>
-      <Content>
-        {MenuList.map(item => (
-          <Link href={item.link} key={item.name} passHref>
-            <MenuOptions>
-              <SvgIcon>{item.icon}</SvgIcon>
-              {item.name}
-            </MenuOptions>
-          </Link>
-        ))}
-      </Content>
-    </Container>
+    <>
+      <Container>
+        <Content>
+          <ContentConfigs>
+            <HelpOutlineIcon />
+            <SettingsOutlinedIcon />
+          </ContentConfigs>
+          <ContainerUserInfos>
+            <h2>{user?.name?.firstName}</h2>
+          </ContainerUserInfos>
+        </Content>
+      </Container>
+      <Configs openDialog={false} />
+    </>
   );
 };
+
+export default MenuLeft;

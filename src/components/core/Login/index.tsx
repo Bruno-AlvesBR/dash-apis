@@ -1,25 +1,15 @@
-import { DialogContent } from '@material-ui/core';
-
-import { UseLogin } from '../../../hooks/Login';
 import { FormLogin } from '../FormLogin';
 import Snackbar from '../Snackbar';
 import { UseUser } from '../../../hooks/User';
 
-import { Dialog } from './styles';
+import { Container } from './styles';
 
-export const Login = () => {
-  const [
-    { openDialog, handleCloseDialog },
-    { isInvalid, noAdmin },
-  ] = [UseLogin(), UseUser()];
+const Login = () => {
+  const [{ isInvalid, noAdmin }] = [UseUser()];
 
   return (
-    <>
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogContent>
-          <FormLogin />
-        </DialogContent>
-      </Dialog>
+    <Container>
+      <FormLogin />
       <Snackbar
         setVertical="top"
         setHorizontal="right"
@@ -27,10 +17,11 @@ export const Login = () => {
         message={
           isInvalid
             ? 'Usuário ou senha inválidos'
-            : noAdmin &&
-              'Usuário não tem permissão para acessar o site'
+            : noAdmin && 'Usuário não tem permissão para acessar o site'
         }
       />
-    </>
+    </Container>
   );
 };
+
+export default Login;
