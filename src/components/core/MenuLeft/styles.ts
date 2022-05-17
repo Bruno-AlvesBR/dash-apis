@@ -38,13 +38,16 @@ export const ContentConfigs = styled(Box)(() => ({
 
 export const ContainerUserInfos = styled('div')(() => ({
   width: '100%',
-  height: 150,
+  height: 'fit-content',
+  padding: '30px 0px',
+  gap: 20,
   background: '#00000035',
   borderRadius: 10,
   marginTop: 70,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  flexDirection: 'column',
   position: 'relative',
 
   '& button': {

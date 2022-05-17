@@ -3,8 +3,12 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import { useMediaQuery } from '@material-ui/core';
+import { Button, useMediaQuery } from '@material-ui/core';
 import MenuIcon from '@mui/icons-material/Menu';
+import Link from 'next/link';
+import { useState } from 'react';
+import Cookies from 'universal-cookie';
+import Router from 'next/router';
 
 import {
   Container,
@@ -16,10 +20,10 @@ import {
   MenuPopup,
 } from './styles';
 import { theme } from '../../../styles/theme';
-import Link from 'next/link';
-import { useState } from 'react';
 
 const HeaderTop = () => {
+  const cookie = new Cookies();
+
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const menuList = [
@@ -55,10 +59,15 @@ const HeaderTop = () => {
     },
   ];
 
-  const isMobile = useMediaQuery(theme.breakpoints.down(500));
+  const isMobile = useMediaQuery(theme.breakpoints.down(780));
 
   const handleToggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const handleLogout = () => {
+    cookie.remove('authUserId');
+    Router.reload();
   };
 
   return (
@@ -72,7 +81,6 @@ const HeaderTop = () => {
             </ItemMenu>
           </Link>
         ))}
-
         {!isMobile ? (
           <ContentItems>
             {menuList?.slice(1, 10).map(item => (
@@ -103,6 +111,7 @@ const HeaderTop = () => {
                 </Link>
               ))}
             </MenuPopup>
+            <Button onClick={() => handleLogout()}>Logout</Button>
           </>
         )}
       </Content>
