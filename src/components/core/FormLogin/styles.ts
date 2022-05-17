@@ -43,6 +43,6 @@ export const FormContent = styled('form')(() => ({
   },
 
   '@media (max-width: 780px)': {
-    padding: '0px 20px'
+    padding: '30px 20px'
   },
 }));
