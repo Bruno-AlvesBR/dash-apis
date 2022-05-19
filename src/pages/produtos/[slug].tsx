@@ -5,16 +5,16 @@ import { api } from '../../services/api';
 
 import { Container } from '../../styles/theme';
 
-export default function ProductContent({
-  foods,
-}: IFoodsSLug) {
+const ProductContent: React.FC<IFoodsSLug> = ({ foods }) => {
   return (
     <Container>
       {foods?.title}
       {foods?.description}
     </Container>
   );
-}
+};
+
+export default ProductContent;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -26,9 +26,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ctx => {
   const { slug } = ctx.params;
 
-  const { data } = await api.get(`foods/${slug}`);
-
   try {
+    const { data } = await api.get(`foods/${slug}`);
+
     const foods = {
       id: data?.id,
       name: data?.name,

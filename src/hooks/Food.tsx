@@ -9,23 +9,19 @@ import {
 import { IFoodProps } from '../interfaces/IFoodsProps';
 import { api } from '../services/api';
 
-interface IFoodContext {
+interface IFoodContextProps {
   onsubmit?(event: IFoodProps): void;
-  productData: IFoodProps;
+  productData?: IFoodProps;
 }
 
-interface IFoodProvider {
+interface IFoodProviderProps {
   children: ReactNode;
 }
 
-export const FoodContext = createContext(
-  {} as IFoodContext,
-);
+const FoodContext = createContext({} as IFoodContextProps);
 
-export const FoodContextProvider = ({
-  children,
-}: IFoodProvider) => {
-  const [productData, setProductData] = useState();
+const FoodProvider = ({ children }: IFoodProviderProps) => {
+  const [productData, setProductData] = useState<IFoodProps | {}>(null);
 
   const onsubmit = useCallback(async event => {
     try {
@@ -39,6 +35,8 @@ export const FoodContextProvider = ({
         monthInstallment: event?.monthInstallment,
         quantity: event?.quantity,
       });
+
+      if (!data) return;
 
       setProductData(data);
     } catch (err) {
@@ -58,8 +56,14 @@ export const FoodContextProvider = ({
   );
 };
 
-export const UseFood = () => {
+function useFood() {
   const context = useContext(FoodContext);
 
+  if (!context) {
+    throw new Error('useFood must be within a FoodProvider');
+  }
+
   return context;
-};
+}
+
+export { FoodProvider, useFood };

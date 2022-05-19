@@ -1,11 +1,11 @@
 import { FormLogin } from '../FormLogin';
 import Snackbar from '../Snackbar';
-import { UseUser } from '../../../hooks/User';
+import { useUser } from '../../../hooks/User';
 
 import { Container } from './styles';
 
 const Login = () => {
-  const [{ isInvalid, noAdmin }] = [UseUser()];
+  const [{ isInvalid, noAdmin }] = [useUser()];
 
   return (
     <Container>

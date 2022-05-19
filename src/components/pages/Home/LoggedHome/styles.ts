@@ -14,10 +14,11 @@ export const Description = styled(Typography)(() => ({
   gap: 10,
 
   '& a': {
-    color: '#0078d1 ',
+    color: '#0078d1',
     fontWeight: 500,
     '&:hover': {
       opacity: 0.7,
     },
   },
 }));
+

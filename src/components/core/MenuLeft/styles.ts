@@ -56,7 +56,7 @@ export const ContainerUserInfos = styled('div')(() => ({
     margin: 'auto',
 
     '&:hover': {
-      opacity: .7,
+      opacity: 0.7,
       background: '#fff',
     },
   },

@@ -6,10 +6,10 @@ import {
   useState,
 } from 'react';
 
-import { UseUser } from './User';
+import { useUser } from './User';
 
-interface ISnackbarContext {
-  openSnackbar: boolean;
+interface ISnackbarContextProps {
+  openSnackbar?: boolean;
   setOpenSnackBar?(type: boolean): void;
   handleCloseSnackBar?(): void;
 }
@@ -18,15 +18,11 @@ interface ISnackbarProvider {
   children: ReactNode;
 }
 
-export const SnackbarContext = createContext(
-  {} as ISnackbarContext,
-);
+export const SnackbarContext = createContext({} as ISnackbarContextProps);
 
-export const SnackbarProvider = ({
-  children,
-}: ISnackbarProvider) => {
-  const { noAdmin, isInvalid } = UseUser();
-  const [openSnackbar, setOpenSnackBar] = useState(false);
+const SnackbarProvider = ({ children }: ISnackbarProvider) => {
+  const { noAdmin, isInvalid } = useUser();
+  const [openSnackbar, setOpenSnackBar] = useState<boolean>(false);
 
   const handleCloseSnackBar = () => setOpenSnackBar(false);
 
@@ -49,8 +45,14 @@ export const SnackbarProvider = ({
   );
 };
 
-export const UseSnack = () => {
+function useSnack() {
   const context = useContext(SnackbarContext);
 
+  if (!context) {
+    throw new Error('useSnack must be within a SnackbarProvider');
+  }
+
   return context;
-};
+}
+
+export { SnackbarProvider, useSnack };

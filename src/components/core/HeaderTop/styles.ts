@@ -47,5 +47,5 @@ export const MenuPopup = withStyles(() => ({
     marginTop: 45,
     width: 100,
     height: 'auto',
-  }
+  },
 }))(Menu);

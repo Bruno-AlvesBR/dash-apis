@@ -7,9 +7,9 @@ import dayjs from 'dayjs';
 import { Skeleton } from '@mui/material';
 
 import { IFoodProps } from '../../../interfaces/IFoodsProps';
+import { useUser } from '../../../hooks/User';
 
 import { Card, Title, Description } from './styles';
-import { UseUser } from '../../../hooks/User';
 
 export const CardContent: NextPage<IFoodProps> = ({
   id,
@@ -19,18 +19,14 @@ export const CardContent: NextPage<IFoodProps> = ({
   createdAt,
   image,
 }) => {
-  const [router, { user }] = [useRouter(), UseUser()];
+  const [router, { user }] = [useRouter(), useUser()];
 
-  const [allItems, setAllItems] = useState([]);
+  const [allItems, setAllItems] = useState<string[]>([]);
 
-  const handleRedirect = () => {
-    router.push(`/produtos/${id}`);
-  };
+  const handleRedirect = () => router.push(`/produtos/${id}`);
 
   useEffect(() => {
-    const formatData = [
-      dayjs(createdAt).format('DD MMM YYYY'),
-    ];
+    const formatData = [dayjs(createdAt).format('DD MMM YYYY')];
 
     if (router.pathname === '/produtos/todos') {
       setAllItems([...formatData]);
@@ -41,12 +37,7 @@ export const CardContent: NextPage<IFoodProps> = ({
     <Card>
       {allItems}
       {image?.desktopSrc ? (
-        <Image
-          src={image?.desktopSrc}
-          alt={title}
-          width={100}
-          height={200}
-        />
+        <Image src={image?.desktopSrc} alt={title} width={100} height={200} />
       ) : (
         <Skeleton width={200} height={200} />
       )}
@@ -58,10 +49,7 @@ export const CardContent: NextPage<IFoodProps> = ({
         <p>{brand}</p>
       </Description>
       {user?.admin && (
-        <Button
-          variant="contained"
-          onClick={handleRedirect}
-        >
+        <Button variant="contained" onClick={handleRedirect}>
           Editar
         </Button>
       )}

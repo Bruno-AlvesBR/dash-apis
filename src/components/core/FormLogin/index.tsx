@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { UseUser } from '../../../hooks/User';
+import { useUser } from '../../../hooks/User';
 
 import { FormContent } from './styles';
 
 export const FormLogin = () => {
-  const [{ onsubmit, isLoadingUser }] = [UseUser()];
+  const [{ onsubmit, isLoadingUser }] = [useUser()];
 
   const validationForm = yup.object({
     email: yup.string().email().required('O email é obrigatório'),

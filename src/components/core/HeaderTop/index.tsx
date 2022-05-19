@@ -6,9 +6,9 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import { Button, useMediaQuery } from '@material-ui/core';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import Cookies from 'universal-cookie';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 import {
   Container,
@@ -21,12 +21,19 @@ import {
 } from './styles';
 import { theme } from '../../../styles/theme';
 
+interface IHeaderProps {
+  id?: number;
+  name?: string;
+  icon?: ReactElement;
+  link?: string;
+}
+
 const HeaderTop = () => {
-  const cookie = new Cookies();
+  const [router, cookie] = [useRouter(), new Cookies()];
 
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-  const menuList = [
+  const menuList: IHeaderProps[] = [
     {
       id: 1,
       name: 'Logo',
@@ -61,13 +68,11 @@ const HeaderTop = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down(780));
 
-  const handleToggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const handleToggleMenu = () => setMenuOpen(!menuOpen);
 
   const handleLogout = () => {
     cookie.remove('authUserId');
-    Router.reload();
+    router.reload();
   };
 
   return (

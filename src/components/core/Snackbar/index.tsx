@@ -1,7 +1,7 @@
 import { Snackbar } from '@material-ui/core';
 import { memo } from 'react';
 
-import { UseSnack } from '../../../hooks/Snackbar';
+import { useSnack } from '../../../hooks/Snackbar';
 
 import { Message } from './styles';
 
@@ -12,13 +12,13 @@ interface ISnackbar {
   setHorizontal: 'left' | 'right';
 }
 
-const index = ({
+const SnackbarContent: React.FC<ISnackbar> = ({
   message,
   alert,
   setVertical,
   setHorizontal,
-}: ISnackbar) => {
-  const { openSnackbar, handleCloseSnackBar } = UseSnack();
+}) => {
+  const { openSnackbar, handleCloseSnackBar } = useSnack();
 
   return (
     <Snackbar
@@ -35,4 +35,4 @@ const index = ({
   );
 };
 
-export default memo(index);
+export default memo(SnackbarContent);

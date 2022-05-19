@@ -6,9 +6,9 @@ import {
   useState,
 } from 'react';
 
-import { UseUser } from './User';
+import { useUser } from './User';
 
-export interface ILoginContext {
+export interface ILoginContextProps {
   openDialog: boolean;
   setOpenDialog?(type: boolean): void;
   handleCloseDialog?(): void;
@@ -18,19 +18,13 @@ export interface ILoginProvider {
   children: ReactNode;
 }
 
-export const UseContextProvider = createContext(
-  {} as ILoginContext,
-);
+const LoginContext = createContext({} as ILoginContextProps);
 
-export const LoginContextProvider = ({
-  children,
-}: ILoginProvider) => {
-  const { userId } = UseUser();
-  const [openDialog, setOpenDialog] = useState(false);
+const LoginProvider = ({ children }: ILoginProvider) => {
+  const { userId } = useUser();
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  }
+  const handleCloseDialog = () => setOpenDialog(false);
 
   useEffect(() => {
     if (!userId) {
@@ -41,7 +35,7 @@ export const LoginContextProvider = ({
   }, [userId]);
 
   return (
-    <UseContextProvider.Provider
+    <LoginContext.Provider
       value={{
         openDialog,
         setOpenDialog,
@@ -49,12 +43,18 @@ export const LoginContextProvider = ({
       }}
     >
       {children}
-    </UseContextProvider.Provider>
+    </LoginContext.Provider>
   );
 };
 
-export const UseLogin = () => {
-  const context = useContext(UseContextProvider);
+function useLogin() {
+  const context = useContext(LoginContext);
+
+  if (!context) {
+    throw new Error('useLogin must be within a LoginProvider');
+  }
 
   return context;
-};
+}
+
+export { LoginProvider, useLogin };

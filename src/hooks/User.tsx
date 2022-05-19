@@ -4,7 +4,6 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import Cookies from 'universal-cookie';
@@ -12,7 +11,7 @@ import Cookies from 'universal-cookie';
 import { IUserLogin, IUserProps } from '../interfaces/IUserProps';
 import { userService } from '../services';
 
-export interface IUserContext {
+export interface IUserContextProps {
   onsubmit?(event: any): void;
   user?: IUserProps;
   userId?: string;
@@ -21,17 +20,17 @@ export interface IUserContext {
   isLoadingUser?: boolean;
 }
 
-export interface IUserContextProps {
+export interface IUserContextProvider {
   children: ReactNode;
 }
 
-export const UserContext = createContext({} as IUserContext);
+const UserContext = createContext({} as IUserContextProps);
 
-export const UserContextProvider = ({ children }: IUserContextProps) => {
+const UserProvider = ({ children }: IUserContextProvider) => {
   const [user, setUser] = useState<IUserProps | null>(null);
   const [userId, setUserId] = useState<string>();
-  const [noAdmin, setNoAdmin] = useState(false);
-  const [isInvalid, setIsInvalid] = useState(false);
+  const [noAdmin, setNoAdmin] = useState<boolean>(false);
+  const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const [isLoadingUser, setIsLoadingUser] = useState<boolean>();
 
   const cookie = new Cookies();
@@ -105,7 +104,7 @@ export const UserContextProvider = ({ children }: IUserContextProps) => {
   );
 };
 
-export const UseUser = () => {
+function useUser() {
   const context = useContext(UserContext);
 
   if (!context) {
@@ -113,4 +112,6 @@ export const UseUser = () => {
   }
 
   return context;
-};
+}
+
+export { useUser, UserProvider };

@@ -28,7 +28,7 @@ export const FormContent = styled('form')(() => ({
     '&:hover': {
       opacity: 1,
       background: '#aaaaaa60',
-    }
+    },
   },
 
   '& button:last-child': {
@@ -38,11 +38,11 @@ export const FormContent = styled('form')(() => ({
 
     '&:hover': {
       background: '#6674BB',
-      opacity: .6,
-    }
+      opacity: 0.6,
+    },
   },
 
   '@media (max-width: 780px)': {
-    padding: '30px 20px'
+    padding: '30px 20px',
   },
 }));

@@ -10,10 +10,10 @@ export const Container = styled('div')(() => ({
 
   '& form': {
     height: 'fit-content',
-    
+
     '& input': {
       padding: '10px 22px',
-    }
+    },
   },
 
   '@media (max-width: 780px)': {

@@ -3,31 +3,25 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@material-ui/core';
 import * as yup from 'yup';
 
-import { UseFood } from '../../../../hooks/Food';
+import { useFood } from '../../../../hooks/Food';
+import { useUser } from '../../../../hooks/User';
 
 import { Container, BoxInputs } from './styles';
-import { UseUser } from '../../../../hooks/User';
 
 export const Form = () => {
+  const [{ onsubmit }, { user }] = [useFood(), useUser()];
+
   const validateForm = yup.object({
     name: yup.string().required('O nome é obrigatório!'),
-    description: yup
-      .string()
-      .required('A descrição é obrigatória!'),
+    description: yup.string().required('A descrição é obrigatória!'),
     price: yup.string().required('O preço é obrigatório!'),
-    thumbnail: yup
-      .string()
-      .required('A thumbnail é obrigatória!'),
-    category: yup
-      .string()
-      .required('A categoria é obrigatória!'),
+    thumbnail: yup.string().required('A thumbnail é obrigatória!'),
+    category: yup.string().required('A categoria é obrigatória!'),
     brand: yup.string().required('A marca é obrigatória!'),
     monthInstallment: yup
       .string()
       .required('Os meses de parcelamento é obrigatório!'),
-    quantity: yup
-      .string()
-      .required('A quantidade é obrigatória!'),
+    quantity: yup.string().required('A quantidade é obrigatória!'),
   });
 
   const {
@@ -37,8 +31,6 @@ export const Form = () => {
   } = useForm({
     resolver: yupResolver(validateForm),
   });
-
-  const [{ onsubmit }, { user }] = [UseFood(), UseUser()];
 
   return (
     <Container onSubmit={handleSubmit(onsubmit)}>
@@ -95,10 +87,7 @@ export const Form = () => {
           variant="outlined"
           name="monthInstallment"
           type="number"
-          label={
-            errors.monthInstallment?.message ||
-            'Parcelamento (meses)'
-          }
+          label={errors.monthInstallment?.message || 'Parcelamento (meses)'}
           {...register('monthInstallment')}
         />
         <TextField

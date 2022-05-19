@@ -1,24 +1,14 @@
 import { CircularProgress } from '@material-ui/core';
-import {
-  memo,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { CardContent } from '../../components/core/CardContent';
-import {
-  IFoodProps,
-  IFoods,
-  IFoodsSLug,
-} from '../../interfaces/IFoodsProps';
+import { IFoodProps } from '../../interfaces/IFoodsProps';
 import { foodService } from '../../services';
 
 import Container from './styles';
 
 const Todos = () => {
-  const [foodsData, setFoodsData] =
-    useState<IFoodProps[]>();
+  const [foodsData, setFoodsData] = useState<IFoodProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const getFoods = () => {

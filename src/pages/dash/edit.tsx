@@ -1,11 +1,11 @@
 import { Form } from '../../components/pages/Dash/Form';
-import { UseFood } from '../../hooks/Food';
+import { useFood } from '../../hooks/Food';
 import { CardContent } from '../../components/core/CardContent';
 
 import { Container } from '../../styles/theme';
 
-const index: React.FC = () => {
-  const { productData } = UseFood();
+const Edit: React.FC = () => {
+  const { productData } = useFood();
 
   return (
     <Container>
@@ -25,4 +25,4 @@ const index: React.FC = () => {
   );
 };
 
-export default index;
+export default Edit;
