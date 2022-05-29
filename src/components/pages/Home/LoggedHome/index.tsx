@@ -1,5 +1,6 @@
 import { ContainerApresentation, Title, Description } from './styles';
 import { Container } from '../../../../styles/theme';
+import BannerCreateProduct from '../../../core/BannerCreateProduct';
 
 export const LoggedHome = () => {
   const handleRedirect = () =>
@@ -14,6 +15,7 @@ export const LoggedHome = () => {
           <span onClick={handleRedirect}>(e-foods)</span>
         </Description>
       </ContainerApresentation>
+      <BannerCreateProduct />
     </Container>
   );
 };
