@@ -4,19 +4,11 @@ export const theme = createTheme({});
 
 export const Container = styled('div')(() => ({
   position: 'relative',
-  marginTop: 65,
-  marginLeft: 200,
+  margin: '85px 20px 0px 220px',
   height: '100%',
-
-  '& form': {
-    height: 'fit-content',
-
-    '& input': {
-      padding: '10px 22px',
-    },
-  },
+  width: '100%',
 
   '@media (max-width: 780px)': {
-    marginLeft: 0,
+    marginLeft: 20,
   },
 }));

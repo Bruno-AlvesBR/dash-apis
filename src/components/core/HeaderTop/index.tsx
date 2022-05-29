@@ -44,7 +44,7 @@ const HeaderTop = () => {
       id: 2,
       name: 'Dashboard',
       icon: <DashboardIcon />,
-      link: '/dash/edit',
+      link: '/dash',
     },
     {
       id: 3,

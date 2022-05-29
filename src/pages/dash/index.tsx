@@ -1,10 +1,10 @@
-import { Form } from '../../components/pages/Dash/Form';
+import { Form } from '../../components/core/Forms/Foods';
 import { useFood } from '../../hooks/Food';
 import { CardContent } from '../../components/core/CardContent';
 
 import { Container } from '../../styles/theme';
 
-const Edit: React.FC = () => {
+const Dash: React.FC = () => {
   const { productData } = useFood();
 
   return (
@@ -25,4 +25,4 @@ const Edit: React.FC = () => {
   );
 };
 
-export default Edit;
+export default Dash;
