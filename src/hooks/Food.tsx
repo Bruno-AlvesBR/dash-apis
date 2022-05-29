@@ -6,11 +6,11 @@ import {
   useState,
 } from 'react';
 
-import { IFoodProps } from '../interfaces/IFoodsProps';
-import { api } from '../services/api';
+import { IFoodCreate, IFoodProps } from '../interfaces/IFoodsProps';
+import { foodService } from '../services';
 
 interface IFoodContextProps {
-  onsubmit?(event: IFoodProps): void;
+  createFood?(event: IFoodProps): void;
   productData?: IFoodProps;
 }
 
@@ -23,31 +23,25 @@ const FoodContext = createContext({} as IFoodContextProps);
 const FoodProvider = ({ children }: IFoodProviderProps) => {
   const [productData, setProductData] = useState<IFoodProps | {}>(null);
 
-  const onsubmit = useCallback(async event => {
-    try {
-      const { data } = await api.post('/foods/create', {
-        name: event?.name,
-        description: event?.description,
-        price: event?.price,
-        thumbnail: event?.thumbnail,
-        category: event?.category,
-        brand: event?.brand,
-        monthInstallment: event?.monthInstallment,
-        quantity: event?.quantity,
-      });
+  const createFood = useCallback(
+    async ({ ...event }: IFoodCreate): Promise<IFoodCreate> => {
+      try {
+        const foodData = await foodService.create(event);
 
-      if (!data) return;
+        if (!foodData && !foodData?.id) return;
 
-      setProductData(data);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+        setProductData(foodData);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    [],
+  );
 
   return (
     <FoodContext.Provider
       value={{
-        onsubmit,
+        createFood,
         productData,
       }}
     >
