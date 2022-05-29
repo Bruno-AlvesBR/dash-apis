@@ -42,10 +42,15 @@ export const ItemButton = styled(Button)(() => ({
 export const MenuPopup = withStyles(() => ({
   paper: {
     position: 'fixed',
-    right: 0,
+    right: 40,
     marginLeft: 'auto !important',
-    marginTop: 45,
+    marginTop: 53,
     width: 100,
     height: 'auto',
+
+    '@media (max-width: 600px)': {
+      right: 30,
+      marginTop: 45,
+    },
   },
 }))(Menu);

@@ -12,13 +12,6 @@ import '../styles/globals.css';
 import { theme } from '../styles/theme';
 
 function MyApp({ Component, pageProps }) {
-  const [{ userId }, router] = [useUser(), useRouter()];
-
-  useEffect(() => {
-    if (!userId) router.push(process.env.NEXT_PUBLIC_APP);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
-
   return (
     <ThemeProvider theme={theme}>
       <UserProvider>
