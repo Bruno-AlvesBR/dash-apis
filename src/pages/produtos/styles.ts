@@ -1,6 +1,6 @@
 import { styled } from '@material-ui/core';
 
-export const Container = styled('div')(({ theme }) => ({
+const Container = styled('div')(({ theme }) => ({
   position: 'relative',
   display: 'flex',
   flexWrap: 'wrap',
@@ -18,3 +18,5 @@ export const Container = styled('div')(({ theme }) => ({
     alignItems: 'center',
   },
 }));
+
+export default Container;

@@ -1,11 +1,11 @@
 import { CircularProgress } from '@material-ui/core';
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CardContent } from '../../components/core/CardContent';
 import { IFoodProps } from '../../interfaces/IFoodsProps';
 import { foodService } from '../../services';
 
-import { Container } from './styles';
+import Container from './styles';
 
 const Todos = () => {
   const [foodsData, setFoodsData] = useState<IFoodProps[]>([]);
@@ -51,4 +51,4 @@ const Todos = () => {
   );
 };
 
-export default memo(Todos);
+export default Todos;
