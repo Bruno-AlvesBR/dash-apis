@@ -5,7 +5,7 @@ import { CardContent } from '../../components/core/CardContent';
 import { IFoodProps } from '../../interfaces/IFoodsProps';
 import { foodService } from '../../services';
 
-import Container from './styles';
+import { Container } from './styles';
 
 const Todos = () => {
   const [foodsData, setFoodsData] = useState<IFoodProps[]>([]);

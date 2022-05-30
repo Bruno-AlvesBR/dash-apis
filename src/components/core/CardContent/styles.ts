@@ -1,6 +1,6 @@
 import { Box, styled } from '@material-ui/core';
 
-export const Card = styled(Box)(() => ({
+export const Card = styled(Box)(({theme}) => ({
   width: 250,
   height: 300,
   padding: 15,
@@ -12,6 +12,8 @@ export const Card = styled(Box)(() => ({
   alignItems: 'center',
   borderRadius: 10,
   boxShadow: '0px 0px 10px #00000020',
+
+  [theme.breakpoints.down(520)]: { width: '100%', margin: '0px 10px' },
 }));
 
 export const Title = styled('div')(() => ({
