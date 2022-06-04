@@ -34,91 +34,91 @@ export const Form = () => {
         variant="outlined"
         name="title"
         type="text"
-        label={errors.title?.message ?? 'title'}
+        label={errors.title?.message ?? 'Nome'}
         {...register('title')}
       />
       <TextField
         variant="outlined"
         name="description"
         type="text"
-        label="description"
+        label="Descrição"
         {...register('description')}
       />
       <TextField
         variant="outlined"
         name="category"
         type="text"
-        label="category"
+        label="Categoria"
         {...register('category')}
       />
       <TextField
         variant="outlined"
         name="priceNumber"
         type="number"
-        label={errors.priceNumber?.message ?? 'priceNumber'}
+        label={errors.priceNumber?.message ?? 'Preço'}
         {...register('priceNumber')}
       />
       <TextField
         variant="outlined"
         name="month"
         type="number"
-        label="month"
+        label="Meses de parcelamento"
         {...register('month')}
       />
       <TextField
         variant="outlined"
         name="pricePerMonth"
         type="number"
-        label="pricePerMonth"
+        label="Preço por mês"
         {...register('pricePerMonth')}
       />
       <TextField
         variant="outlined"
         name="brand"
         type="text"
-        label="brand"
+        label="Marca"
         {...register('brand')}
       />
       <TextField
         variant="outlined"
         name="rating"
         type="number"
-        label="rating"
+        label="Avaliação"
         {...register('rating')}
       />
       <TextField
         variant="outlined"
         name="stock"
         type="number"
-        label={errors.stock?.message ?? 'stock'}
+        label={errors.stock?.message ?? 'Estoque'}
         {...register('stock')}
       />
       <TextField
         variant="outlined"
         name="manufacture"
         type="text"
-        label={errors.manufacture?.message ?? 'manufacture'}
+        label={errors.manufacture?.message ?? 'Fabricante'}
         {...register('manufacture')}
       />
       <TextField
         variant="outlined"
         name="slug"
         type="text"
-        label={errors.slug?.message ?? 'slug'}
+        label={errors.slug?.message ?? 'Slug'}
         {...register('slug')}
       />
       <TextField
         variant="outlined"
         name="desktopSrc"
         type="text"
-        label="desktopSrc"
+        label="Imagem"
         {...register('desktopSrc')}
       />
       <TextField
         variant="outlined"
         name="mobileSrc"
         type="text"
-        label="mobileSrc"
+        label="Thumbnail"
         {...register('mobileSrc')}
       />
       <Switch defaultChecked name="freight" {...register('freight')} />
