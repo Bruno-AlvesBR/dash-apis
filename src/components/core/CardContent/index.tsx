@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { Skeleton } from '@mui/material';
 
@@ -10,36 +10,36 @@ import { useUser } from '../../../hooks/User';
 
 import { Card, Title, Description } from './styles';
 
-export const CardContent: React.FC<IFoodProps> = ({
-  id,
-  title,
-  description,
-  brand,
-  createdAt,
-  image,
-}) => {
+export const CardContent: React.FC<IFoodProps> = ({ ...props }) => {
   const [router, { user }] = [useRouter(), useUser()];
 
-  const handleRedirect = () => router.push(`/produtos/${id}`);
+  const handleRedirect = useCallback(() => {
+    router.push(`/produtos/${props?.slug}`);
+  }, [router, props?.slug]);
 
   const productCreatedAt = useMemo(() => {
-    return [dayjs(createdAt).format('DD MMM YYYY')];
-  }, [createdAt]);
+    return [dayjs(props?.createdAt).format('DD MMM YYYY')];
+  }, [props?.createdAt]);
 
   return (
     <Card>
       {productCreatedAt}
-      {image?.desktopSrc ? (
-        <Image src={image?.desktopSrc} alt={title} width={100} height={200} />
+      {props?.image?.desktopSrc ? (
+        <Image
+          src={props?.image?.desktopSrc}
+          alt={props?.title}
+          width={100}
+          height={200}
+        />
       ) : (
         <Skeleton width={200} height={200} />
       )}
       <Title>
-        <h2>{title}</h2>
-        <p>{description}</p>
+        <h2>{props?.title}</h2>
+        <p>{props?.description}</p>
       </Title>
       <Description>
-        <p>{brand}</p>
+        <p>{props?.brand}</p>
       </Description>
       {user?.admin && (
         <Button variant="contained" onClick={handleRedirect}>
