@@ -1,6 +1,6 @@
 import { useMediaQuery } from '@material-ui/core';
 import { ArrowForwardIos } from '@mui/icons-material';
-import { ReactNode, useRef, useState } from 'react';
+import { ReactNode, useRef } from 'react';
 
 import { theme } from '../../../styles/theme';
 import { Container, Content, ContentButtons } from './styles';
@@ -18,8 +18,6 @@ const Carrousel: React.FC<ICarrousel> = ({
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-
-  const [disableButton, setDisableButton] = useState<string>('prev');
 
   const isMobile = useMediaQuery(theme.breakpoints.down(780));
 
