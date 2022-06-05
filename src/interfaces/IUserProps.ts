@@ -41,3 +41,7 @@ export interface IUserCard {
 export interface IUser {
   user?: IUserProps;
 }
+
+export enum TOKEN {
+  AUTH_TOKEN='authUserId'
+}

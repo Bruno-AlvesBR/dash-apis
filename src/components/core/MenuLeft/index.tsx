@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 
 import { Configs } from '../Configs';
 import { useUser } from '../../../hooks/User';
+import { TOKEN } from '../../../interfaces/IUserProps';
 
 import {
   Container,
@@ -18,7 +19,7 @@ const MenuLeft = () => {
   const [{ user }, cookie, router] = [useUser(), new Cookies(), useRouter()];
 
   const handleLogout = () => {
-    cookie.remove('authUserId');
+    cookie.remove(TOKEN.AUTH_TOKEN);
     router.reload();
   };
 

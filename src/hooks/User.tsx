@@ -8,7 +8,7 @@ import {
 } from 'react';
 import Cookies from 'universal-cookie';
 
-import { IUserLogin, IUserProps } from '../interfaces/IUserProps';
+import { IUserLogin, IUserProps, TOKEN } from '../interfaces/IUserProps';
 import { userService } from '../services';
 
 export interface IUserContextProps {
@@ -36,7 +36,7 @@ const UserProvider = ({ children }: IUserContextProvider) => {
   const cookie = new Cookies();
 
   const userLoadService = useCallback(async () => {
-    const authToken = cookie.get('authUserId');
+    const authToken = cookie.get(TOKEN.AUTH_TOKEN);
 
     if (!authToken) return;
 
@@ -63,7 +63,9 @@ const UserProvider = ({ children }: IUserContextProvider) => {
           password: event?.password,
         });
 
-        cookie.set('authUserId', `${userData?.id}`, { maxAge: 60 * 60 * 24 });
+        cookie.set(TOKEN.AUTH_TOKEN, `${userData?.id}`, {
+          maxAge: 60 * 60 * 24,
+        });
 
         if (!userData) return;
 

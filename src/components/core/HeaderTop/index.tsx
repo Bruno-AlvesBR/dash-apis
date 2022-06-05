@@ -10,6 +10,8 @@ import { ReactElement, useState } from 'react';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
 
+import { TOKEN } from '../../../interfaces/IUserProps';
+
 import {
   Container,
   Content,
@@ -71,7 +73,7 @@ const HeaderTop = () => {
   const handleToggleMenu = () => setMenuOpen(!menuOpen);
 
   const handleLogout = () => {
-    cookie.remove('authUserId');
+    cookie.remove(TOKEN.AUTH_TOKEN);
     router.reload();
   };
 
