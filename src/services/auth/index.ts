@@ -19,8 +19,6 @@ export const login = async ({
 };
 
 export const recoveryUser = async (user: string) => {
-  await delay();
-
   const userResponse = await api.get(`user/${user}`);
 
   return userResponse?.data || [];
