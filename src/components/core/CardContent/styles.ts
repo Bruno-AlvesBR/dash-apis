@@ -1,7 +1,8 @@
 import { Box, styled } from '@material-ui/core';
 
-export const Card = styled(Box)(({theme}) => ({
-  width: 250,
+export const Card = styled(Box)(({ theme }) => ({
+  minWidth: 300,
+  maxWidth: 300,
   height: 300,
   padding: 15,
   background: '#fff',
@@ -12,6 +13,9 @@ export const Card = styled(Box)(({theme}) => ({
   alignItems: 'center',
   borderRadius: 10,
   boxShadow: '0px 0px 10px #00000020',
+  marginRight: 15,
+
+  '&:last-child': { marginRight: 0 },
 
   [theme.breakpoints.down(520)]: { width: '100%', margin: '0px 10px' },
 }));
