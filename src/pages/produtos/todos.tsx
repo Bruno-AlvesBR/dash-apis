@@ -34,14 +34,7 @@ const Todos = () => {
       {foodsData.length !== 0 ? (
         <Carrousel mobileWidth={275} desktopWidth={315}>
           {foodsData?.map(food => (
-            <CardContent
-              key={food?.id}
-              id={food?.id}
-              title={food?.title}
-              description={food?.description}
-              image={food?.image}
-              brand={food?.brand}
-            />
+            <CardContent key={food?.id} {...food} />
           ))}
         </Carrousel>
       ) : (

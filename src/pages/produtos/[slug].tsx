@@ -1,20 +1,24 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-import { IFoodsSLug } from '../../interfaces/IFoodsProps';
-import { api } from '../../services/api';
+import { IFoodProps } from '../../interfaces/IFoodsProps';
+import { foodService } from '../../services';
 
 import { Container } from '../../styles/theme';
 
-const ProductContent: React.FC<IFoodsSLug> = ({ foods }) => {
+interface IProduct {
+  food?: IFoodProps;
+}
+
+const Product: NextPage<IProduct> = ({ food }) => {
   return (
     <Container>
-      {foods?.title}
-      {foods?.description}
+      {food?.title}
+      {food?.description}
     </Container>
   );
 };
 
-export default ProductContent;
+export default Product;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -27,25 +31,11 @@ export const getStaticProps: GetStaticProps = async ctx => {
   const { slug } = ctx.params;
 
   try {
-    const { data } = await api.get(`foods/${slug}`);
-
-    const foods = {
-      id: data?.id,
-      name: data?.name,
-      description: data?.description,
-      price: data?.price,
-      thumbnail: data?.thumbnail,
-      category: data?.category,
-      brand: data?.brand,
-      monthInstallment: data?.monthInstallment,
-      quantity: data?.quantity,
-      createdAt: data?.createdAt,
-      updatedAt: data?.updatedAt,
-    };
+    const food = await foodService.findBySlug(slug);
 
     return {
       props: {
-        foods,
+        food,
       },
       revalidate: 60 * 60 * 24 * 7,
     };
@@ -54,7 +44,7 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
     return {
       props: {
-        foods: [],
+        food: {},
       },
       revalidate: 60 * 60 * 24 * 7,
     };
