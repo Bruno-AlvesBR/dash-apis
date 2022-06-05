@@ -9,8 +9,6 @@ export const create = async ({
 }: IFoodCreate): Promise<IFoodCreate> => {
   await delay();
 
-  console.log('testFood entrou2', { data });
-
   const foodResponse = await api.post('product/create', data);
 
   return foodResponse?.data || {};
@@ -23,3 +21,11 @@ export const findAll = async (): Promise<IFoodProps[]> => {
 
   return foodResponse?.data || [];
 };
+
+export const findBySlug = async (slug: string | any) => {
+  await delay();
+
+  const foodResponse = await api.get(`product/${slug}`)
+
+  return foodResponse?.data || {};
+}
