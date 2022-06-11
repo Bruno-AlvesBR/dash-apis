@@ -164,17 +164,24 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         {...register('mobileSrc')}
       />
       <Switch defaultChecked name="freight" {...register('freight')} />
+
       <span style={{ display: 'flex', flexDirection: 'row' }}>
-        <Button variant="contained" type="submit">
-          Criar
-        </Button>
-        {router.pathname.includes('/produtos/') && (
-          <Button
-            variant="contained"
-            onClick={() => handleRemoveProduct(product?.id)}
-            style={{ marginLeft: 20 }}
-          >
-            Remover
+        {router.pathname.includes('/produtos/') ? (
+          <>
+            <Button variant="contained" type="submit">
+              Atualizar
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => handleRemoveProduct(product?.id)}
+              style={{ marginLeft: 20 }}
+            >
+              Remover
+            </Button>
+          </>
+        ) : (
+          <Button variant="contained" type="submit">
+            Criar
           </Button>
         )}
       </span>
