@@ -1,19 +1,22 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-import { IFoodProps } from '../../interfaces/IFoodsProps';
 import { foodService } from '../../services';
+import { useFood } from '../../hooks/Food';
+import Form from '../../components/core/Forms/Foods';
+import { IProductProps } from '../../interfaces/IProductProps';
 
 import { Container } from '../../styles/theme';
 
 interface IProduct {
-  food?: IFoodProps;
+  food?: IProductProps;
 }
 
 const Product: NextPage<IProduct> = ({ food }) => {
+  const [{ handleUpdateProduct }] = [useFood()];
+
   return (
     <Container>
-      {food?.title}
-      {food?.description}
+      <Form handleProductSubmit={handleUpdateProduct} product={food} />
     </Container>
   );
 };

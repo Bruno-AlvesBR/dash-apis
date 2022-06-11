@@ -1,15 +1,15 @@
-import { Form } from '../../components/core/Forms/Foods';
+import Form from '../../components/core/Forms/Foods';
 import { useFood } from '../../hooks/Food';
 import { CardContent } from '../../components/core/CardContent';
 
 import { Container } from '../../styles/theme';
 
 const Dash: React.FC = () => {
-  const { productData } = useFood();
+  const { productData, handleCreateProduct } = useFood();
 
   return (
     <Container>
-      <Form />
+      <Form handleProductSubmit={handleCreateProduct} />
       <h1>Último produto adicionado</h1>
       {productData && (
         <CardContent
