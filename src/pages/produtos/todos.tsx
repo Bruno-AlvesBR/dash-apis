@@ -1,47 +1,46 @@
-import { CircularProgress } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { GetStaticProps, NextPage } from 'next';
 
-import { CardContent } from '../../components/core/CardContent';
-import Carrousel from '../../components/core/Carrousel';
-import { IFoodProps } from '../../interfaces/IFoodsProps';
-import { foodService } from '../../services';
+import ProductsContent from '../../components/pages/Produtos';
+import { useFood } from '../../hooks/Product';
+import { IPodcastProps } from '../../interfaces/IPodcastProps';
+import { IProductProps } from '../../interfaces/IProductProps';
+import { foodService, podcastService } from '../../services';
 
 import Container from './styles';
 
-const Todos = () => {
-  const [foodsData, setFoodsData] = useState<IFoodProps[]>([]);
+export interface IProductsContentProps {
+  foods: IProductProps[];
+  podcasts: IPodcastProps[];
+}
 
-  const getFoods = () => {
-    try {
-      const foodsOnbounce = setTimeout(async () => {
-        const foodResponse = await foodService?.findAll();
-
-        setFoodsData(foodResponse);
-        return () => clearTimeout(foodsOnbounce);
-      }, 1000);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getFoods();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const Todos: NextPage<IProductsContentProps> = ({ ...props }) => {
+  const [{ isLoading }] = [useFood()];
 
   return (
     <Container>
-      {foodsData.length !== 0 ? (
-        <Carrousel mobileWidth={275} desktopWidth={315}>
-          {foodsData?.map(food => (
-            <CardContent key={food?.id} {...food} />
-          ))}
-        </Carrousel>
+      {!isLoading ? (
+        <ProductsContent {...props} />
       ) : (
-        <CircularProgress style={{ margin: 10 }} />
+        <CircularProgress style={{ margin: 'auto' }} />
       )}
     </Container>
   );
 };
 
 export default Todos;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const [foods, podcasts] = await Promise.all([
+    await foodService?.findAll(),
+    await podcastService?.findAll(),
+  ]);
+
+  return {
+    props: {
+      foods,
+      podcasts,
+    },
+    revalidate: 3600 * 24 * 7,
+  };
+};
