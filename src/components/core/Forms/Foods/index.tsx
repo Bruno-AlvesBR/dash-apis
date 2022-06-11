@@ -68,7 +68,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="id"
         type="text"
-        label="id"
+        placeholder="id"
         disabled
         {...register('id')}
       />
@@ -76,91 +76,91 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="title"
         type="text"
-        label={errors.title?.message ?? 'Nome'}
+        placeholder={errors.title?.message ?? 'Nome'}
         {...register('title')}
       />
       <TextField
         variant="outlined"
         name="description"
         type="text"
-        label="Descrição"
+        placeholder="Descrição"
         {...register('description')}
       />
       <TextField
         variant="outlined"
         name="category"
         type="text"
-        label="Categoria"
+        placeholder="Categoria"
         {...register('category')}
       />
       <TextField
         variant="outlined"
         name="priceNumber"
         type="number"
-        label={errors.priceNumber?.message ?? 'Preço'}
+        placeholder={errors.priceNumber?.message ?? 'Preço'}
         {...register('priceNumber')}
       />
       <TextField
         variant="outlined"
         name="monthInstallment"
         type="number"
-        label="Meses de parcelamento"
+        placeholder="Meses de parcelamento"
         {...register('monthInstallment')}
       />
       <TextField
         variant="outlined"
         name="pricePerMonth"
         type="number"
-        label="Preço por mês"
+        placeholder="Preço por mês"
         {...register('pricePerMonth')}
       />
       <TextField
         variant="outlined"
         name="brand"
         type="text"
-        label="Marca"
+        placeholder="Marca"
         {...register('brand')}
       />
       <TextField
         variant="outlined"
         name="rating"
         type="number"
-        label="Avaliação"
+        placeholder="Avaliação"
         {...register('rating')}
       />
       <TextField
         variant="outlined"
         name="stock"
         type="number"
-        label={errors.stock?.message ?? 'Estoque'}
+        placeholder={errors.stock?.message ?? 'Estoque'}
         {...register('stock')}
       />
       <TextField
         variant="outlined"
         name="manufacture"
         type="text"
-        label={errors.manufacture?.message ?? 'Fabricante'}
+        placeholder={errors.manufacture?.message ?? 'Fabricante'}
         {...register('manufacture')}
       />
       <TextField
         variant="outlined"
         name="slug"
         type="text"
-        label={errors.slug?.message ?? 'Slug'}
+        placeholder={errors.slug?.message ?? 'Slug'}
         {...register('slug')}
       />
       <TextField
         variant="outlined"
         name="desktopSrc"
         type="text"
-        label="Imagem"
+        placeholder="Imagem"
         {...register('desktopSrc')}
       />
       <TextField
         variant="outlined"
         name="mobileSrc"
         type="text"
-        label="Thumbnail"
+        placeholder="Thumbnail"
         {...register('mobileSrc')}
       />
       <Switch defaultChecked name="freight" {...register('freight')} />
