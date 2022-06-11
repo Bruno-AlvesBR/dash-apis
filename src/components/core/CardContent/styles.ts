@@ -24,6 +24,12 @@ export const Card = styled(Box)(({ theme }) => ({
 
   '&:last-child': { marginRight: 0 },
 
+  [theme.breakpoints.down(780)]: {
+    minWidth: 260,
+    maxWidth: 260,
+    margin: '0px 10px',
+  },
+
   [theme.breakpoints.down(520)]: { width: '100%', margin: '0px 10px' },
 }));
 
