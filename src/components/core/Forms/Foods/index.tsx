@@ -68,6 +68,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="id"
         type="text"
+        label="id"
         placeholder="id"
         disabled
         {...register('id')}
@@ -76,13 +77,15 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="title"
         type="text"
-        placeholder={errors.title?.message ?? 'Nome'}
+        label="Título"
+        placeholder={errors.title?.message ?? 'Título'}
         {...register('title')}
       />
       <TextField
         variant="outlined"
         name="description"
         type="text"
+        label="Descrição"
         placeholder="Descrição"
         {...register('description')}
       />
@@ -90,6 +93,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="category"
         type="text"
+        label="Categoria"
         placeholder="Categoria"
         {...register('category')}
       />
@@ -97,6 +101,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="priceNumber"
         type="number"
+        label="Preço"
         placeholder={errors.priceNumber?.message ?? 'Preço'}
         {...register('priceNumber')}
       />
@@ -104,6 +109,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="monthInstallment"
         type="number"
+        label="Meses de parcelamento"
         placeholder="Meses de parcelamento"
         {...register('monthInstallment')}
       />
@@ -111,6 +117,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="pricePerMonth"
         type="number"
+        label="Preço por mês"
         placeholder="Preço por mês"
         {...register('pricePerMonth')}
       />
@@ -118,6 +125,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="brand"
         type="text"
+        label="Marca"
         placeholder="Marca"
         {...register('brand')}
       />
@@ -125,6 +133,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="rating"
         type="number"
+        label="Avaliação"
         placeholder="Avaliação"
         {...register('rating')}
       />
@@ -132,6 +141,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="stock"
         type="number"
+        label="Estoque"
         placeholder={errors.stock?.message ?? 'Estoque'}
         {...register('stock')}
       />
@@ -139,6 +149,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="manufacture"
         type="text"
+        label="Fabricante"
         placeholder={errors.manufacture?.message ?? 'Fabricante'}
         {...register('manufacture')}
       />
@@ -146,6 +157,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="slug"
         type="text"
+        label="Slug"
         placeholder={errors.slug?.message ?? 'Slug'}
         {...register('slug')}
       />
@@ -153,6 +165,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="desktopSrc"
         type="text"
+        label="Imagem"
         placeholder="Imagem"
         {...register('desktopSrc')}
       />
@@ -160,6 +173,7 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         variant="outlined"
         name="mobileSrc"
         type="text"
+        label="Thumbnail"
         placeholder="Thumbnail"
         {...register('mobileSrc')}
       />
