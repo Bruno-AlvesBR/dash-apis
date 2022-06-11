@@ -41,6 +41,6 @@ export const getStaticProps: GetStaticProps = async () => {
       foods,
       podcasts,
     },
-    revalidate: 3600 * 24 * 7,
+    revalidate: 60,
   };
 };
