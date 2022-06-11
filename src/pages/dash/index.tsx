@@ -1,5 +1,5 @@
 import Form from '../../components/core/Forms/Foods';
-import { useFood } from '../../hooks/Food';
+import { useFood } from '../../hooks/Product';
 import { CardContent } from '../../components/core/CardContent';
 
 import { Container } from '../../styles/theme';
@@ -16,8 +16,7 @@ const Dash: React.FC = () => {
           id={productData?.id}
           title={productData?.title}
           description={productData?.description}
-          price={productData?.price}
-          image={productData?.image}
+          desktopSrc={productData?.image?.desktopSrc}
           brand={productData?.brand}
         />
       )}

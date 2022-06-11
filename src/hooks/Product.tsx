@@ -16,6 +16,8 @@ interface IFoodContextProps {
   handleUpdateProduct?(event: IProductProps): void;
   handleRemoveProduct?(id: string): void;
   productData?: IFoodProps;
+  setIsLoading?(type: boolean): void;
+  isLoading?: boolean;
 }
 
 interface IFoodProviderProps {
@@ -27,6 +29,7 @@ const FoodContext = createContext({} as IFoodContextProps);
 const FoodProvider = ({ children }: IFoodProviderProps) => {
   const [router] = [useRouter()];
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [productData, setProductData] = useState<IFoodProps | {}>(
     {} as IFoodProps,
   );
@@ -82,6 +85,8 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
         productData,
         handleUpdateProduct,
         handleRemoveProduct,
+        setIsLoading,
+        isLoading,
       }}
     >
       {children}

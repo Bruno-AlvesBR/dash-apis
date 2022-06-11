@@ -1,4 +1,4 @@
-import { IFoodCreate, IFoodProps } from '../../../interfaces/IFoodsProps';
+import { IFoodCreate } from '../../../interfaces/IFoodsProps';
 import { IProductProps } from '../../../interfaces/IProductProps';
 import { api } from '../../api';
 
@@ -15,7 +15,7 @@ export const create = async ({
   return foodResponse?.data || {};
 };
 
-export const findAll = async (): Promise<IFoodProps[]> => {
+export const findAll = async (): Promise<IProductProps[]> => {
   await delay();
 
   const foodResponse = await api.get('product/foods');

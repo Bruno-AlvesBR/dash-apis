@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import Header from '../components/core/Header';
-import { FoodProvider } from '../hooks/Food';
+import { FoodProvider } from '../hooks/Product';
 import { LoginProvider } from '../hooks/Login';
 import { SnackbarProvider } from '../hooks/Snackbar';
 import { UserProvider, useUser } from '../hooks/User';

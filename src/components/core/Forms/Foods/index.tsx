@@ -8,7 +8,7 @@ import { memo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { IProductProps } from '../../../../interfaces/IProductProps';
-import { useFood } from '../../../../hooks/Food';
+import { useFood } from '../../../../hooks/Product';
 
 import { Container } from './styles';
 
