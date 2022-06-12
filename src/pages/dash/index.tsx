@@ -1,24 +1,45 @@
-import Form from '../../components/core/Forms/Foods';
+import { useEffect } from 'react';
+
+import EForm from '../../components/core/Forms/Foods';
+import PodcastForm from '../../components/core/Forms/Podcast';
 import { useFood } from '../../hooks/Product';
-import { CardContent } from '../../components/core/CardContent';
+import SelectForms from '../../components/core/SelectForms';
+import { usePodcast } from '../../hooks/Podcast';
 
 import { Container } from '../../styles/theme';
 
 const Dash: React.FC = () => {
-  const { productData, handleCreateProduct } = useFood();
+  const [
+    {
+      handleCreateProduct,
+      setSelectCompleted,
+      selectCompleted,
+      formType,
+      setFormType,
+    },
+    { handleCreatePodcast },
+  ] = [useFood(), usePodcast()];
+
+  useEffect(() => {
+    const formType = localStorage.getItem('formulario');
+
+    if (!formType) return;
+
+    setSelectCompleted(true);
+    setFormType(formType);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setSelectCompleted]);
 
   return (
     <Container>
-      <Form handleProductSubmit={handleCreateProduct} />
-      <h1>Último produto adicionado</h1>
-      {productData && (
-        <CardContent
-          id={productData?.id}
-          title={productData?.title}
-          description={productData?.description}
-          desktopSrc={productData?.image?.desktopSrc}
-          brand={productData?.brand}
-        />
+      {!selectCompleted ? (
+        <SelectForms />
+      ) : formType === 'e-commerce' ? (
+        <EForm handleProductSubmit={handleCreateProduct} />
+      ) : (
+        formType === 'podcast' && (
+          <PodcastForm handlePodcastSubmit={handleCreatePodcast} />
+        )
       )}
     </Container>
   );

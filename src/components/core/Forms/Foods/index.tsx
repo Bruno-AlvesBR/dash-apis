@@ -17,7 +17,7 @@ interface IFormProps {
   product?: IProductProps;
 }
 
-const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
+const EForm: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
   const [{ handleRemoveProduct }, router] = [useFood(), useRouter()];
 
   const validateForm = yup.object({
@@ -61,6 +61,12 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
       setValue('stock', product?.stock);
     }
   }, [product, setValue]);
+
+  const handleRemoveFormStorage = () => {
+    localStorage.removeItem('formulario');
+
+    router.reload();
+  };
 
   return (
     <Container onSubmit={handleSubmit(handleProductSubmit)}>
@@ -194,13 +200,16 @@ const Form: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
             </Button>
           </>
         ) : (
-          <Button variant="contained" type="submit">
-            Criar
-          </Button>
+          <>
+            <Button variant="contained" type="submit">
+              Criar
+            </Button>
+            <Button onClick={() => handleRemoveFormStorage()}>Voltar</Button>
+          </>
         )}
       </span>
     </Container>
   );
 };
 
-export default memo(Form);
+export default memo(EForm);

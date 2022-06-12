@@ -17,7 +17,11 @@ interface IFoodContextProps {
   handleRemoveProduct?(id: string): void;
   productData?: IFoodProps;
   setIsLoading?(type: boolean): void;
+  setSelectCompleted?(type: boolean): void;
+  setFormType?(type: string): void;
   isLoading?: boolean;
+  selectCompleted?: boolean;
+  formType?: string;
 }
 
 interface IFoodProviderProps {
@@ -30,6 +34,8 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   const [router] = [useRouter()];
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectCompleted, setSelectCompleted] = useState<boolean>(false);
+  const [formType, setFormType] = useState<string>('');
   const [productData, setProductData] = useState<IFoodProps | {}>(
     {} as IFoodProps,
   );
@@ -87,6 +93,10 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
         handleRemoveProduct,
         setIsLoading,
         isLoading,
+        setSelectCompleted,
+        selectCompleted,
+        setFormType,
+        formType,
       }}
     >
       {children}
