@@ -21,6 +21,13 @@ const Dash: React.FC = () => {
   ] = [useFood(), usePodcast()];
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
+  useEffect(() => {
     const formType = localStorage.getItem('formulario');
 
     if (!formType) return;
