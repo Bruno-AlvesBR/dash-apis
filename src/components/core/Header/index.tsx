@@ -2,9 +2,9 @@ import { useMediaQuery } from '@material-ui/core';
 
 import HeaderTop from '../HeaderTop';
 import MenuLeft from '../MenuLeft';
-import { useUser } from '../../../hooks/User';
+import { useUser } from '@/hooks/User';
 
-import { theme } from '../../../styles/theme';
+import { theme } from '@/styles/theme';
 
 const Header = () => {
   const { userId } = useUser();

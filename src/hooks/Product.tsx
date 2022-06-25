@@ -7,9 +7,9 @@ import {
   useState,
 } from 'react';
 
-import { IFoodCreate, IFoodProps } from '../interfaces/IFoodsProps';
-import { IProductProps, IProductUpdate } from '../interfaces/IProductProps';
-import { foodService } from '../services';
+import { IFoodCreate, IFoodProps } from '@/interfaces/IFoodsProps';
+import { IProductProps, IProductUpdate } from '@/interfaces/IProductProps';
+import { foodService } from '@/services/index';
 
 interface IFoodContextProps {
   handleCreateProduct?(event: IFoodProps): void;

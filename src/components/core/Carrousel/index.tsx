@@ -2,7 +2,7 @@ import { useMediaQuery } from '@material-ui/core';
 import { ArrowForwardIos } from '@mui/icons-material';
 import { ReactNode, useRef } from 'react';
 
-import { theme } from '../../../styles/theme';
+import { theme } from '@/styles/theme';
 import { Container, Content, ContentButtons } from './styles';
 
 interface ICarrousel {

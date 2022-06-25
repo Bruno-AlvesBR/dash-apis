@@ -8,8 +8,8 @@ import {
 } from 'react';
 import Cookies from 'universal-cookie';
 
-import { IUserLogin, IUserProps, TOKEN } from '../interfaces/IUserProps';
-import { userService } from '../services';
+import { IUserLogin, IUserProps, TOKEN } from '@/interfaces/IUserProps';
+import { userService } from '@/services/index';
 
 export interface IUserContextProps {
   onsubmit?(event: any): void;

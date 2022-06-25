@@ -6,8 +6,8 @@ import * as yup from 'yup';
 import { memo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { IPodcastProps } from '../../../../interfaces/IPodcastProps';
-import { usePodcast } from '../../../../hooks/Podcast';
+import { IPodcastProps } from '@/interfaces/IPodcastProps';
+import { usePodcast } from '@/hooks/Podcast';
 
 import { Container } from './styles';
 

@@ -1,10 +1,10 @@
 import { memo } from 'react';
 
-import { IProductProps } from '../../../interfaces/IProductProps';
-import { CardContent } from '../../core/CardContent';
-import Carrousel from '../../core/Carrousel';
-import { IPodcastProps } from '../../../interfaces/IPodcastProps';
-import { useFood } from '../../../hooks/Product';
+import { IProductProps } from '@/interfaces/IProductProps';
+import { CardContent } from '@/components/core/CardContent';
+import Carrousel from '@/components/core/Carrousel';
+import { IPodcastProps } from '@/interfaces/IPodcastProps';
+import { useFood } from '@/hooks/Product';
 
 import { Container } from './styles';
 

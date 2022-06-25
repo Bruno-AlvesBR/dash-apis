@@ -1,5 +1,5 @@
-import { IFoodCreate } from '../../../interfaces/IFoodsProps';
-import { IProductProps } from '../../../interfaces/IProductProps';
+import { IFoodCreate } from '@/interfaces/IFoodsProps';
+import { IProductProps } from '@/interfaces/IProductProps';
 import { api } from '../../api';
 
 const delay = (amount = 750) =>

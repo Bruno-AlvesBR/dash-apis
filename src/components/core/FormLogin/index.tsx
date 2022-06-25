@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { useUser } from '../../../hooks/User';
+import { useUser } from '@/hooks/User';
 
 import { FormContent } from './styles';
 

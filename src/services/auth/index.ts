@@ -1,4 +1,4 @@
-import { IUserLogin } from '../../interfaces/IUserProps';
+import { IUserLogin } from '@/interfaces/IUserProps';
 import { api } from '../api';
 
 const delay = (amount = 750) =>

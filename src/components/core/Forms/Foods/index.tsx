@@ -7,8 +7,8 @@ import * as yup from 'yup';
 import { memo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { IProductProps } from '../../../../interfaces/IProductProps';
-import { useFood } from '../../../../hooks/Product';
+import { IProductProps } from '@/interfaces/IProductProps';
+import { useFood } from '@/hooks/Product';
 
 import { Container } from './styles';
 

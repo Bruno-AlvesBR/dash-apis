@@ -2,7 +2,7 @@ import {
   IPodcastCreate,
   IPodcastProps,
   IPodcastUpdate,
-} from '../../../interfaces/IPodcastProps';
+} from '@/interfaces/IPodcastProps';
 import { api } from '../../api';
 
 const delay = (amount: number = 1000) =>

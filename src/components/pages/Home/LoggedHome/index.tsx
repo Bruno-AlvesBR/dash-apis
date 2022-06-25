@@ -1,6 +1,6 @@
 import { ContainerApresentation, Title, Description } from './styles';
-import { Container } from '../../../../styles/theme';
-import BannerCreateProduct from '../../../core/BannerCreateProduct';
+import { Container } from '@/styles/theme';
+import BannerCreateProduct from '@/components/core/BannerCreateProduct';
 
 export const LoggedHome = () => {
   const handleRedirect = () =>

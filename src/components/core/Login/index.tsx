@@ -1,6 +1,6 @@
 import { FormLogin } from '../FormLogin';
 import Snackbar from '../Snackbar';
-import { useUser } from '../../../hooks/User';
+import { useUser } from '@/hooks/User';
 
 import { Container } from './styles';
 

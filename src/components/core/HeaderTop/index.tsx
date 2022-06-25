@@ -10,7 +10,7 @@ import { ReactElement, useState } from 'react';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
 
-import { TOKEN } from '../../../interfaces/IUserProps';
+import { TOKEN } from '@/interfaces/IUserProps';
 
 import {
   Container,
@@ -21,7 +21,7 @@ import {
   ItemButton,
   MenuPopup,
 } from './styles';
-import { theme } from '../../../styles/theme';
+import { theme } from '@/styles/theme';
 
 interface IHeaderProps {
   id?: number;

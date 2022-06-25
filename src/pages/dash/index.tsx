@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import EForm from '../../components/core/Forms/Foods';
-import PodcastForm from '../../components/core/Forms/Podcast';
-import { useFood } from '../../hooks/Product';
-import SelectForms from '../../components/core/SelectForms';
-import { usePodcast } from '../../hooks/Podcast';
+import EForm from '@/components/core/Forms/Foods';
+import PodcastForm from '@/components/core/Forms/Podcast';
+import { useFood } from '@/hooks/Product';
+import SelectForms from '@/components/core/SelectForms';
+import { usePodcast } from '@/hooks/Podcast';
 
-import { Container } from '../../styles/theme';
+import { Container } from '@/styles/theme';
 
 const Dash: React.FC = () => {
   const [

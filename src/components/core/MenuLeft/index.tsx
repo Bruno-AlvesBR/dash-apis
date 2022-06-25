@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 import Button from '@material-ui/core/Button';
 
 import { Configs } from '../Configs';
-import { useUser } from '../../../hooks/User';
-import { TOKEN } from '../../../interfaces/IUserProps';
+import { useUser } from '@/hooks/User';
+import { TOKEN } from '@/interfaces/IUserProps';
 
 import {
   Container,

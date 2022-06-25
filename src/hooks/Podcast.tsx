@@ -7,13 +7,13 @@ import {
   useState,
 } from 'react';
 
-import { IFoodProps } from '../interfaces/IFoodsProps';
+import { IFoodProps } from '@/interfaces/IFoodsProps';
 import {
   IPodcastCreate,
   IPodcastProps,
   IPodcastUpdate,
-} from '../interfaces/IPodcastProps';
-import { podcastService } from '../services';
+} from '@/interfaces/IPodcastProps';
+import { podcastService } from '@/services/index';
 
 interface IPodcastContextProps {
   handleCreatePodcast?(event: IPodcastProps): void;

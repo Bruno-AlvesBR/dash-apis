@@ -1,11 +1,11 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-import { foodService } from '../../services';
-import { useFood } from '../../hooks/Product';
-import Form from '../../components/core/Forms/Foods';
-import { IProductProps } from '../../interfaces/IProductProps';
+import { foodService } from '@/services/index';
+import { useFood } from '@/hooks/Product';
+import Form from '@/components/core/Forms/Foods';
+import { IProductProps } from '@/interfaces/IProductProps';
 
-import { Container } from '../../styles/theme';
+import { Container } from '@/styles/theme';
 
 interface IProduct {
   food?: IProductProps;

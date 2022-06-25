@@ -1,14 +1,14 @@
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
 
-import Header from '../components/core/Header';
-import { FoodProvider } from '../hooks/Product';
-import { LoginProvider } from '../hooks/Login';
-import { SnackbarProvider } from '../hooks/Snackbar';
-import { UserProvider } from '../hooks/User';
-import { PodcastProvider } from '../hooks/Podcast';
+import Header from '@/components/core/Header';
+import { FoodProvider } from '@/hooks/Product';
+import { LoginProvider } from '@/hooks/Login';
+import { SnackbarProvider } from '@/hooks/Snackbar';
+import { UserProvider } from '@/hooks/User';
+import { PodcastProvider } from '@/hooks/Podcast';
 
-import '../styles/globals.css';
-import { theme } from '../styles/theme';
+import '@/styles/globals.css';
+import { theme } from '@/styles/theme';
 
 function MyApp({ Component, pageProps }) {
   return (

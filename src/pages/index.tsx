@@ -1,10 +1,10 @@
 import { GetStaticProps, NextPage } from 'next';
 
-import { LoggedHome } from '../components/pages/Home/LoggedHome';
-import { useUser } from '../hooks/User';
-import { IFoodProps, IFoods } from '../interfaces/IFoodsProps';
-import { foodService } from '../services';
-import Login from '../components/core/Login';
+import { LoggedHome } from '@/components/pages/Home/LoggedHome';
+import { useUser } from '@/hooks/User';
+import { IFoodProps, IFoods } from '@/interfaces/IFoodsProps';
+import { foodService } from '@/services/index';
+import Login from '@/components/core/Login';
 
 const Index: NextPage<IFoods> = ({ foods }) => {
   const { userId } = useUser();

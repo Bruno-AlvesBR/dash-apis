@@ -1,11 +1,11 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { GetStaticProps, NextPage } from 'next';
 
-import ProductsContent from '../../components/pages/Produtos';
-import { useFood } from '../../hooks/Product';
-import { IPodcastProps } from '../../interfaces/IPodcastProps';
-import { IProductProps } from '../../interfaces/IProductProps';
-import { foodService, podcastService } from '../../services';
+import ProductsContent from '@/components/pages/Produtos';
+import { useFood } from '@/hooks/Product';
+import { IPodcastProps } from '@/interfaces/IPodcastProps';
+import { IProductProps } from '@/interfaces/IProductProps';
+import { foodService, podcastService } from '@/services/index';
 
 import Container from './styles';
 

@@ -5,8 +5,8 @@ import { useCallback, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { Skeleton } from '@mui/material';
 
-import { useUser } from '../../../hooks/User';
-import { ICardProps } from '../../../interfaces/ICardProps';
+import { useUser } from '@/hooks/User';
+import { ICardProps } from '@/interfaces/ICardProps';
 
 import { Card, Title, Description, ContentImage } from './styles';
 
