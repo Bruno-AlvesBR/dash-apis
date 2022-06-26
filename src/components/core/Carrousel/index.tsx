@@ -29,24 +29,28 @@ const Carrousel: React.FC<ICarrousel> = ({
     const clientWidth = !isMobile ? desktopWidth : mobileWidth;
     const valueScroll = event === 'next' ? clientWidth : -clientWidth;
 
-    listRef.current.scrollTo({
-      left: scrollLeft + valueScroll,
-      behavior: 'smooth',
-    });
+    if (process.env.NODE_ENV !== 'test') {
+      listRef.current.scrollTo({
+        left: scrollLeft + valueScroll,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
-    <Container>
+    <Container data-testid="carrousel">
       <ContentButtons>
-        <ArrowForwardIos onClick={() => handleScroll('prev')} />
-        <ArrowForwardIos onClick={() => handleScroll('next')} />
+        <ArrowForwardIos
+          data-testid="carrousel-button"
+          onClick={() => handleScroll('prev')}
+        />
+        <ArrowForwardIos
+          data-testid="carrousel-button"
+          onClick={() => handleScroll('next')}
+        />
       </ContentButtons>
       <div ref={contentRef}>
-        <Content
-          horizontal
-          nativeMobileScroll
-          innerRef={listRef}
-        >
+        <Content horizontal nativeMobileScroll innerRef={listRef}>
           {children}
         </Content>
       </div>
