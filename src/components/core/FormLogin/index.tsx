@@ -24,7 +24,7 @@ export const FormLogin = () => {
   });
 
   return (
-    <FormContent onSubmit={handleSubmit(onsubmit)}>
+    <FormContent data-testid="form-content" onSubmit={handleSubmit(onsubmit)}>
       <h1 style={{ textAlign: 'center' }}>Login</h1>
       <TextField
         label={errors.email?.message || 'Email'}

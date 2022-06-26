@@ -11,18 +11,13 @@ const Header = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down(780));
 
-  return (
+  return userId && !isMobile ? (
     <>
-      {userId &&
-        (!isMobile ? (
-          <>
-            <HeaderTop />
-            <MenuLeft />
-          </>
-        ) : (
-          <HeaderTop />
-        ))}
+      <HeaderTop />
+      <MenuLeft />
     </>
+  ) : (
+    <HeaderTop />
   );
 };
 
