@@ -33,11 +33,13 @@ export const CardContent: React.FC<ICardProps> = ({ ...props }) => {
       )}
       <Title data-testid="title-card">{props?.title}</Title>
       <Description>{props?.description}</Description>
-      {user?.admin && (
-        <Button variant="contained" onClick={handleRedirect}>
-          Editar
-        </Button>
-      )}
+      <Button
+        data-testid="edit-button-card"
+        variant="contained"
+        onClick={handleRedirect}
+      >
+        Editar
+      </Button>
     </Card>
   );
 };
