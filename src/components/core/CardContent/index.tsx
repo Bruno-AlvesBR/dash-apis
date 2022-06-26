@@ -22,7 +22,7 @@ export const CardContent: React.FC<ICardProps> = ({ ...props }) => {
   }, [props?.createdAt]);
 
   return (
-    <Card>
+    <Card data-testid="card-content">
       {productCreatedAt}
       {props?.desktopSrc ? (
         <ContentImage>
@@ -31,7 +31,7 @@ export const CardContent: React.FC<ICardProps> = ({ ...props }) => {
       ) : (
         <Skeleton width={200} height={200} />
       )}
-      <Title>{props?.title}</Title>
+      <Title data-testid="title-card">{props?.title}</Title>
       <Description>{props?.description}</Description>
       {user?.admin && (
         <Button variant="contained" onClick={handleRedirect}>
