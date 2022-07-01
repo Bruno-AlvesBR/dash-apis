@@ -1,6 +1,8 @@
-import { styled, createTheme } from '@material-ui/core';
+import { styled, createTheme } from '@mui/material';
 
-export const theme = createTheme({});
+import { adaptV4Theme } from '@mui/material/styles';
+
+export const theme = createTheme(adaptV4Theme({}));
 
 export const Container = styled('div')(() => ({
   position: 'relative',
