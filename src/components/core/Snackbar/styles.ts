@@ -1,4 +1,4 @@
-import { styled } from '@material-ui/core';
+import { styled } from '@mui/material';
 import { Alert } from '@mui/material';
 
 export const Message = styled(Alert)(() => ({

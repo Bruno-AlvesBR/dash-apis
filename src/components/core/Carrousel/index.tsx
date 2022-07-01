@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@material-ui/core';
+import { useMediaQuery } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
 import { ReactNode, useRef } from 'react';
 

@@ -1,4 +1,4 @@
-import { styled, Typography, Box } from '@material-ui/core';
+import { styled, Typography, Box } from '@mui/material';
 
 export const ContainerApresentation = styled(Box)(() => ({}));
 

@@ -1,4 +1,4 @@
-import { Snackbar } from '@material-ui/core';
+import { Snackbar } from '@mui/material';
 import { memo } from 'react';
 
 import { useSnack } from '@/hooks/Snackbar';

@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import { Children } from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { ServerStyleSheets as MaterialUISheets } from '@material-ui/core/styles';
+import MaterialUISheets from '@mui/styles/ServerStyleSheets';
 import { ServerStyleSheet } from 'styled-components';
 
 interface DocumentProps {

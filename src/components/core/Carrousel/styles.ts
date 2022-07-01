@@ -1,4 +1,4 @@
-import { Box, styled } from '@material-ui/core';
+import { Box, styled } from '@mui/material';
 import IndianaDrag from 'react-indiana-drag-scroll';
 
 export const Container = styled('div')(({ theme }) => ({
