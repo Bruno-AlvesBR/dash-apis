@@ -6,6 +6,8 @@ const createJestConfig = nextJest({
 
 const customJestConfig = {
   bail: 1,
+  verbose: true,
+  silent: true,
   setupFilesAfterEnv: ['<rootDir>/src/tests/index.ts'],
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
