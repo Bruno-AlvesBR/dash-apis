@@ -1,12 +1,6 @@
-import {
-  AppBar,
-  Button,
-  MenuItem,
-  styled,
-  Toolbar,
-  Menu,
-  withStyles,
-} from '@material-ui/core';
+import { AppBar, Button, MenuItem, styled, Toolbar, Menu } from '@mui/material';
+
+import withStyles from '@mui/styles/withStyles';
 
 export const Container = styled(AppBar)(() => ({
   position: 'fixed',

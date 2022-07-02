@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, styled, Button, Box } from '@material-ui/core';
+import { AppBar, Toolbar, styled, Button, Box } from '@mui/material';
 
 export const Container = styled(AppBar)(() => ({
   left: 0,

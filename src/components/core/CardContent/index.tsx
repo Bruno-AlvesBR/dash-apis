@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useCallback, useMemo } from 'react';
