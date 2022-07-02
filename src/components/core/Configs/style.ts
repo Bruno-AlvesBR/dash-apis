@@ -1,6 +1,4 @@
-import { Dialog as DialogMui, styled } from '@mui/material';
-
-import withStyles from '@mui/styles/withStyles';
+import { Dialog as DialogMui, styled, withStyles } from '@material-ui/core';
 
 export const Container = withStyles(() => ({
   paper: {

@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import { Box, styled } from '@material-ui/core';
 
 export const Card = styled(Box)(({ theme }) => ({
   minWidth: 300,

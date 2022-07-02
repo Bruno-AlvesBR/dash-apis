@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { styled } from '@material-ui/core';
 
 export const FormContent = styled('form')(() => ({
   gap: 50,

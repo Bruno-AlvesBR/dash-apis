@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery } from '@material-ui/core';
 
 import HeaderTop from '../HeaderTop';
 import MenuLeft from '../MenuLeft';
@@ -11,17 +11,13 @@ const Header = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down(780));
 
-  return userId ? (
-    !isMobile ? (
-      <>
-        <HeaderTop />
-        <MenuLeft />
-      </>
-    ) : (
+  return userId && !isMobile ? (
+    <>
       <HeaderTop />
-    )
+      <MenuLeft />
+    </>
   ) : (
-    <></>
+    <HeaderTop />
   );
 };
 

@@ -3,7 +3,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import { Button, useMediaQuery } from '@mui/material';
+import { Button, useMediaQuery } from '@material-ui/core';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import { ReactElement, useState } from 'react';

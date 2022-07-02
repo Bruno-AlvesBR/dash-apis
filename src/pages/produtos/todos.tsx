@@ -1,4 +1,4 @@
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { GetStaticProps, NextPage } from 'next';
 
 import ProductsContent from '@/components/pages/Produtos';
@@ -31,26 +31,16 @@ const Todos: NextPage<IProductsContentProps> = ({ ...props }) => {
 export default Todos;
 
 export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const [foods, podcasts] = await Promise.all([
-      foodService?.findAll(),
-      podcastService?.findAll(),
-    ]);
+  const [foods, podcasts] = await Promise.all([
+    await foodService?.findAll(),
+    await podcastService?.findAll(),
+  ]);
 
-    return {
-      props: {
-        foods,
-        podcasts,
-      },
-      revalidate: 60,
-    };
-  } catch (err) {
-    return {
-      props: {
-        foods: [],
-        podcasts: [],
-      },
-      revalidate: 60,
-    };
-  }
+  return {
+    props: {
+      foods,
+      podcasts,
+    },
+    revalidate: 60,
+  };
 };

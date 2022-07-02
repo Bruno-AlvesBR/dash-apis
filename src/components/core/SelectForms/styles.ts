@@ -1,5 +1,5 @@
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material';
+import Button from '@material-ui/core/Button';
+import { styled } from '@material-ui/core';
 
 export const Container = styled('div')(() => ({
   display: 'flex',
