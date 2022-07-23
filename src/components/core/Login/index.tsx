@@ -4,19 +4,9 @@ import { useUser } from '@/hooks/User';
 
 import { Container } from './styles';
 import { useLogin } from '@/hooks/Login';
-import { useEffect } from 'react';
 
 const Login = () => {
-  const [
-    { isInvalid, noAdmin, user },
-    { openDialog, setOpenDialog, handleCloseDialog },
-  ] = [useUser(), useLogin()];
-
-  useEffect(() => {
-    if (user?.id) return setOpenDialog(false);
-
-    setOpenDialog(true);
-  }, [setOpenDialog, user?.id]);
+  const [{ isInvalid, noAdmin }, { openDialog }] = [useUser(), useLogin()];
 
   return (
     <Container open={openDialog}>

@@ -22,6 +22,8 @@ import {
   MenuPopup,
 } from './styles';
 import { theme } from '@/styles/theme';
+import { useLogin } from '@/hooks/Login';
+import { useUser } from '@/hooks/User';
 
 interface IHeaderProps {
   id?: number;
@@ -31,7 +33,12 @@ interface IHeaderProps {
 }
 
 const HeaderTop = () => {
-  const [router, cookie] = [useRouter(), new Cookies()];
+  const [router, cookie, { setOpenDialog }, { user }] = [
+    useRouter(),
+    new Cookies(),
+    useLogin(),
+    useUser(),
+  ];
 
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
@@ -77,6 +84,8 @@ const HeaderTop = () => {
     router.reload();
   };
 
+  const handleOpenLogin = () => setOpenDialog(true);
+
   return (
     <Container>
       <Content>
@@ -101,6 +110,11 @@ const HeaderTop = () => {
           </ContentItems>
         ) : (
           <>
+            {!user?.id ? (
+              <Button onClick={() => setOpenDialog(true)}>Logar</Button>
+            ) : (
+              <Button onClick={() => handleLogout()}>Logout</Button>
+            )}
             <ItemButton onClick={() => handleToggleMenu()}>
               <MenuIcon />
             </ItemButton>
@@ -118,7 +132,6 @@ const HeaderTop = () => {
                 </Link>
               ))}
             </MenuPopup>
-            <Button onClick={() => handleLogout()}>Logout</Button>
           </>
         )}
       </Content>

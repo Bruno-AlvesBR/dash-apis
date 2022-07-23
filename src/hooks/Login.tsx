@@ -21,18 +21,17 @@ export interface ILoginProvider {
 const LoginContext = createContext({} as ILoginContextProps);
 
 const LoginProvider = ({ children }: ILoginProvider) => {
-  const { userId } = useUser();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
-  const handleCloseDialog = () => setOpenDialog(false);
+  const { user } = useUser(); 
 
   useEffect(() => {
-    if (!userId) {
-      setOpenDialog(true);
-    } else {
-      setOpenDialog(false);
-    }
-  }, [userId]);
+    if (user?.id) return setOpenDialog(false);
+
+    setOpenDialog(true);
+  }, [setOpenDialog, user?.id]);
+
+  const handleCloseDialog = () => setOpenDialog(false);
 
   return (
     <LoginContext.Provider

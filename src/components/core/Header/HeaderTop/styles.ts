@@ -1,4 +1,11 @@
-import { AppBar, Button, MenuItem, styled, Toolbar, Menu } from '@mui/material';
+import {
+  AppBar,
+  Button,
+  MenuItem,
+  styled,
+  Toolbar,
+  Popover,
+} from '@mui/material';
 
 import withStyles from '@mui/styles/withStyles';
 
@@ -10,6 +17,12 @@ export const Container = styled(AppBar)(() => ({
 
 export const Content = styled(Toolbar)(() => ({
   width: '100%',
+
+  '& > button:first-of-type': {
+    marginLeft: 'auto',
+    width: 'fit-content',
+    color: '#000',
+  },
 }));
 
 export const ItemMenu = styled(MenuItem)(() => ({
@@ -29,22 +42,19 @@ export const ItemName = styled('p')(() => ({
 }));
 
 export const ItemButton = styled(Button)(() => ({
-  marginLeft: 'auto',
   color: '#000',
 }));
 
-export const MenuPopup = withStyles(() => ({
-  paper: {
+export const MenuPopup = styled(Popover)(({ theme }) => ({
+  '& .MuiPaper-root': {
     position: 'fixed',
-    right: 40,
-    marginLeft: 'auto !important',
-    marginTop: 53,
+    left: 'calc(100% - 150px)!important',
+    top: '70px!important',
     width: 100,
-    height: 'auto',
 
-    '@media (max-width: 600px)': {
-      right: 30,
-      marginTop: 45,
+    [theme.breakpoints.down(600)]: {
+      left: 'calc(100% - 140px)!important',
+      top: '63px!important',
     },
   },
-}))(Menu);
+}));

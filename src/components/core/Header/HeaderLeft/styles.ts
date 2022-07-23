@@ -36,11 +36,11 @@ export const ContentConfigs = styled(Box)(() => ({
   },
 }));
 
-export const ContainerUserInfos = styled('div')(() => ({
+export const ContentUserName = styled(Box)(() => ({
   width: '100%',
+  maxWidth: 200,
   height: 'fit-content',
   padding: '30px 0px',
-  gap: 20,
   background: '#00000035',
   borderRadius: 10,
   marginTop: 70,
@@ -50,15 +50,17 @@ export const ContainerUserInfos = styled('div')(() => ({
   flexDirection: 'column',
   position: 'relative',
 
-  '& button': {
-    background: '#fff',
-    color: '#6674BB',
-    margin: 'auto',
+  '& h2': {
+    borderBottom: '1px solid #000',
+    marginBottom: 15,
+    paddingBottom: 5,
+  },
 
-    '&:hover': {
-      opacity: 0.7,
-      background: '#fff',
-    },
+  '& > button': {
+    transition: '.2s all ease',
+    margin: 'auto',
+    color: '#000',
+    background: '#fff',
   },
 }));
 
