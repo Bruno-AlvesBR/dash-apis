@@ -15,6 +15,7 @@ import { PodcastProvider } from '@/hooks/Podcast';
 
 import '@/styles/globals.css';
 import { theme } from '@/styles/theme';
+import Login from '@/components/core/Login';
 
 declare module '@mui/styles/defaultTheme' {
   interface DefaultTheme extends Theme {}
@@ -33,6 +34,7 @@ const MyApp = ({ Component, pageProps }) => {
                   <div className="body-no-wrap">
                     <Component {...pageProps} />
                     <CssBaseline />
+                    <Login />
                   </div>
                 </PodcastProvider>
               </FoodProvider>

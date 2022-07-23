@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
 
-import { Configs } from '../Configs';
+import { Configs } from '../../Configs';
 import { useUser } from '@/hooks/User';
 import { TOKEN } from '@/interfaces/IUserProps';
 
@@ -20,7 +20,10 @@ const MenuLeft = () => {
 
   const handleLogout = () => {
     cookie.remove(TOKEN.AUTH_TOKEN);
-    router.reload();
+
+    if (!cookie.get(TOKEN.AUTH_TOKEN)) {
+      router.reload();
+    }
   };
 
   return (

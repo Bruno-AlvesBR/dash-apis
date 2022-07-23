@@ -1,14 +1,17 @@
-import { Button, CircularProgress, TextField } from '@mui/material';
+import { Box, Button, CircularProgress, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { useUser } from '@/hooks/User';
 
-import { FormContent } from './styles';
+import { ButtonForm, FormContent, InputForm } from './styles';
+import { useRef } from 'react';
 
 export const FormLogin = () => {
-  const [{ onsubmit, isLoadingUser }] = [useUser()];
+  const { onsubmit, isLoadingUser } = useUser();
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const validationForm = yup.object({
     email: yup.string().email().required('O email é obrigatório'),
@@ -23,28 +26,44 @@ export const FormLogin = () => {
     resolver: yupResolver(validationForm),
   });
 
+  const handleEventKey = (event: any) => {
+    if (event !== 'Enter') return;
+
+    buttonRef.current.click();
+  };
+
   return (
     <FormContent data-testid="form-content" onSubmit={handleSubmit(onsubmit)}>
       <h1 style={{ textAlign: 'center' }}>Login</h1>
-      <TextField
-        label={errors.email?.message || 'Email'}
-        variant="standard"
-        name="email"
-        {...register('email')}
-      />
-      <TextField
-        label={errors.password?.message || 'Senha'}
-        variant="standard"
-        name="password"
-        type="password"
-        {...register('password')}
-      />
+
+      <Box mb={4} mt={4}>
+        <InputForm
+          label={errors.email?.message || 'Email'}
+          variant="standard"
+          name="email"
+          {...register('email')}
+          error={errors.email?.message}
+          onKeyDown={handleEventKey}
+        />
+      </Box>
+      <Box mb={5}>
+        <InputForm
+          label={errors.password?.message || 'Senha'}
+          variant="standard"
+          name="password"
+          type="password"
+          {...register('password')}
+          error={errors.password?.message}
+          onKeyDown={handleEventKey}
+        />
+      </Box>
+
       {isLoadingUser ? (
-        <CircularProgress style={{ margin: '10px auto' }} />
+        <CircularProgress style={{ margin: 'auto' }} />
       ) : (
-        <Button variant="contained" type="submit">
+        <ButtonForm ref={buttonRef} variant="contained" type="submit">
           Access
-        </Button>
+        </ButtonForm>
       )}
     </FormContent>
   );

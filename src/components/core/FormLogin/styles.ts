@@ -1,23 +1,25 @@
-import { styled } from '@mui/material';
+import { Button, styled, TextField } from '@mui/material';
 
-export const FormContent = styled('form')(() => ({
-  gap: 50,
-  zIndex: 1000,
+export const FormContent = styled('form')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   margin: 'auto',
-  marginTop: 250,
   width: '100%',
   maxWidth: 500,
-  border: '1px solid #00000025',
   padding: '50px 40px',
   borderRadius: 5,
 
-  '& input': {
-    width: '100%',
+  [theme.breakpoints.down(780)]: {
+    padding: '30px 0px',
   },
+}));
 
+export const InputForm = styled(TextField)(() => ({
+  width: '100%',
+}));
+
+export const ButtonForm = styled(Button)(() => ({
   '& button:first-child': {
     paddingg: 5,
 
@@ -40,9 +42,5 @@ export const FormContent = styled('form')(() => ({
       background: '#6674BB',
       opacity: 0.6,
     },
-  },
-
-  '@media (max-width: 780px)': {
-    padding: '30px 20px',
   },
 }));

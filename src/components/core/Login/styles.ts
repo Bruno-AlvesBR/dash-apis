@@ -1,14 +1,15 @@
 import { styled } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
 
-export const Container = styled('div')(() => ({
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  margin: 'auto',
+export const Container = styled(Dialog)(() => ({
+  '& .MuiPaper-root': {
+    width: 400,
+    maxWidth: 500,
+    height: '100%',
+    maxHeight: 450,
 
-  '@media (max-width: 780px)': {
-    padding: '0px 30px',
+    '@media (max-width: 780px)': {
+      padding: '0px 30px',
+    },
   },
 }));
