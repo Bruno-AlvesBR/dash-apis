@@ -10,6 +10,7 @@ import {
 import { IFoodCreate, IFoodProps } from '@/interfaces/IFoodsProps';
 import { IProductProps, IProductUpdate } from '@/interfaces/IProductProps';
 import { foodService } from '@/services/index';
+import { useUser } from './User';
 
 interface IFoodContextProps {
   handleCreateProduct?(event: IFoodProps): void;
@@ -31,7 +32,7 @@ interface IFoodProviderProps {
 const FoodContext = createContext({} as IFoodContextProps);
 
 const FoodProvider = ({ children }: IFoodProviderProps) => {
-  const [router] = [useRouter()];
+  const [router, { user }] = [useRouter(), useUser()];
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectCompleted, setSelectCompleted] = useState<boolean>(false);
@@ -43,46 +44,55 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   const handleCreateProduct = useCallback(
     async ({ ...event }: IFoodCreate): Promise<IFoodCreate> => {
       try {
-        const foodData = await foodService.create(event);
+        if (user?.id) {
+          const foodData = await foodService.create(event);
 
-        if (!foodData && !foodData?.id) return;
+          if (!foodData && !foodData?.id) return;
 
-        setProductData(foodData);
+          setProductData(foodData);
+        }
       } catch (err) {
         console.log(err);
       }
     },
-    [],
+    [user?.id],
   );
 
   const handleUpdateProduct = useCallback(
     async ({ ...event }: IProductUpdate): Promise<IProductUpdate> => {
       try {
-        const productResponse = await foodService.update(event?.id, event);
+        if (user?.id) {
+          const productResponse = await foodService.update(event?.id, event);
 
-        if (!productResponse && !productResponse?.id) return;
+          if (!productResponse && !productResponse?.id) return;
 
-        router.push('/produtos/todos');
+          router.push('/produtos/todos');
+        }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [user?.id],
   );
 
-  const handleRemoveProduct = useCallback(async (id: string) => {
-    try {
-      const productResponse = await foodService.remove(id);
+  const handleRemoveProduct = useCallback(
+    async (id: string) => {
+      try {
+        if (user?.id) {
+          const productResponse = await foodService.remove(id);
 
-      if (!productResponse && !productResponse?.id) return;
+          if (!productResponse && !productResponse?.id) return;
 
-      router.push('/produtos/todos');
-    } catch (err) {
-      console.log(err);
-    }
+          router.push('/produtos/todos');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    [user?.id],
+  );
 
   return (
     <FoodContext.Provider

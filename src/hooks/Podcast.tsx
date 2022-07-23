@@ -14,6 +14,7 @@ import {
   IPodcastUpdate,
 } from '@/interfaces/IPodcastProps';
 import { podcastService } from '@/services/index';
+import { useUser } from './User';
 
 interface IPodcastContextProps {
   handleCreatePodcast?(event: IPodcastProps): void;
@@ -33,7 +34,7 @@ interface IPodcastProviderProps {
 const PodcastContext = createContext({} as IPodcastContextProps);
 
 const PodcastProvider = ({ children }: IPodcastProviderProps) => {
-  const [router] = [useRouter()];
+  const [router, { user }] = [useRouter(), useUser()];
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectCompleted, setSelectCompleted] = useState<boolean>(false);
@@ -44,46 +45,55 @@ const PodcastProvider = ({ children }: IPodcastProviderProps) => {
   const handleCreatePodcast = useCallback(
     async ({ ...event }: IPodcastCreate): Promise<IPodcastCreate> => {
       try {
-        const podcastResponse = await podcastService.create(event);
+        if (user?.id) {
+          const podcastResponse = await podcastService.create(event);
 
-        if (!podcastResponse && !podcastResponse?.id) return;
+          if (!podcastResponse && !podcastResponse?.id) return;
 
-        setPodcastData(podcastResponse);
+          setPodcastData(podcastResponse);
+        }
       } catch (err) {
         console.log(err);
       }
     },
-    [],
+    [user?.id],
   );
 
   const handleUpdatePodcast = useCallback(
     async ({ ...event }: IPodcastUpdate): Promise<IPodcastUpdate> => {
       try {
-        const podcastResponse = await podcastService.update(event?.id, event);
+        if (user?.id) {
+          const podcastResponse = await podcastService.update(event?.id, event);
 
-        if (!podcastResponse && !podcastResponse?.id) return;
+          if (!podcastResponse && !podcastResponse?.id) return;
 
-        router.push('/produtos/todos');
+          router.push('/produtos/todos');
+        }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [user?.id],
   );
 
-  const handleRemovePodcast = useCallback(async (id: string) => {
-    try {
-      const podcastResponse = await podcastService.remove(id);
+  const handleRemovePodcast = useCallback(
+    async (id: string) => {
+      try {
+        if (user?.id) {
+          const podcastResponse = await podcastService.remove(id);
 
-      if (!podcastResponse && !podcastResponse?.id) return;
+          if (!podcastResponse && !podcastResponse?.id) return;
 
-      router.push('/produtos/todos');
-    } catch (err) {
-      console.log(err);
-    }
+          router.push('/produtos/todos');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    [user?.id],
+  );
 
   return (
     <PodcastContext.Provider

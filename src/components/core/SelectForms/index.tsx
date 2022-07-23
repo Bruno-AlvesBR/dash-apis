@@ -1,13 +1,19 @@
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 import { useFood } from '@/hooks/Product';
 
 import { Container, Title, ButtonSelect } from './styles';
+import { useUser } from '@/hooks/User';
+import { useRouter } from 'next/router';
 
 const SelectForms: React.FC = () => {
-  const [{ setSelectCompleted, setFormType, formType }] = [useFood()];
+  const [{ setSelectCompleted, setFormType, formType }, { user }, router] = [
+    useFood(),
+    useUser(),
+    useRouter(),
+  ];
 
   const handleSelectValue = (event: any) => {
     if (event) {
@@ -15,6 +21,17 @@ const SelectForms: React.FC = () => {
       localStorage.setItem('formulario', event);
     }
   };
+
+  const handleClick = () => {
+    return user?.id && formType && setSelectCompleted(true);
+  };
+
+  useEffect(() => {
+    if (!user?.id) {
+      localStorage.removeItem('formulario');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   return (
     <Container>
@@ -28,9 +45,7 @@ const SelectForms: React.FC = () => {
         <MenuItem value={'e-commerce'}>e-commerce</MenuItem>
         <MenuItem value={'podcast'}>podcast</MenuItem>
       </Select>
-      <ButtonSelect onClick={() => formType && setSelectCompleted(true)}>
-        Confirmar
-      </ButtonSelect>
+      <ButtonSelect onClick={() => handleClick()}>Confirmar</ButtonSelect>
     </Container>
   );
 };
