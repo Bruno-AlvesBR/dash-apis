@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { IProductProps } from '@/interfaces/IProductProps';
 import { CardContent } from '@/components/core/CardContent';
-import Carrousel from '@/components/core/Carrousel';
+import CarrouselDynamic from '@/components/core/Carrousel/dynamic';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
 
 import { Container } from './styles';
@@ -17,7 +17,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
   podcasts,
 }) => {
   const FoodContent: React.FC = () => (
-    <Carrousel mobileWidth={275} desktopWidth={315}>
+    <CarrouselDynamic mobileWidth={275} desktopWidth={315}>
       {foods?.map(item => (
         <CardContent
           key={item?.id}
@@ -29,11 +29,11 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           slug={item?.slug}
         />
       ))}
-    </Carrousel>
+    </CarrouselDynamic>
   );
 
   const PodcastContent: React.FC = () => (
-    <Carrousel mobileWidth={275} desktopWidth={315}>
+    <CarrouselDynamic mobileWidth={275} desktopWidth={315}>
       {podcasts?.map(item => (
         <CardContent
           key={item?.id}
@@ -44,7 +44,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           createdAt={item?.createdAt}
         />
       ))}
-    </Carrousel>
+    </CarrouselDynamic>
   );
 
   return (
