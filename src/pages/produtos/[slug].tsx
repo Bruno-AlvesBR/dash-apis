@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import { foodService } from '@/services/index';
 import { useFood } from '@/hooks/Product';
-import Form from '@/components/core/Forms/Foods';
+import DynamicForm from '@/components/core/Forms/Foods/dynamic';
 import { IProductProps } from '@/interfaces/IProductProps';
 
 import { Container } from '@/styles/theme';
@@ -12,11 +12,14 @@ interface IProduct {
 }
 
 const Product: NextPage<IProduct> = ({ food }) => {
-  const [{ handleUpdateProduct }] = [useFood()];
+  const { handleUpdateProduct } = useFood();
 
   return (
     <Container>
-      <Form handleProductSubmit={handleUpdateProduct} product={food} />
+      <DynamicForm
+        handleProductSubmit={handleUpdateProduct}
+        product={food}
+      />
     </Container>
   );
 };
@@ -37,9 +40,7 @@ export const getStaticProps: GetStaticProps = async ctx => {
     const food = await foodService.findBySlug(slug);
 
     return {
-      props: {
-        food,
-      },
+      props: { food },
       revalidate: 60,
     };
   } catch (err) {

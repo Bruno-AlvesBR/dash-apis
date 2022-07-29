@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
-import EForm from '@/components/core/Forms/Foods';
-import PodcastForm from '@/components/core/Forms/Podcast';
+import ProductsDynamicForm from '@/components/core/Forms/Foods/dynamic';
+import PodcastDynamicForm from '@/components/core/Forms/Podcast/dynamic';
 import { useFood } from '@/hooks/Product';
-import SelectForms from '@/components/core/SelectForms';
+import SelectDynamicForms from '@/components/core/SelectForms/dynamic';
 import { usePodcast } from '@/hooks/Podcast';
 
 import { Container } from '@/styles/theme';
@@ -40,12 +40,16 @@ const Dash: React.FC = () => {
   return (
     <Container>
       {!selectCompleted ? (
-        <SelectForms />
+        <SelectDynamicForms />
       ) : formType === 'e-commerce' ? (
-        <EForm handleProductSubmit={handleCreateProduct} />
+        <ProductsDynamicForm
+          handleProductSubmit={handleCreateProduct}
+        />
       ) : (
         formType === 'podcast' && (
-          <PodcastForm handlePodcastSubmit={handleCreatePodcast} />
+          <PodcastDynamicForm
+            handlePodcastSubmit={handleCreatePodcast}
+          />
         )
       )}
     </Container>

@@ -5,8 +5,10 @@ import {
   useEffect,
   useState,
 } from 'react';
+import Cookies from 'universal-cookie';
 
 import { useUser } from './User';
+import { TOKEN } from '@/interfaces/IUserProps';
 
 export interface ILoginContextProps {
   openDialog: boolean;
@@ -23,12 +25,14 @@ const LoginContext = createContext({} as ILoginContextProps);
 const LoginProvider = ({ children }: ILoginProvider) => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
-  const { user } = useUser(); 
+  const [{ user }, cookie] = [useUser(), new Cookies()];
 
   useEffect(() => {
-    if (user?.id) return setOpenDialog(false);
+    const authToken = cookie.get(TOKEN.AUTH_TOKEN);
+    if (!user?.id && !authToken) return setOpenDialog(true);
 
-    setOpenDialog(true);
+    setOpenDialog(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setOpenDialog, user?.id]);
 
   const handleCloseDialog = () => setOpenDialog(false);

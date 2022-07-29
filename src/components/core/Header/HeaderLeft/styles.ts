@@ -1,4 +1,7 @@
-import { AppBar, Toolbar, styled, Button, Box } from '@mui/material';
+import { styled } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
 
 export const Container = styled(AppBar)(() => ({
   left: 0,
@@ -19,6 +22,7 @@ export const Content = styled(Toolbar)(() => ({
   position: 'relative',
   gap: 20,
   padding: 20,
+
   '& button': {
     marginTop: 100,
   },
@@ -28,11 +32,11 @@ export const ContentConfigs = styled(Box)(() => ({
   position: 'absolute',
   top: 10,
   right: 10,
+
   '& svg': {
     cursor: 'pointer',
-  },
-  '& svg:first-child': {
-    marginRight: 15,
+
+    '&:first-child': { marginRight: 15 },
   },
 }));
 

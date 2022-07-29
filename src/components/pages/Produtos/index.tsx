@@ -4,7 +4,6 @@ import { IProductProps } from '@/interfaces/IProductProps';
 import { CardContent } from '@/components/core/CardContent';
 import Carrousel from '@/components/core/Carrousel';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
-import { useFood } from '@/hooks/Product';
 
 import { Container } from './styles';
 
@@ -17,8 +16,6 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
   foods,
   podcasts,
 }) => {
-  const [{ setIsLoading }] = [useFood()];
-
   const FoodContent: React.FC = () => (
     <Carrousel mobileWidth={275} desktopWidth={315}>
       {foods?.map(item => (

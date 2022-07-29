@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from 'next/router';
 
@@ -11,7 +11,9 @@ const BannerCreateProduct: React.FC = () => {
     <Container data-testid="banner-home">
       <span>Registre um novo produto...</span>
       <Button
-        onClick={() => router.push(`${process.env.NEXT_PUBLIC_APP}/dash`)}
+        onClick={() =>
+          router.push(`${process.env.NEXT_PUBLIC_APP}/dash`)
+        }
       >
         <AddIcon />
       </Button>

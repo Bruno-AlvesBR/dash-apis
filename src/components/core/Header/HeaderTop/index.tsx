@@ -3,7 +3,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import { Button, useMediaQuery } from '@mui/material';
+import Button from '@mui/material/Button';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import { ReactElement, useState } from 'react';
@@ -11,6 +12,8 @@ import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
 
 import { TOKEN } from '@/interfaces/IUserProps';
+import { useLogin } from '@/hooks/Login';
+import { useUser } from '@/hooks/User';
 
 import {
   Container,
@@ -22,8 +25,6 @@ import {
   MenuPopup,
 } from './styles';
 import { theme } from '@/styles/theme';
-import { useLogin } from '@/hooks/Login';
-import { useUser } from '@/hooks/User';
 
 interface IHeaderProps {
   id?: number;
@@ -32,7 +33,7 @@ interface IHeaderProps {
   link?: string;
 }
 
-const HeaderTop = () => {
+const HeaderTop: React.FC = () => {
   const [router, cookie, { setOpenDialog }, { user }] = [
     useRouter(),
     new Cookies(),
@@ -111,11 +112,11 @@ const HeaderTop = () => {
         ) : (
           <>
             {!user?.id ? (
-              <Button onClick={() => setOpenDialog(true)}>Logar</Button>
+              <Button onClick={handleOpenLogin}>Logar</Button>
             ) : (
-              <Button onClick={() => handleLogout()}>Logout</Button>
+              <Button onClick={handleLogout}>Logout</Button>
             )}
-            <ItemButton onClick={() => handleToggleMenu()}>
+            <ItemButton onClick={handleToggleMenu}>
               <MenuIcon />
             </ItemButton>
             <MenuPopup

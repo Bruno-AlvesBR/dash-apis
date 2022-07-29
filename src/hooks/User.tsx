@@ -4,11 +4,16 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import Cookies from 'universal-cookie';
 
-import { IUserLogin, IUserProps, TOKEN } from '@/interfaces/IUserProps';
+import {
+  IUserLogin,
+  IUserProps,
+  TOKEN,
+} from '@/interfaces/IUserProps';
 import { userService } from '@/services/index';
 
 export interface IUserContextProps {
@@ -27,31 +32,29 @@ export interface IUserContextProvider {
 const UserContext = createContext({} as IUserContextProps);
 
 const UserProvider = ({ children }: IUserContextProvider) => {
+  const cookie = new Cookies();
+
   const [user, setUser] = useState<IUserProps | null>(null);
   const [userId, setUserId] = useState<string>();
   const [noAdmin, setNoAdmin] = useState<boolean>(false);
   const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const [isLoadingUser, setIsLoadingUser] = useState<boolean>();
 
-  const cookie = new Cookies();
-
-  const userLoadService = useCallback(async () => {
-    const authToken = cookie.get(TOKEN.AUTH_TOKEN);
+  useMemo(async () => {
+    const authToken = await cookie.get(TOKEN.AUTH_TOKEN);
 
     if (!authToken) return;
 
     setUserId(authToken);
-    const userResponse = await userService?.recoveryUser(`${authToken}`);
+    const userResponse = await userService?.recoveryUser(
+      `${authToken}`,
+    );
 
     if (userResponse) {
       setUser(userResponse);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    userLoadService();
-  }, [userLoadService]);
 
   const onsubmit = useCallback(
     async (event: IUserLogin) => {

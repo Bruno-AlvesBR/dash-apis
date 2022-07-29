@@ -1,4 +1,6 @@
-import { Button, styled, TextField } from '@mui/material';
+import { styled } from '@mui/material';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 export const FormContent = styled('form')(({ theme }) => ({
   display: 'flex',
@@ -15,9 +17,7 @@ export const FormContent = styled('form')(({ theme }) => ({
   },
 }));
 
-export const InputForm = styled(TextField)(() => ({
-  width: '100%',
-}));
+export const InputForm = styled(TextField)(() => ({ width: '100%' }));
 
 export const ButtonForm = styled(Button)(() => ({
   '& button:first-child': {

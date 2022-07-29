@@ -15,7 +15,7 @@ export interface IProductsContentProps {
 }
 
 const Todos: NextPage<IProductsContentProps> = ({ ...props }) => {
-  const [{ isLoading }] = [useFood()];
+  const { isLoading } = useFood();
 
   return (
     <Container>

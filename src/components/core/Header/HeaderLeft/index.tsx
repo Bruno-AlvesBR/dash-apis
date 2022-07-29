@@ -2,17 +2,22 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
+import Button from '@mui/material/Button';
+import { memo, useMemo } from 'react';
 
 import { Configs } from '../../Configs';
 import { useUser } from '@/hooks/User';
 import { TOKEN } from '@/interfaces/IUserProps';
-
-import { Container, Content, ContentUserName, ContentConfigs } from './styles';
-import { useMemo } from 'react';
 import { useLogin } from '@/hooks/Login';
-import { Button } from '@mui/material';
 
-const MenuLeft = () => {
+import {
+  Container,
+  Content,
+  ContentUserName,
+  ContentConfigs,
+} from './styles';
+
+const MenuLeft: React.FC = () => {
   const [{ user }, cookie, router, { setOpenDialog }] = [
     useUser(),
     new Cookies(),
@@ -64,4 +69,4 @@ const MenuLeft = () => {
   );
 };
 
-export default MenuLeft;
+export default memo(MenuLeft);

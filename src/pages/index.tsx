@@ -15,8 +15,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const foods: IFoodProps[] = await foodService?.findAll();
 
     return {
-      props: {
-        foods,
+      props: {foods,
       },
       revalidate: 60 * 60 * 24,
     };

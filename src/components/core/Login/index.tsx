@@ -1,11 +1,11 @@
 import { FormLogin } from '../FormLogin';
 import Snackbar from '../Snackbar';
 import { useUser } from '@/hooks/User';
-
-import { Container } from './styles';
 import { useLogin } from '@/hooks/Login';
 
-const Login = () => {
+import { Container } from './styles';
+
+const Login: React.FC = () => {
   const [{ isInvalid, noAdmin }, { openDialog }] = [useUser(), useLogin()];
 
   return (

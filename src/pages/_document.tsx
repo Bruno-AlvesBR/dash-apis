@@ -19,11 +19,6 @@ export default class MyDocument extends Document<DocumentProps> {
             href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
             rel="stylesheet"
           />
-          <script src="https://kit.fontawesome.com/0cc4094601.js" />
-          <link
-            href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
-            rel="stylesheet"
-          />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
@@ -33,7 +28,7 @@ export default class MyDocument extends Document<DocumentProps> {
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
-          ></link>
+          />
         </Head>
         <body>
           <Main />

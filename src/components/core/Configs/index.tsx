@@ -1,4 +1,5 @@
-import { DialogContent, DialogTitle } from '@mui/material';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { Container } from './style';

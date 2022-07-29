@@ -1,13 +1,9 @@
-import {
-  AppBar,
-  Button,
-  MenuItem,
-  styled,
-  Toolbar,
-  Popover,
-} from '@mui/material';
-
-import withStyles from '@mui/styles/withStyles';
+import { styled } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import Popover from '@mui/material/Popover';
 
 export const Container = styled(AppBar)(() => ({
   position: 'fixed',

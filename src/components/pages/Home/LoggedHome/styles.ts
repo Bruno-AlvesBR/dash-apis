@@ -1,4 +1,6 @@
-import { styled, Typography, Box } from '@mui/material';
+import { styled } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 export const ContainerApresentation = styled(Box)(() => ({}));
 
@@ -16,9 +18,9 @@ export const Description = styled(Typography)(() => ({
   '& a': {
     color: '#0078d1',
     fontWeight: 500,
+
     '&:hover': {
       opacity: 0.7,
     },
   },
 }));
-

@@ -1,5 +1,4 @@
-import { Dialog as DialogMui, styled } from '@mui/material';
-
+import Dialog from '@mui/material/Dialog';
 import withStyles from '@mui/styles/withStyles';
 
 export const Container = withStyles(() => ({
@@ -7,4 +6,4 @@ export const Container = withStyles(() => ({
     minWidth: '90vw !important',
     minHeight: '90vh !important',
   },
-}))(DialogMui);
+}))(Dialog);

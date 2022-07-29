@@ -3,17 +3,15 @@ import MenuItem from '@mui/material/MenuItem';
 import { memo, useEffect } from 'react';
 
 import { useFood } from '@/hooks/Product';
+import { useUser } from '@/hooks/User';
 
 import { Container, Title, ButtonSelect } from './styles';
-import { useUser } from '@/hooks/User';
-import { useRouter } from 'next/router';
 
 const SelectForms: React.FC = () => {
-  const [{ setSelectCompleted, setFormType, formType }, { user }, router] = [
-    useFood(),
-    useUser(),
-    useRouter(),
-  ];
+  const [
+    { setSelectCompleted, setFormType, formType },
+    { user },
+  ] = [useFood(), useUser()];
 
   const handleSelectValue = (event: any) => {
     if (event) {
@@ -45,7 +43,9 @@ const SelectForms: React.FC = () => {
         <MenuItem value={'e-commerce'}>e-commerce</MenuItem>
         <MenuItem value={'podcast'}>podcast</MenuItem>
       </Select>
-      <ButtonSelect onClick={() => handleClick()}>Confirmar</ButtonSelect>
+      <ButtonSelect onClick={handleClick}>
+        Confirmar
+      </ButtonSelect>
     </Container>
   );
 };
