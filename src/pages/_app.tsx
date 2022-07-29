@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 import '@mui/styles';
 
-import Header from '@/components/core/Header';
+import HeaderDynamic from '@/components/core/Header/dynamic';
 import { FoodProvider } from '@/hooks/Product';
 import { LoginProvider } from '@/hooks/Login';
 import { SnackbarProvider } from '@/hooks/Snackbar';
@@ -30,7 +30,7 @@ const MyApp = ({ Component, pageProps }) => {
             <SnackbarProvider>
               <FoodProvider>
                 <PodcastProvider>
-                  <Header />
+                  <HeaderDynamic />
                   <div className="body-no-wrap">
                     <Component {...pageProps} />
                     <CssBaseline />
