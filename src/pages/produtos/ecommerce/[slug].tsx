@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
     return {
       props: { food },
-      revalidate: 60,
+      revalidate: false,
     };
   } catch (err) {
     console.log(err);
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async ctx => {
       props: {
         food: {},
       },
-      revalidate: 60,
+      revalidate: false,
     };
   }
 };

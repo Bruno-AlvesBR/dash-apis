@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
     return {
       props: { podcast },
-      revalidate: 60,
+      revalidate: false,
     };
   } catch (err) {
     console.log(err);
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async ctx => {
       props: {
         podcast: {},
       },
-      revalidate: 60,
+      revalidate: false,
     };
   }
 };
