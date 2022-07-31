@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { IProductProps } from '@/interfaces/IProductProps';
 import { useFood } from '@/hooks/Product';
 
-import { Container } from './styles';
+import { Container } from '../styles';
 
 interface IFormProps {
   handleProductSubmit(event: any): void;
