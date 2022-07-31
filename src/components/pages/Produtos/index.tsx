@@ -56,7 +56,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           desktopSrc={item?.image?.desktopSrc}
           createdAt={item?.createdAt}
           slug={item?.slug}
-          type="food"
+          type="ecommerce"
           handleClick={handleClick}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
         />
