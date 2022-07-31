@@ -9,6 +9,7 @@ export const CardContent: React.FC<ICardProps> = ({
   title,
   desktopSrc,
   slug,
+  type,
   description,
   handleClick,
   contentCreatedAt,
@@ -25,7 +26,7 @@ export const CardContent: React.FC<ICardProps> = ({
     <Button
       data-testid="edit-button-card"
       variant="contained"
-      onClick={() => handleClick(slug)}
+      onClick={() => handleClick(slug, type)}
     >
       Editar
     </Button>
