@@ -65,8 +65,6 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
           const productResponse = await foodService.update(event?.id, event);
 
           if (!productResponse && !productResponse?.id) return;
-
-          router.push('/produtos/todos');
         }
       } catch (err) {
         console.log(err);

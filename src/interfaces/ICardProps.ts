@@ -6,5 +6,6 @@ export interface ICardProps {
   desktopSrc?: string;
   createdAt?: string;
   contentCreatedAt?: string;
-  handleClick?(slug?: string): void;
+  type?: string;
+  handleClick?(slug?: string, type?: string): void;
 }

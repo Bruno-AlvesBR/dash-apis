@@ -18,11 +18,17 @@ interface ISnackbarProvider {
   children: ReactNode;
 }
 
-export const SnackbarContext = createContext({} as ISnackbarContextProps);
+export const SnackbarContext = createContext(
+  {} as ISnackbarContextProps,
+);
 
 const SnackbarProvider = ({ children }: ISnackbarProvider) => {
   const { noAdmin, isInvalid } = useUser();
   const [openSnackbar, setOpenSnackBar] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
+  const [alert, setAlert] = useState<string>('sucess');
+  const [horizontal, setHorizontal] = useState<string>('right');
+  const [vertical, setVertical] = useState<string>('top');
 
   const handleCloseSnackBar = () => setOpenSnackBar(false);
 
@@ -31,6 +37,19 @@ const SnackbarProvider = ({ children }: ISnackbarProvider) => {
       setOpenSnackBar(true);
     }
   }, [isInvalid, noAdmin]);
+
+  const handleOpenSnackbar = (
+    message: string,
+    alert?: string,
+    vertical?: string,
+    horizontal?: string,
+  ) => {
+    setOpenSnackBar(true);
+    setMessage(message);
+    setAlert(alert);
+    setHorizontal(horizontal);
+    setVertical(vertical);
+  };
 
   return (
     <SnackbarContext.Provider

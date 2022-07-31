@@ -1,24 +1,25 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import ProductsDynamicForm from '@/components/core/Forms/Foods/dynamic';
 import PodcastDynamicForm from '@/components/core/Forms/Podcast/dynamic';
 import { useFood } from '@/hooks/Product';
 import SelectDynamicForms from '@/components/core/SelectForms/dynamic';
 import { usePodcast } from '@/hooks/Podcast';
+import VideosDynamicForm from '@/components/core/Forms/Videos/dynamic';
+import { useVideo } from '@/hooks/Videos';
 
 import { Container } from '@/styles/theme';
 
 const Dash: React.FC = () => {
-  const [
-    {
-      handleCreateProduct,
-      setSelectCompleted,
-      selectCompleted,
-      formType,
-      setFormType,
-    },
-    { handleCreatePodcast },
-  ] = [useFood(), usePodcast()];
+  const {
+    handleCreateProduct,
+    setSelectCompleted,
+    selectCompleted,
+    formType,
+    setFormType,
+  } = useFood();
+  const { handleCreatePodcast } = usePodcast();
+  const { handleCreateVideo } = useVideo();
 
   useEffect(() => {
     window.scrollTo({
@@ -37,20 +38,35 @@ const Dash: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setSelectCompleted]);
 
+  const formSelected = useCallback(
+    (type: string) => {
+      const components = {
+        ecommerce: (
+          <ProductsDynamicForm
+            handleProductSubmit={handleCreateProduct}
+          />
+        ),
+        podcast: (
+          <PodcastDynamicForm
+            handlePodcastSubmit={handleCreatePodcast}
+          />
+        ),
+        videos: (
+          <VideosDynamicForm handleVideoSubmit={handleCreateVideo} />
+        ),
+      };
+
+      return components[type];
+    },
+    [handleCreatePodcast, handleCreateProduct, handleCreateVideo],
+  );
+
   return (
     <Container>
       {!selectCompleted ? (
         <SelectDynamicForms />
-      ) : formType === 'e-commerce' ? (
-        <ProductsDynamicForm
-          handleProductSubmit={handleCreateProduct}
-        />
       ) : (
-        formType === 'podcast' && (
-          <PodcastDynamicForm
-            handlePodcastSubmit={handleCreatePodcast}
-          />
-        )
+        formSelected(formType)
       )}
     </Container>
   );

@@ -12,10 +12,11 @@ import { LoginProvider } from '@/hooks/Login';
 import { SnackbarProvider } from '@/hooks/Snackbar';
 import { UserProvider } from '@/hooks/User';
 import { PodcastProvider } from '@/hooks/Podcast';
+import Login from '@/components/core/Login';
+import { VideoProvider } from '@/hooks/Videos';
 
 import '@/styles/globals.css';
 import { theme } from '@/styles/theme';
-import Login from '@/components/core/Login';
 
 declare module '@mui/styles/defaultTheme' {
   interface DefaultTheme extends Theme {}
@@ -30,12 +31,14 @@ const MyApp = ({ Component, pageProps }) => {
             <SnackbarProvider>
               <FoodProvider>
                 <PodcastProvider>
-                  <HeaderDynamic />
-                  <div className="body-no-wrap">
-                    <Component {...pageProps} />
-                    <CssBaseline />
-                    <Login />
-                  </div>
+                  <VideoProvider>
+                    <HeaderDynamic />
+                    <div className="body-no-wrap">
+                      <Component {...pageProps} />
+                      <CssBaseline />
+                      <Login />
+                    </div>
+                  </VideoProvider>
                 </PodcastProvider>
               </FoodProvider>
             </SnackbarProvider>

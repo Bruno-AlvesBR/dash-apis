@@ -16,7 +16,7 @@ export const findAll = async (): Promise<IPodcastProps[]> => {
   return podcastResponse?.data ?? [];
 };
 
-export const findById = async (id: string) => {
+export const findById = async (id: string | string[]) => {
   await delay();
 
   const podcastResponse = await api.get(`podcasts/${id}`);

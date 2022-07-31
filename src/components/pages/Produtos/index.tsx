@@ -1,24 +1,27 @@
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback } from 'react';
+import dayjs from 'dayjs';
+import { useRouter } from 'next/router';
 
 import { IProductProps } from '@/interfaces/IProductProps';
 import { CardContent } from '@/components/core/CardContent';
 import CarrouselDynamic from '@/components/core/Carrousel/dynamic';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
-
-import { Container } from './styles';
-import { useRouter } from 'next/router';
 import { useUser } from '@/hooks/User';
 import { useLogin } from '@/hooks/Login';
-import dayjs from 'dayjs';
+import { IVideoProps } from '@/interfaces/IVideoProps';
+
+import { Container } from './styles';
 
 interface IProductsContentProps {
   foods: IProductProps[];
   podcasts: IPodcastProps[];
+  videos: IVideoProps[];
 }
 
 const ProductsContent: React.FC<IProductsContentProps> = ({
   foods,
   podcasts,
+  videos,
 }) => {
   const [router, { user }, { setOpenDialog }] = [
     useRouter(),
@@ -27,8 +30,8 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
   ];
 
   const handleClick = useCallback(
-    (slug?: string) => {
-      if (user?.id) return router.push(`/produtos/${slug}`);
+    (slug?: string, type?: string) => {
+      if (user?.id) return router.push(`/produtos/${type}/${slug}`);
 
       setOpenDialog(true);
     },
@@ -53,6 +56,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           desktopSrc={item?.image?.desktopSrc}
           createdAt={item?.createdAt}
           slug={item?.slug}
+          type="food"
           handleClick={handleClick}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
         />
@@ -71,6 +75,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           desktopSrc={item?.thumbnail}
           createdAt={item?.createdAt}
           slug={item?.id}
+          type="podcast"
           handleClick={handleClick}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
         />
@@ -78,10 +83,29 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
     </CarrouselDynamic>
   );
 
+  const VideoContent: React.FC = () =>
+    videos?.length > 0 && (
+      <CarrouselDynamic desktopWidth={275} mobileWidth={315}>
+        {videos?.map(item => (
+          <CardContent
+            key={item?.id}
+            id={item?.id}
+            title={item?.title}
+            desktopSrc={item?.file?.image}
+            slug={item?.id}
+            type="video"
+            handleClick={handleClick}
+            contentCreatedAt={contentCreatedAt(item?.createdAt)}
+          />
+        ))}
+      </CarrouselDynamic>
+    );
+
   return (
     <Container>
       <FoodContent />
       <PodcastContent />
+      <VideoContent />
     </Container>
   );
 };
