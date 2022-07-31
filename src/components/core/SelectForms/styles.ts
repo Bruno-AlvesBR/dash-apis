@@ -14,6 +14,8 @@ export const Container = styled('div')(() => ({
   margin: '0px auto',
   boxShadow: '0px 0px 30px #00000025',
 
+  '& .MuiOutlinedInput-root': { width: '100%' },
+
   '& .MuiInput-root': {
     width: '100%',
     height: '100%',
@@ -28,6 +30,6 @@ export const Title = styled('h1')(() => ({
 }));
 
 export const ButtonSelect = styled(Button)(() => ({
-  background: '#C4C4C4',
   padding: '10px 20px',
+  marginTop: 20,
 }));

@@ -44,7 +44,7 @@ const SelectForms: React.FC = () => {
         <MenuItem value={'podcast'}>podcast</MenuItem>
         <MenuItem value={'videos'}>videos</MenuItem>
       </Select>
-      <ButtonSelect onClick={handleClick}>
+      <ButtonSelect variant="contained" onClick={handleClick}>
         Confirmar
       </ButtonSelect>
     </Container>
