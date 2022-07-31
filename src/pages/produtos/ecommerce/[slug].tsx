@@ -1,22 +1,20 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-
+import { IFoodProps } from '@/interfaces/IFoodsProps';
 import { foodService } from '@/services/index';
-import { useFood } from '@/hooks/Product';
-import DynamicForm from '@/components/core/Forms/Foods/dynamic';
-import { IProductProps } from '@/interfaces/IProductProps';
-
 import { Container } from '@/styles/theme';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import DynamicFoodForm from '@/components/core/Forms/Foods/dynamic';
+import { useFood } from '@/hooks/Product';
 
-interface IProduct {
-  food?: IProductProps;
+interface IProductSlugProps {
+  food?: IFoodProps;
 }
 
-const Product: NextPage<IProduct> = ({ food }) => {
+const Ecommerce: NextPage<IProductSlugProps> = ({ food }) => {
   const { handleUpdateProduct } = useFood();
 
   return (
     <Container>
-      <DynamicForm
+      <DynamicFoodForm
         handleProductSubmit={handleUpdateProduct}
         product={food}
       />
@@ -24,7 +22,7 @@ const Product: NextPage<IProduct> = ({ food }) => {
   );
 };
 
-export default Product;
+export default Ecommerce;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {

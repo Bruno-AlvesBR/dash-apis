@@ -15,7 +15,6 @@ export const Container = styled('form')(() => ({
   },
 
   '& input': {
-    padding: 20,
     width: '100%',
     background: '#fff',
   },

@@ -35,4 +35,4 @@ const SnackbarContent: React.FC<ISnackbar> = ({
   );
 };
 
-export default memo(SnackbarContent);
+export default SnackbarContent;

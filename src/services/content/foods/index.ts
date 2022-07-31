@@ -23,7 +23,7 @@ export const findAll = async (): Promise<IProductProps[]> => {
   return foodResponse?.data || [];
 };
 
-export const findBySlug = async (slug: string | any) => {
+export const findBySlug = async (slug: string | string[]) => {
   const foodResponse = await api.get(`product/${slug}`);
 
   return foodResponse?.data || {};

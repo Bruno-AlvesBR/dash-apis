@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { usePodcast } from '@/hooks/Podcast';
 
-import { Container } from './styles';
+import { Container } from '../styles';
 
 interface IFormProps {
   handlePodcastSubmit(event: any): void;

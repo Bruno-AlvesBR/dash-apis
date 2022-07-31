@@ -40,8 +40,9 @@ const SelectForms: React.FC = () => {
         value={formType}
         onChange={e => handleSelectValue(e.target.value)}
       >
-        <MenuItem value={'e-commerce'}>e-commerce</MenuItem>
+        <MenuItem value={'ecommerce'}>e-commerce</MenuItem>
         <MenuItem value={'podcast'}>podcast</MenuItem>
+        <MenuItem value={'videos'}>videos</MenuItem>
       </Select>
       <ButtonSelect onClick={handleClick}>
         Confirmar
