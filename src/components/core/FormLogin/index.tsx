@@ -34,7 +34,10 @@ export const FormLogin = () => {
   };
 
   return (
-    <FormContent data-testid="form-content" onSubmit={handleSubmit(onsubmit)}>
+    <FormContent
+      data-testid="form-content"
+      onSubmit={handleSubmit(onsubmit)}
+    >
       <h1 style={{ textAlign: 'center' }}>Login</h1>
 
       <Box mb={4} mt={4}>
@@ -45,6 +48,7 @@ export const FormLogin = () => {
           {...register('email')}
           error={errors.email?.message}
           onKeyDown={handleEventKey}
+          inputProps={{ 'data-testid': 'input-login' }}
         />
       </Box>
       <Box mb={5}>
@@ -56,13 +60,19 @@ export const FormLogin = () => {
           {...register('password')}
           error={errors.password?.message}
           onKeyDown={handleEventKey}
+          inputProps={{ 'data-testid': 'input-login' }}
         />
       </Box>
 
       {isLoadingUser ? (
         <CircularProgress style={{ margin: 'auto' }} />
       ) : (
-        <ButtonForm ref={buttonRef} variant="contained" type="submit">
+        <ButtonForm
+          data-testid="button-form"
+          ref={buttonRef}
+          variant="contained"
+          type="submit"
+        >
           Access
         </ButtonForm>
       )}
