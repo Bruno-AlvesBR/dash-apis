@@ -23,7 +23,9 @@ export const Card = styled(Box)(({ theme }) => ({
     objectFit: 'cover',
   },
 
-  '&:last-child': { marginRight: 0 },
+  '&:first-of-type': { marginLeft: 0 },
+
+  '&:last-of-type': { marginRight: 0 },
 
   [theme.breakpoints.down(780)]: {
     minWidth: 260,
@@ -31,7 +33,10 @@ export const Card = styled(Box)(({ theme }) => ({
     margin: '0px 10px',
   },
 
-  [theme.breakpoints.down(520)]: { width: '100%', margin: '0px 10px' },
+  [theme.breakpoints.down(520)]: {
+    width: '100%',
+    margin: '0px 10px',
+  },
 }));
 
 export const Title = styled('h1')(() => ({

@@ -1,20 +1,22 @@
-import useMediaQuery from '@mui/material/useMediaQuery';
-import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import { ReactNode, useRef } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { theme } from '@/styles/theme';
-import { Container, Content, ContentButtons } from './styles';
+import { Container, Content } from './styles';
+import { HeaderCarrousel } from './Header';
 
 interface ICarrousel {
   children: ReactNode;
   desktopWidth: number;
   mobileWidth: number;
+  title?: string;
 }
 
 const Carrousel: React.FC<ICarrousel> = ({
   children,
   desktopWidth,
   mobileWidth,
+  title,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -27,6 +29,7 @@ const Carrousel: React.FC<ICarrousel> = ({
     const { scrollLeft } = listRef.current;
 
     const clientWidth = !isMobile ? desktopWidth : mobileWidth;
+
     const valueScroll = event === 'next' ? clientWidth : -clientWidth;
 
     if (process.env.NODE_ENV !== 'test') {
@@ -39,16 +42,7 @@ const Carrousel: React.FC<ICarrousel> = ({
 
   return (
     <Container data-testid="carrousel">
-      <ContentButtons>
-        <ArrowForwardIos
-          data-testid="carrousel-button"
-          onClick={() => handleScroll('prev')}
-        />
-        <ArrowForwardIos
-          data-testid="carrousel-button"
-          onClick={() => handleScroll('next')}
-        />
-      </ContentButtons>
+      <HeaderCarrousel handleScroll={handleScroll} title={title} />
       <div ref={contentRef}>
         <Content horizontal nativeMobileScroll innerRef={listRef}>
           {children}
