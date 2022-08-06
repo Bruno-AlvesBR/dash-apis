@@ -13,6 +13,10 @@ interface IMockProps {
 }
 
 const makesut = (router = createMockRouter({})): IMockProps => {
+  const handleClick = (slug?: string, type?: string) => {
+    router.push(`/produtos/${type}/${slug}`);
+  };
+
   render(
     <RouterContext.Provider value={router}>
       <CardContent
@@ -22,6 +26,8 @@ const makesut = (router = createMockRouter({})): IMockProps => {
         desktopSrc=""
         createdAt={MockCardList[0]?.createdAt}
         slug={MockCardList[0]?.slug}
+        type={MockCardList[0]?.type}
+        handleClick={handleClick}
       />
     </RouterContext.Provider>,
   );
@@ -50,7 +56,13 @@ describe('Card carrousel - Unit tests', () => {
   it('Should be able to be redirected after click in edit', () => {
     const { router, MockCardList } = makesut();
 
-    fireEvent.click(screen.getByTestId('edit-button-card'));
-    expect(router.push).toBeCalledWith(`/produtos/${MockCardList[0]?.slug}`);
+    const button = fireEvent.click(
+      screen.getByTestId('edit-button-card'),
+    );
+
+    expect(button).toBe(true);
+    expect(router.push).toBeCalledWith(
+      `/produtos/${MockCardList[0]?.type}/${MockCardList[0]?.slug}`,
+    );
   });
 });

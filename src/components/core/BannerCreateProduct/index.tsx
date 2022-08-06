@@ -11,6 +11,7 @@ const BannerCreateProduct: React.FC = () => {
     <Container data-testid="banner-home">
       <span>Registre um novo produto...</span>
       <Button
+        data-testid="banner-home-button"
         onClick={() =>
           router.push(`${process.env.NEXT_PUBLIC_APP}/dash`)
         }

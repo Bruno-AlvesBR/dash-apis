@@ -8,6 +8,7 @@ const MockCardList: ICardProps[] = [
     slug: faker.random.word(),
     description: faker.random.words(),
     createdAt: String(faker.date.recent()),
+    type: faker.random.word(),
   },
   {
     id: faker.datatype.uuid(),
@@ -15,6 +16,7 @@ const MockCardList: ICardProps[] = [
     slug: faker.random.word(),
     description: faker.random.words(),
     createdAt: String(faker.date.recent()),
+    type: faker.random.word(),
   },
 ];
 
