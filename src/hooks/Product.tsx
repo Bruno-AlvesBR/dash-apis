@@ -8,7 +8,10 @@ import {
 } from 'react';
 
 import { IFoodCreate, IFoodProps } from '@/interfaces/IFoodsProps';
-import { IProductProps, IProductUpdate } from '@/interfaces/IProductProps';
+import {
+  IProductProps,
+  IProductUpdate,
+} from '@/interfaces/IProductProps';
 import { foodService } from '@/services/index';
 import { useUser } from './User';
 
@@ -35,7 +38,8 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   const [router, { user }] = [useRouter(), useUser()];
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [selectCompleted, setSelectCompleted] = useState<boolean>(false);
+  const [selectCompleted, setSelectCompleted] =
+    useState<boolean>(false);
   const [formType, setFormType] = useState<string>('');
   const [productData, setProductData] = useState<IFoodProps | {}>(
     {} as IFoodProps,
@@ -62,9 +66,14 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
     async ({ ...event }: IProductUpdate): Promise<IProductUpdate> => {
       try {
         if (user?.id) {
-          const productResponse = await foodService.update(event?.id, event);
+          const productResponse = await foodService.update(
+            event?.id,
+            event,
+          );
 
           if (!productResponse && !productResponse?.id) return;
+
+          router.push('/produtos/todos');
         }
       } catch (err) {
         console.log(err);

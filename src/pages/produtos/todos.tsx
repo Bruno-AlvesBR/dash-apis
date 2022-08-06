@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps = async () => {
         podcasts,
         videos,
       },
-      revalidate: 60,
+      revalidate: false,
     };
   } catch (err) {
     return {
@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps = async () => {
         podcasts: [],
         videos: [],
       },
-      revalidate: 60,
+      revalidate: false,
     };
   }
 };

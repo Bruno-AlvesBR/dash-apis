@@ -44,7 +44,8 @@ const VideoProvider: React.FC<IVideoProviderProps> = ({
         console.log(err);
       }
     },
-    [push, user?.id],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [user?.id],
   );
 
   const handleUpdateVideo = useCallback(
@@ -55,17 +56,16 @@ const VideoProvider: React.FC<IVideoProviderProps> = ({
           data,
         );
 
-        console.log('test', updatedVideo);
-
         if (!updatedVideo && !updatedVideo?.id) return;
 
         setOpenSnackBar(true);
 
-        reload();
+        push('/produtos/todos');
       } catch (err) {
         console.log(err);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [reload, setOpenSnackBar],
   );
 
@@ -81,7 +81,8 @@ const VideoProvider: React.FC<IVideoProviderProps> = ({
         console.log(err);
       }
     },
-    [push],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   );
 
   return (
