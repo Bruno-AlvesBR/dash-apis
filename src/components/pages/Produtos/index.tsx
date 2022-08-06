@@ -46,7 +46,11 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
   };
 
   const FoodContent: React.FC = () => (
-    <CarrouselDynamic mobileWidth={275} desktopWidth={315}>
+    <CarrouselDynamic
+      mobileWidth={275}
+      desktopWidth={315}
+      title="E-commerce"
+    >
       {foods?.map(item => (
         <CardContent
           key={item?.id}
@@ -65,7 +69,11 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
   );
 
   const PodcastContent: React.FC = () => (
-    <CarrouselDynamic mobileWidth={275} desktopWidth={315}>
+    <CarrouselDynamic
+      mobileWidth={275}
+      desktopWidth={315}
+      title="Podcasts"
+    >
       {podcasts?.map(item => (
         <CardContent
           key={item?.id}
@@ -85,7 +93,11 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
 
   const VideoContent: React.FC = () =>
     videos?.length > 0 && (
-      <CarrouselDynamic desktopWidth={275} mobileWidth={315}>
+      <CarrouselDynamic
+        desktopWidth={275}
+        mobileWidth={315}
+        title="Videos"
+      >
         {videos?.map(item => (
           <CardContent
             key={item?.id}
