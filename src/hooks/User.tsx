@@ -119,4 +119,4 @@ function useUser() {
   return context;
 }
 
-export { useUser, UserProvider };
+export { useUser, UserContext, UserProvider };
