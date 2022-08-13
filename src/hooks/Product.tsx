@@ -54,11 +54,13 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
           if (!foodData && !foodData?.id) return;
 
           setProductData(foodData);
+          router.push('/produtos/todos');
         }
       } catch (err) {
         console.log(err);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [user?.id],
   );
 
