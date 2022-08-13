@@ -1,9 +1,11 @@
+import { GetServerSideProps, NextPage } from 'next';
+
 import { videoService } from '@/services/index';
-import { Container } from '@/styles/theme';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import DynamicVideoForm from '@/components/core/Forms/Videos/dynamic';
 import { useVideo } from '@/hooks/Videos';
 import { IVideoProps } from '@/interfaces/IVideoProps';
+
+import { Container } from '@/styles/theme';
 
 interface IVideoSlugProps {
   video?: IVideoProps;
@@ -24,14 +26,7 @@ const Video: NextPage<IVideoSlugProps> = ({ video }) => {
 
 export default Video;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ctx => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const { id } = ctx.params;
 
   try {
@@ -39,16 +34,12 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
     return {
       props: { video },
-      revalidate: false,
     };
   } catch (err) {
     console.log(err);
 
     return {
-      props: {
-        video: {},
-      },
-      revalidate: false,
+      props: { video: {} },
     };
   }
 };

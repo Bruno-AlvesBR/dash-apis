@@ -46,7 +46,7 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   );
 
   const handleCreateProduct = useCallback(
-    async ({ ...event }: IFoodCreate): Promise<IFoodCreate> => {
+    async ({ ...event }: IFoodCreate) => {
       try {
         if (user?.id) {
           const foodData = await foodService.create(event);
@@ -63,7 +63,7 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   );
 
   const handleUpdateProduct = useCallback(
-    async ({ ...event }: IProductUpdate): Promise<IProductUpdate> => {
+    async ({ ...event }: IProductUpdate) => {
       try {
         if (user?.id) {
           const productResponse = await foodService.update(

@@ -4,7 +4,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import * as yup from 'yup';
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { IProductProps } from '@/interfaces/IProductProps';
@@ -17,7 +17,10 @@ interface IFormProps {
   product?: IProductProps;
 }
 
-const EForm: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
+const EForm: React.FC<IFormProps> = ({
+  handleProductSubmit,
+  product,
+}) => {
   const [{ handleRemoveProduct }, router] = [useFood(), useRouter()];
 
   const validateForm = yup.object({
@@ -55,7 +58,10 @@ const EForm: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         'monthInstallment',
         product?.price?.installment?.monthInstallment,
       );
-      setValue('pricePerMonth', product?.price?.installment?.pricePerMonth);
+      setValue(
+        'pricePerMonth',
+        product?.price?.installment?.pricePerMonth,
+      );
       setValue('rating', product?.rating);
       setValue('slug', product?.slug);
       setValue('stock', product?.stock);
@@ -183,7 +189,11 @@ const EForm: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
         placeholder="Thumbnail"
         {...register('mobileSrc')}
       />
-      <Switch defaultChecked name="freight" {...register('freight')} />
+      <Switch
+        defaultChecked
+        name="freight"
+        {...register('freight')}
+      />
 
       <span style={{ display: 'flex', flexDirection: 'row' }}>
         {router.pathname.includes('/produtos/') ? (
@@ -204,7 +214,9 @@ const EForm: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
             <Button variant="contained" type="submit">
               Criar
             </Button>
-            <Button onClick={() => handleRemoveFormStorage()}>Voltar</Button>
+            <Button onClick={() => handleRemoveFormStorage()}>
+              Voltar
+            </Button>
           </>
         )}
       </span>
@@ -212,4 +224,4 @@ const EForm: React.FC<IFormProps> = ({ handleProductSubmit, product }) => {
   );
 };
 
-export default memo(EForm);
+export default EForm;

@@ -1,7 +1,7 @@
 import { IFoodProps } from '@/interfaces/IFoodsProps';
 import { foodService } from '@/services/index';
 import { Container } from '@/styles/theme';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import DynamicFoodForm from '@/components/core/Forms/Foods/dynamic';
 import { useFood } from '@/hooks/Product';
 
@@ -24,14 +24,7 @@ const Ecommerce: NextPage<IProductSlugProps> = ({ food }) => {
 
 export default Ecommerce;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ctx => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const { slug } = ctx.params;
 
   try {
@@ -39,16 +32,12 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
     return {
       props: { food },
-      revalidate: false,
     };
   } catch (err) {
     console.log(err);
 
     return {
-      props: {
-        food: {},
-      },
-      revalidate: false,
+      props: { food: {} },
     };
   }
 };

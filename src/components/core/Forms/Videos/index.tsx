@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { IVideoBody, IVideoProps } from '@/interfaces/IVideoProps';
 import { useVideo } from '@/hooks/Videos';
@@ -161,4 +161,4 @@ const VideosForm: React.FC<IVideoFormProps> = ({
   );
 };
 
-export default memo(VideosForm);
+export default VideosForm;

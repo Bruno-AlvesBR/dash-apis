@@ -1,6 +1,6 @@
 import { podcastService } from '@/services/index';
 import { Container } from '@/styles/theme';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import DynamicPodcastForm from '@/components/core/Forms/Podcast/dynamic';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { usePodcast } from '@/hooks/Podcast';
@@ -24,14 +24,7 @@ const Podcast: NextPage<IPodcastSlugProps> = ({ podcast }) => {
 
 export default Podcast;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ctx => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const { id } = ctx.params;
 
   try {
@@ -39,16 +32,12 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
     return {
       props: { podcast },
-      revalidate: false,
     };
   } catch (err) {
     console.log(err);
 
     return {
-      props: {
-        podcast: {},
-      },
-      revalidate: false,
+      props: { podcast: {} },
     };
   }
 };

@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 
@@ -122,4 +122,4 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
   );
 };
 
-export default memo(ProductsContent);
+export default ProductsContent;

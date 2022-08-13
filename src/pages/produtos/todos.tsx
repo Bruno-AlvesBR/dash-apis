@@ -1,5 +1,5 @@
 import CircularProgress from '@mui/material/CircularProgress';
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
 import ProductsContent from '@/components/pages/Produtos';
 import { useFood } from '@/hooks/Product';
@@ -44,7 +44,7 @@ const Todos: NextPage<IProductsContentProps> = ({
 
 export default Todos;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const [foods, podcasts, videos] = await Promise.all([
       foodService?.findAll(),
@@ -58,7 +58,6 @@ export const getStaticProps: GetStaticProps = async () => {
         podcasts,
         videos,
       },
-      revalidate: false,
     };
   } catch (err) {
     return {
@@ -67,7 +66,6 @@ export const getStaticProps: GetStaticProps = async () => {
         podcasts: [],
         videos: [],
       },
-      revalidate: false,
     };
   }
 };

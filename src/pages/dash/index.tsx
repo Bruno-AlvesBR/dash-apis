@@ -22,10 +22,14 @@ const Dash: React.FC = () => {
   const { handleCreateVideo } = useVideo();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    const form = localStorage.getItem('formulario');
+
+    if (form) {
+      localStorage.removeItem('formulario');
+      setFormType(undefined);
+      setSelectCompleted(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -39,8 +43,8 @@ const Dash: React.FC = () => {
   }, [setSelectCompleted]);
 
   const formSelected = useCallback(
-    (type: string) => {
-      const components = {
+    (type: string) =>
+      ({
         ecommerce: (
           <ProductsDynamicForm
             handleProductSubmit={handleCreateProduct}
@@ -54,12 +58,16 @@ const Dash: React.FC = () => {
         videos: (
           <VideosDynamicForm handleVideoSubmit={handleCreateVideo} />
         ),
-      };
-
-      return components[type];
-    },
+      }[type]),
     [handleCreatePodcast, handleCreateProduct, handleCreateVideo],
   );
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
 
   return (
     <Container>

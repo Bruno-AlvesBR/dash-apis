@@ -37,13 +37,14 @@ const PodcastProvider = ({ children }: IPodcastProviderProps) => {
   const [router, { user }] = [useRouter(), useUser()];
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [selectCompleted, setSelectCompleted] = useState<boolean>(false);
+  const [selectCompleted, setSelectCompleted] =
+    useState<boolean>(false);
   const [podcastData, setPodcastData] = useState<IFoodProps | {}>(
     {} as IFoodProps,
   );
 
   const handleCreatePodcast = useCallback(
-    async ({ ...event }: IPodcastCreate): Promise<IPodcastCreate> => {
+    async ({ ...event }: IPodcastCreate) => {
       try {
         if (user?.id) {
           const podcastResponse = await podcastService.create(event);
@@ -51,19 +52,24 @@ const PodcastProvider = ({ children }: IPodcastProviderProps) => {
           if (!podcastResponse && !podcastResponse?.id) return;
 
           setPodcastData(podcastResponse);
+          router.push('/produtos/todos');
         }
       } catch (err) {
         console.log(err);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [user?.id],
   );
 
   const handleUpdatePodcast = useCallback(
-    async ({ ...event }: IPodcastUpdate): Promise<IPodcastUpdate> => {
+    async ({ ...event }: IPodcastUpdate) => {
       try {
         if (user?.id) {
-          const podcastResponse = await podcastService.update(event?.id, event);
+          const podcastResponse = await podcastService.update(
+            event?.id,
+            event,
+          );
 
           if (!podcastResponse && !podcastResponse?.id) return;
 

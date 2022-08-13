@@ -18,9 +18,9 @@ export interface IPodcastCreate {
   title?: string;
   members?: string[];
   thumbnail?: string;
-  description?: string;
-  url?: string;
-  type?: string;
+  fileDescription?: string;
+  fileUrl?: string;
+  fileType?: string;
   duration?: number;
 }
 
@@ -30,7 +30,7 @@ export interface IPodcastUpdate {
   members?: string[];
   thumbnail?: string;
   description?: string;
-  url?: string;
-  type?: string;
-  duration?: number;
+  fileDescription?: string;
+  fileUrl?: string;
+  fileType?: string;
 }

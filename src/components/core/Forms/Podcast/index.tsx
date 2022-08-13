@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import * as yup from 'yup';
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
@@ -20,15 +20,18 @@ const PodcastForm: React.FC<IFormProps> = ({
   handlePodcastSubmit,
   podcast,
 }) => {
-  const [{ handleRemovePodcast }, router] = [usePodcast(), useRouter()];
+  const [{ handleRemovePodcast }, router] = [
+    usePodcast(),
+    useRouter(),
+  ];
 
   const validateForm = yup.object({
     title: yup.string().required('O título é obrigatório!'),
     description: yup.string().required('A descrição é obrigatória!'),
     members: yup.string().required('Os membros são obrigatórios!'),
-    duration: yup.string().required('A duração é obrigatória!'),
-    type: yup.string().required('O tipo é obrigatório!'),
-    url: yup.string().required('A url é obrigatória!'),
+    fileDuration: yup.string().required('A duração é obrigatória!'),
+    fileType: yup.string().required('O tipo é obrigatório!'),
+    fileUrl: yup.string().required('A url é obrigatória!'),
     thumbnail: yup.string().required('A imagem é obrigatória!'),
   });
 
@@ -47,9 +50,9 @@ const PodcastForm: React.FC<IFormProps> = ({
       setValue('title', podcast?.title);
       setValue('description', podcast?.description);
       setValue('members', podcast?.members);
-      setValue('duration', podcast?.file?.duration);
-      setValue('type', podcast?.file?.type);
-      setValue('url', podcast?.file?.url);
+      setValue('fileDuration', podcast?.file?.duration);
+      setValue('fileType', podcast?.file?.type);
+      setValue('fileUrl', podcast?.file?.url);
       setValue('thumbnail', podcast?.thumbnail);
     }
   }, [podcast, setValue]);
@@ -97,27 +100,27 @@ const PodcastForm: React.FC<IFormProps> = ({
       />
       <TextField
         variant="outlined"
-        name="duration"
+        name="fileDuration"
         type="number"
         label="Duração"
         placeholder="Duração"
-        {...register('duration')}
+        {...register('fileDuration')}
       />
       <TextField
         variant="outlined"
-        name="type"
+        name="fileType"
         type="text"
         label="Tipo"
         placeholder="Tipo"
-        {...register('type')}
+        {...register('fileType')}
       />
       <TextField
         variant="outlined"
-        name="url"
+        name="fileUrl"
         type="text"
         label="Url"
         placeholder="Url"
-        {...register('url')}
+        {...register('fileUrl')}
       />
       <TextField
         variant="outlined"
@@ -146,7 +149,9 @@ const PodcastForm: React.FC<IFormProps> = ({
             <Button variant="contained" type="submit">
               Criar
             </Button>
-            <Button onClick={() => handleRemoveFormStorage()}>Voltar</Button>
+            <Button onClick={() => handleRemoveFormStorage()}>
+              Voltar
+            </Button>
           </>
         )}
       </span>
@@ -154,4 +159,4 @@ const PodcastForm: React.FC<IFormProps> = ({
   );
 };
 
-export default memo(PodcastForm);
+export default PodcastForm;

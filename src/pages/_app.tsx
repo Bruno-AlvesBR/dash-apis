@@ -5,6 +5,7 @@ import {
   CssBaseline,
 } from '@mui/material';
 import '@mui/styles';
+import { useEffect } from 'react';
 
 import HeaderDynamic from '@/components/core/Header/dynamic';
 import { FoodProvider } from '@/hooks/Product';
