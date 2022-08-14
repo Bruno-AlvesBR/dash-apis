@@ -1,5 +1,5 @@
 {
-  "name": "next12",
+  "name": "dash-apis",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-    "@hookform/resolvers": "^2.9.3",
+    "@hookform/resolvers": "^2.9.7",
     "@material-ui/core": "^5.0.0-beta.5",
     "@mui/codemod": "^5.8.5",
     "@mui/icons-material": "^5.8.4",

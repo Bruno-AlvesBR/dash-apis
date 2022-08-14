@@ -14,7 +14,7 @@ const mockRender = (router = createMockRouter({})) => {
   return { router };
 };
 
-describe('Test - Unit test', () => {
+describe('Banner Product - Unit test', () => {
   it('Should be able to render this component', () => {
     mockRender();
 

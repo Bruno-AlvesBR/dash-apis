@@ -9,7 +9,7 @@ const customJestConfig = {
   verbose: true,
   silent: true,
   rootDir: process.cwd(),
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: ['src/**/*.{ts,tsx}'],
   coverageReporters: ['lcov', 'text', 'html'],
   setupFilesAfterEnv: ['<rootDir>/src/tests/index.ts'],
@@ -17,7 +17,6 @@ const customJestConfig = {
     '@/(.*)': '<rootDir>/src/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
-  resolver: '<rootDir>/resolver.js',
 };
 
 module.exports = createJestConfig(customJestConfig);

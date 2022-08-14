@@ -64,7 +64,10 @@ const PodcastForm: React.FC<IFormProps> = ({
   };
 
   return (
-    <Container onSubmit={handleSubmit(handlePodcastSubmit)}>
+    <Container
+      data-testid="podcast-form"
+      onSubmit={handleSubmit(handlePodcastSubmit)}
+    >
       <TextField
         variant="outlined"
         name="id"
@@ -73,6 +76,7 @@ const PodcastForm: React.FC<IFormProps> = ({
         placeholder="id"
         disabled
         {...register('id')}
+        inputProps={{ 'data-testid': 'input-form' }}
       />
       <TextField
         variant="outlined"
@@ -81,6 +85,7 @@ const PodcastForm: React.FC<IFormProps> = ({
         label="Título"
         placeholder={errors.title?.message ?? 'Título'}
         {...register('title')}
+        inputProps={{ 'data-testid': 'input-form' }}
       />
       <TextField
         variant="outlined"
@@ -89,6 +94,7 @@ const PodcastForm: React.FC<IFormProps> = ({
         label="Descrição"
         placeholder="Descrição"
         {...register('description')}
+        inputProps={{ 'data-testid': 'input-form' }}
       />
       <TextField
         variant="outlined"
@@ -97,6 +103,7 @@ const PodcastForm: React.FC<IFormProps> = ({
         label="Membros"
         placeholder="Membros"
         {...register('members')}
+        inputProps={{ 'data-testid': 'input-form' }}
       />
       <TextField
         variant="outlined"
@@ -105,6 +112,7 @@ const PodcastForm: React.FC<IFormProps> = ({
         label="Duração"
         placeholder="Duração"
         {...register('fileDuration')}
+        inputProps={{ 'data-testid': 'input-form' }}
       />
       <TextField
         variant="outlined"
@@ -113,6 +121,7 @@ const PodcastForm: React.FC<IFormProps> = ({
         label="Tipo"
         placeholder="Tipo"
         {...register('fileType')}
+        inputProps={{ 'data-testid': 'input-form' }}
       />
       <TextField
         variant="outlined"
@@ -121,6 +130,7 @@ const PodcastForm: React.FC<IFormProps> = ({
         label="Url"
         placeholder="Url"
         {...register('fileUrl')}
+        inputProps={{ 'data-testid': 'input-form' }}
       />
       <TextField
         variant="outlined"
@@ -129,6 +139,7 @@ const PodcastForm: React.FC<IFormProps> = ({
         label="Thumbnail"
         placeholder="Thumbnail"
         {...register('thumbnail')}
+        inputProps={{ 'data-testid': 'input-form' }}
       />
       <span style={{ display: 'flex', flexDirection: 'row' }}>
         {router.pathname.includes('/produtos/') ? (

@@ -38,7 +38,7 @@ const makesut = (router = createMockRouter({})): IMockProps => {
   };
 };
 
-describe('Card carrousel - Unit tests', () => {
+describe('Card Carrousel - Unit tests', () => {
   it('Should be able to render this component', () => {
     makesut();
 
