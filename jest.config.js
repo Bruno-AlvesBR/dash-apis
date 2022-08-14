@@ -9,7 +9,7 @@ const customJestConfig = {
   verbose: true,
   silent: true,
   rootDir: process.cwd(),
-  collectCoverage: false,
+  collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{ts,tsx}'],
   coverageReporters: ['lcov', 'text', 'html'],
   setupFilesAfterEnv: ['<rootDir>/src/tests/index.ts'],
