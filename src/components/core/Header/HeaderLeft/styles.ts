@@ -3,49 +3,50 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
-export const Container = styled(AppBar)(() => ({
+export const Container = styled(AppBar)(({ theme }) => ({
   left: 0,
   width: 200,
   height: '100vh',
   top: 65,
-  background: '#fff',
   boxShadow: '0px 0px 10px #00000025',
   color: '#000',
   position: 'fixed',
   zIndex: 100,
   display: 'flex',
+  background: theme?.palette?.common?.black,
 }));
 
-export const Content = styled(Toolbar)(() => ({
+export const Content = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   position: 'relative',
   gap: 20,
   padding: 20,
 
-  '& button': {
-    marginTop: 100,
-  },
+  '& button': { marginTop: 100 },
 }));
 
-export const ContentConfigs = styled(Box)(() => ({
+export const ContentConfigs = styled(Box)(({ theme }) => ({
   position: 'absolute',
   top: 10,
   right: 10,
+  display: 'flex',
+  alignItems: 'center',
 
   '& svg': {
     cursor: 'pointer',
+    color: theme?.palette?.text?.primary,
 
     '&:first-child': { marginRight: 15 },
   },
 }));
 
-export const ContentUserName = styled(Box)(() => ({
+export const ContentUserName = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: 200,
   height: 'fit-content',
   padding: '30px 0px',
-  background: '#00000035',
+  background: theme?.palette?.common?.white,
   borderRadius: 10,
   marginTop: 70,
   display: 'flex',
@@ -58,13 +59,19 @@ export const ContentUserName = styled(Box)(() => ({
     borderBottom: '1px solid #000',
     marginBottom: 15,
     paddingBottom: 5,
+    color: theme?.palette?.text?.secondary,
   },
 
   '& > button': {
     transition: '.2s all ease',
     margin: 'auto',
-    color: '#000',
-    background: '#fff',
+    color: theme?.palette?.text?.primary,
+    background: theme?.palette?.common?.black,
+
+    '&:hover': {
+      background: theme?.palette?.common?.black,
+      opacity: 0.7,
+    },
   },
 }));
 

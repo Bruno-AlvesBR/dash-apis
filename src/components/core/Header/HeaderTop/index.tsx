@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { ReactElement, useState } from 'react';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
+import { useTheme } from '@mui/material';
 
 import { TOKEN } from '@/interfaces/IUserProps';
 import { useLogin } from '@/hooks/Login';
@@ -24,7 +25,6 @@ import {
   ItemButton,
   MenuPopup,
 } from './styles';
-import { theme } from '@/styles/theme';
 
 interface IHeaderProps {
   id?: number;
@@ -40,6 +40,7 @@ const HeaderTop: React.FC = () => {
     useLogin(),
     useUser(),
   ];
+  const theme = useTheme();
 
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 

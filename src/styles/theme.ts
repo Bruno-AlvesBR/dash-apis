@@ -1,11 +1,13 @@
 import { styled, createTheme } from '@mui/material';
 
-export const theme = createTheme(({}));
+export const theme = createTheme({});
 
-export const Container = styled('div')(() => ({
+export const Container = styled('div')(({ theme }) => ({
   position: 'relative',
-  margin: '85px 20px 0px 220px',
-  width: '100%',
+  padding: '85px 20px 0px 220px',
+  width: '100vw',
+  height: '100vh',
+  background: theme?.palette?.background?.default,
 
   '@media (max-width: 780px)': {
     marginLeft: 20,

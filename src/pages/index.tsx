@@ -4,8 +4,8 @@ import { LoggedHome } from '@/components/pages/Home/LoggedHome';
 import { IFoodProps, IFoods } from '@/interfaces/IFoodsProps';
 import { foodService } from '@/services/index';
 
-const Index: NextPage<IFoods> = (props) => {
-  return <LoggedHome />
+const Index: NextPage<IFoods> = props => {
+  return <LoggedHome />;
 };
 
 export default Index;
@@ -15,8 +15,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const foods: IFoodProps[] = await foodService?.findAll();
 
     return {
-      props: {foods,
-      },
+      props: { foods },
       revalidate: 60 * 60 * 24,
     };
   } catch (err) {

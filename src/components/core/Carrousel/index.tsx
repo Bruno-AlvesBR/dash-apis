@@ -1,9 +1,10 @@
 import { ReactNode, useRef } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material';
 
-import { theme } from '@/styles/theme';
-import { Container, Content } from './styles';
 import { HeaderCarrousel } from './Header';
+
+import { Container, Content } from './styles';
 
 interface ICarrousel {
   children: ReactNode;
@@ -20,6 +21,7 @@ const Carrousel: React.FC<ICarrousel> = ({
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
 
   const isMobile = useMediaQuery(theme.breakpoints.down(780));
 

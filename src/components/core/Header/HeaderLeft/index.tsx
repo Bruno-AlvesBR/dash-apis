@@ -1,14 +1,15 @@
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
-import { memo, useMemo } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
+import Switch from '@mui/material/Switch';
 
 import { Configs } from '../../Configs';
 import { useUser } from '@/hooks/User';
 import { TOKEN } from '@/interfaces/IUserProps';
 import { useLogin } from '@/hooks/Login';
+import { useThemeMode } from '@/hooks/theme';
 
 import {
   Container,
@@ -24,6 +25,9 @@ const MenuLeft: React.FC = () => {
     useRouter(),
     useLogin(),
   ];
+  const { toggleColorMode } = useThemeMode();
+
+  const [checked, setChecked] = useState(false);
 
   const handleLogout = () => {
     cookie.remove(TOKEN.AUTH_TOKEN);
@@ -46,12 +50,30 @@ const MenuLeft: React.FC = () => {
     [user],
   );
 
+  const handleToggleMode = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    localStorage.setItem('isDark', `${event.target.checked}`);
+    setChecked(event.target.checked);
+    toggleColorMode();
+  };
+
+  useEffect(() => {
+    const mode = localStorage.getItem('isDark');
+
+    if (mode) {
+      setChecked(mode === 'true' ? true : false);
+      toggleColorMode();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toggleColorMode]);
+
   return (
     <>
       <Container>
         <Content>
           <ContentConfigs>
-            <HelpOutlineIcon />
+            <Switch checked={checked} onChange={handleToggleMode} />
             <SettingsOutlinedIcon />
           </ContentConfigs>
 

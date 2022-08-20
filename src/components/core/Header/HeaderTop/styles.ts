@@ -5,10 +5,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Popover from '@mui/material/Popover';
 
-export const Container = styled(AppBar)(() => ({
+export const Container = styled(AppBar)(({ theme }) => ({
   position: 'fixed',
   width: '100%',
-  background: '#fff',
+  background: theme?.palette?.common?.black,
 }));
 
 export const Content = styled(Toolbar)(() => ({
@@ -21,10 +21,10 @@ export const Content = styled(Toolbar)(() => ({
   },
 }));
 
-export const ItemMenu = styled(MenuItem)(() => ({
+export const ItemMenu = styled(MenuItem)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  color: '#000',
+  color: theme?.palette?.text?.primary,
 }));
 
 export const ContentItems = styled('div')(() => ({
