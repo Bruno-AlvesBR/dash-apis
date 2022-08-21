@@ -68,6 +68,8 @@ const MenuLeft: React.FC = () => {
   useEffect(() => {
     const mode = localStorage.getItem('isDark');
 
+    if (!mode && checked) toggleColorMode();
+
     if (mode) {
       setChecked(mode === 'true' ? true : false);
 
