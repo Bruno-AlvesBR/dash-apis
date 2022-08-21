@@ -1,4 +1,5 @@
 import BannerCreateProduct from '@/components/core/BannerCreateProduct';
+import HeadPage from '@/components/core/Head';
 
 import { ContainerApresentation, Title, Description } from './styles';
 import { Container } from '@/styles/theme';
@@ -9,6 +10,7 @@ export const LoggedHome: React.FC = () => {
 
   return (
     <Container>
+      <HeadPage />
       <ContainerApresentation>
         <Title variant="h1">
           Dashboard para gerenciamento da api.

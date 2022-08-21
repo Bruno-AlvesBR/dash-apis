@@ -4,6 +4,7 @@ import ProductsDynamicForm from '@/components/core/Forms/Foods/dynamic';
 import PodcastDynamicForm from '@/components/core/Forms/Podcast/dynamic';
 import { useFood } from '@/hooks/Product';
 import SelectDynamicForms from '@/components/core/SelectForms/dynamic';
+import HeadPage from '@/components/core/Head';
 import { usePodcast } from '@/hooks/Podcast';
 import VideosDynamicForm from '@/components/core/Forms/Videos/dynamic';
 import { useVideo } from '@/hooks/Videos';
@@ -71,6 +72,7 @@ const Dash: React.FC = () => {
 
   return (
     <Container>
+      <HeadPage title={`${formType || 'Select'}`} />
       {!selectCompleted ? (
         <SelectDynamicForms />
       ) : (

@@ -3,6 +3,7 @@ import { foodService } from '@/services/index';
 import { Container } from '@/styles/theme';
 import { GetServerSideProps, NextPage } from 'next';
 import DynamicFoodForm from '@/components/core/Forms/Foods/dynamic';
+import HeadPage from '@/components/core/Head';
 import { useFood } from '@/hooks/Product';
 
 interface IProductSlugProps {
@@ -14,6 +15,7 @@ const Ecommerce: NextPage<IProductSlugProps> = ({ food }) => {
 
   return (
     <Container>
+      <HeadPage title="E-commerce" />
       <DynamicFoodForm
         handleProductSubmit={handleUpdateProduct}
         product={food}

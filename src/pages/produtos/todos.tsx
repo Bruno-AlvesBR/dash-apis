@@ -2,6 +2,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { GetServerSideProps, NextPage } from 'next';
 
 import ProductsContent from '@/components/pages/Produtos';
+import HeadPage from '@/components/core/Head';
 import { useFood } from '@/hooks/Product';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { IProductProps } from '@/interfaces/IProductProps';
@@ -26,7 +27,10 @@ const Todos: NextPage<IProductsContentProps> = ({
 }) => {
   const { isLoading } = useFood();
 
-  return !isLoading ? (
+  return (
+    <>
+    <HeadPage title="Todos" />
+    {!isLoading ? (
     <ProductsContent
       podcasts={podcasts}
       foods={foods}
@@ -34,7 +38,8 @@ const Todos: NextPage<IProductsContentProps> = ({
     />
   ) : (
     <CircularProgress style={{ margin: 'auto' }} />
-  );
+  )}</>
+  )
 };
 
 export default Todos;

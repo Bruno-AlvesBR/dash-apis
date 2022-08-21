@@ -1,9 +1,12 @@
-import { podcastService } from '@/services/index';
-import { Container } from '@/styles/theme';
 import { GetServerSideProps, NextPage } from 'next';
+
+import { podcastService } from '@/services/index';
 import DynamicPodcastForm from '@/components/core/Forms/Podcast/dynamic';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { usePodcast } from '@/hooks/Podcast';
+import HeadPage from '@/components/core/Head';
+
+import { Container } from '@/styles/theme';
 
 interface IPodcastSlugProps {
   podcast?: IPodcastProps;
@@ -14,6 +17,7 @@ const Podcast: NextPage<IPodcastSlugProps> = ({ podcast }) => {
 
   return (
     <Container>
+      <HeadPage title="Podcast" />
       <DynamicPodcastForm
         handlePodcastSubmit={handleUpdatePodcast}
         podcast={podcast}
