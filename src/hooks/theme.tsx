@@ -55,6 +55,9 @@ const ThemeColorProvider: React.FC<IThemeColorProviderProps> = ({
             background: {
               default: '#aaaaaa30',
             },
+            action: {
+              hover: '#b0b0b0',
+            },
           }
         : {
             text: {

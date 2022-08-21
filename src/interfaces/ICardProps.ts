@@ -8,4 +8,5 @@ export interface ICardProps {
   contentCreatedAt?: string;
   type?: string;
   handleClick?(slug?: string, type?: string): void;
+  isPriority?: boolean;
 }

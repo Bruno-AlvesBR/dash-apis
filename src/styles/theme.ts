@@ -10,6 +10,6 @@ export const Container = styled('div')(({ theme }) => ({
   background: theme?.palette?.background?.default,
 
   '@media (max-width: 780px)': {
-    marginLeft: 20,
+    padding: '85px 20px',
   },
 }));

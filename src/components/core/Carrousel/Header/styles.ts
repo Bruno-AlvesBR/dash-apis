@@ -13,7 +13,7 @@ export const Container = styled(Box)(({ theme }) => ({
   borderRadius: 10,
 
   [theme.breakpoints.down(780)]: {
-    maxWidth: 'calc(100vw - 45px)',
+    maxWidth: '100%',
   },
 }));
 

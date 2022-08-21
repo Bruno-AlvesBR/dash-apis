@@ -11,7 +11,7 @@ export const Container = styled(Box)(({ theme }) => ({
   '&:first-of-type': { marginTop: 0 },
 
   [theme.breakpoints.down(780)]: {
-    maxWidth: 'calc(100% - 40px)',
+    maxWidth: '100%',
   },
 }));
 
@@ -22,6 +22,6 @@ export const Content = styled(IndianaDrag)(({ theme }) => ({
   maxWidth: 'calc(100vw - 240px)',
 
   [theme.breakpoints.down(780)]: {
-    maxWidth: 'calc(100vw - 45px)',
+    maxWidth: '100%',
   },
 }));

@@ -63,6 +63,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           type="ecommerce"
           handleClick={handleClick}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
+          isPriority
         />
       ))}
     </CarrouselDynamic>
@@ -86,6 +87,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           type="podcast"
           handleClick={handleClick}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
+          isPriority
         />
       ))}
     </CarrouselDynamic>

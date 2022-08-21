@@ -5,11 +5,12 @@ export const Container = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   width: '100%',
-  padding: '10px 20px',
+  padding: '10px 10px 10px 20px',
   position: 'relative',
   background: theme?.palette?.common?.black,
   color: theme?.palette?.text?.primary,
   margin: '20px 0px',
+  borderRadius: 5,
 
   '& > button': {
     background: theme?.palette?.common?.white,

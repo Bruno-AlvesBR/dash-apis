@@ -13,12 +13,19 @@ export const CardContent: React.FC<ICardProps> = ({
   description,
   handleClick,
   contentCreatedAt,
+  isPriority = false,
 }) => (
   <Card data-testid="card-content">
     {contentCreatedAt}
     {desktopSrc && (
       <ContentImage>
-        <Image src={desktopSrc} alt={title} layout="fill" />
+        <Image
+          priority={isPriority}
+          src={desktopSrc}
+          alt={title}
+          layout="fill"
+          quality={70}
+        />
       </ContentImage>
     )}
     <Title data-testid="title-card">{title}</Title>

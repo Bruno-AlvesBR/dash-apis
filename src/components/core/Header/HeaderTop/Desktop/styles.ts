@@ -1,27 +1,7 @@
 import { styled, Theme } from '@mui/material';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Popover from '@mui/material/Popover';
 
-export const Container = styled(AppBar)(({ theme }) => ({
-  position: 'fixed',
-  width: '100%',
-  background: theme?.palette?.common?.black,
-  minHeight: 0,
-}));
-
-export const Content = styled(Toolbar)(() => ({
-  position: 'relative',
-  padding: 0,
-  minHeight: 0,
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-}));
-
-export const ContentMenu = styled(Box)(() => ({
+export const Container = styled(Box)(() => ({
   position: 'relative',
   display: 'flex',
   flexDirection: 'row',

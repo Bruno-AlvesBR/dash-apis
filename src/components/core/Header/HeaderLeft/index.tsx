@@ -33,7 +33,7 @@ const MenuLeft: React.FC = () => {
   ];
   const { toggleColorMode } = useThemeMode();
 
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const handleLogout = () => {
     cookie.remove(TOKEN.AUTH_TOKEN);
