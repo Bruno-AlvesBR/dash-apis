@@ -9,7 +9,6 @@ export const ContainerApresentation = styled(Box)(({ theme }) => ({
 export const Title = styled(Typography)(() => ({
   fontWeight: 300,
   fontSize: '2em',
-  lineHeight: 2,
 }));
 
 export const Description = styled(Typography)(() => ({

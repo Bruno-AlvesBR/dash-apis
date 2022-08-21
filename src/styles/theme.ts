@@ -6,7 +6,7 @@ export const Container = styled('div')(({ theme }) => ({
   position: 'relative',
   padding: '85px 20px 0px 220px',
   width: '100vw',
-  height: '100vh',
+  minHeight: '100vh',
   background: theme?.palette?.background?.default,
 
   '@media (max-width: 780px)': {

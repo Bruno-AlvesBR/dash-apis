@@ -8,7 +8,7 @@ export const Container = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  background: '#fff',
+  background: theme?.palette?.common?.black,
   padding: 8,
   borderRadius: 10,
 
@@ -17,7 +17,7 @@ export const Container = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const ContentButtons = styled(Box)(() => ({
+export const ContentButtons = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -31,7 +31,7 @@ export const ContentButtons = styled(Box)(() => ({
     cursor: 'pointer',
 
     '&:hover': {
-      background: '#C4C4C4',
+      background: theme?.palette?.action?.hover,
     },
   },
 

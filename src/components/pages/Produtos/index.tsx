@@ -10,7 +10,7 @@ import { useUser } from '@/hooks/User';
 import { useLogin } from '@/hooks/Login';
 import { IVideoProps } from '@/interfaces/IVideoProps';
 
-import { Container } from './styles';
+import { Container } from '@/styles/theme';
 
 interface IProductsContentProps {
   foods: IProductProps[];

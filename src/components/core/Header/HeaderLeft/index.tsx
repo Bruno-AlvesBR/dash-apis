@@ -2,8 +2,13 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
-import { memo, useEffect, useMemo, useState } from 'react';
-import Switch from '@mui/material/Switch';
+import {
+  memo,
+  useEffect,
+  useMemo,
+  useState,
+  useCallback,
+} from 'react';
 
 import { Configs } from '../../Configs';
 import { useUser } from '@/hooks/User';
@@ -16,6 +21,7 @@ import {
   Content,
   ContentUserName,
   ContentConfigs,
+  SwitchButton,
 } from './styles';
 
 const MenuLeft: React.FC = () => {
@@ -27,7 +33,7 @@ const MenuLeft: React.FC = () => {
   ];
   const { toggleColorMode } = useThemeMode();
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const handleLogout = () => {
     cookie.remove(TOKEN.AUTH_TOKEN);
@@ -50,20 +56,22 @@ const MenuLeft: React.FC = () => {
     [user],
   );
 
-  const handleToggleMode = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    localStorage.setItem('isDark', `${event.target.checked}`);
-    setChecked(event.target.checked);
-    toggleColorMode();
-  };
+  const handleToggleMode = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      localStorage.setItem('isDark', `${event.target.checked}`);
+      setChecked(event.target.checked);
+      toggleColorMode();
+    },
+    [toggleColorMode],
+  );
 
   useEffect(() => {
     const mode = localStorage.getItem('isDark');
 
     if (mode) {
       setChecked(mode === 'true' ? true : false);
-      toggleColorMode();
+
+      if (mode === 'true' && checked) toggleColorMode();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toggleColorMode]);
@@ -73,7 +81,10 @@ const MenuLeft: React.FC = () => {
       <Container>
         <Content>
           <ContentConfigs>
-            <Switch checked={checked} onChange={handleToggleMode} />
+            <SwitchButton
+              checked={checked}
+              onChange={handleToggleMode}
+            />
             <SettingsOutlinedIcon />
           </ContentConfigs>
 

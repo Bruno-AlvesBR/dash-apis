@@ -1,5 +1,6 @@
 import { styled } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
+import Switch from '@mui/material/Switch';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
@@ -39,6 +40,11 @@ export const ContentConfigs = styled(Box)(({ theme }) => ({
 
     '&:first-child': { marginRight: 15 },
   },
+}));
+
+export const SwitchButton = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-thumb': { background: theme?.palette?.common?.white },
+  '& .MuiSwitch-track': { background: theme?.palette?.common?.white },
 }));
 
 export const ContentUserName = styled(Box)(({ theme }) => ({

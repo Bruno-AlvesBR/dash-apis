@@ -13,7 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 100vw;
     position: relative;
     font-size: 92.5%;
-    background: #aaaaaa30!important;
+    background: #aaaaaa30;
     overflow-x: hidden;
   }
 

@@ -11,7 +11,6 @@ import {
   videoService,
 } from '@/services/index';
 
-import Container from '../../styles/Produtos/styles';
 import { IVideoProps } from '@/interfaces/IVideoProps';
 
 export interface IProductsContentProps {
@@ -27,18 +26,14 @@ const Todos: NextPage<IProductsContentProps> = ({
 }) => {
   const { isLoading } = useFood();
 
-  return (
-    <Container>
-      {!isLoading ? (
-        <ProductsContent
-          podcasts={podcasts}
-          foods={foods}
-          videos={videos}
-        />
-      ) : (
-        <CircularProgress style={{ margin: 'auto' }} />
-      )}
-    </Container>
+  return !isLoading ? (
+    <ProductsContent
+      podcasts={podcasts}
+      foods={foods}
+      videos={videos}
+    />
+  ) : (
+    <CircularProgress style={{ margin: 'auto' }} />
   );
 };
 

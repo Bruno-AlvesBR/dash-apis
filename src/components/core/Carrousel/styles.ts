@@ -5,8 +5,10 @@ import IndianaDrag from 'react-indiana-drag-scroll';
 export const Container = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: 'calc(100vw - 240px)',
-  margin: 20,
+  margin: '20px 0px',
   position: 'relative',
+
+  '&:first-of-type': { marginTop: 0 },
 
   [theme.breakpoints.down(780)]: {
     maxWidth: 'calc(100% - 40px)',

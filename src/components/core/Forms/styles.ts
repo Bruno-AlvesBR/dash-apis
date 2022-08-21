@@ -1,6 +1,6 @@
 import { styled } from '@mui/material';
 
-export const Container = styled('form')(() => ({
+export const Container = styled('form')(({ theme }) => ({
   zIndex: 99,
   display: 'flex',
   flexDirection: 'column',
@@ -9,13 +9,26 @@ export const Container = styled('form')(() => ({
   gap: 15,
 
   '& button': {
-    margin: '10px 0',
+    margin: 10,
     padding: '10px 20px',
     width: 'fit-content',
+    background: theme?.palette?.common?.white,
+    color: theme?.palette?.text?.secondary,
+
+    '&:hover': {
+      background: theme?.palette?.common?.white,
+      opacity: 0.7,
+    },
   },
 
   '& input': {
     width: '100%',
-    background: '#fff',
+    background: theme?.palette?.common?.black,
+    color: theme?.palette?.text?.primary,
+  },
+
+  '& .MuiInputLabel-formControl': {
+    color: theme?.palette?.text?.primary,
+    fontWeight: 700,
   },
 }));

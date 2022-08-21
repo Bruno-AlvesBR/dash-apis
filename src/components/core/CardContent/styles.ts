@@ -7,7 +7,7 @@ export const Card = styled(Box)(({ theme }) => ({
   minHeight: 400,
   maxHeight: 400,
   padding: 15,
-  background: '#fff',
+  background: theme?.palette?.common?.black,
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
@@ -26,6 +26,16 @@ export const Card = styled(Box)(({ theme }) => ({
   '&:first-of-type': { marginLeft: 0 },
 
   '&:last-of-type': { marginRight: 0 },
+
+  '& > button': {
+    background: theme?.palette?.common?.white,
+    transition: '.2s all ease',
+
+    '&:hover': {
+      opacity: 0.8,
+      background: theme?.palette?.common?.white,
+    },
+  },
 
   [theme.breakpoints.down(780)]: {
     minWidth: 260,

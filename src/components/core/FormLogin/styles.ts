@@ -17,30 +17,24 @@ export const FormContent = styled('form')(({ theme }) => ({
   },
 }));
 
-export const InputForm = styled(TextField)(() => ({ width: '100%' }));
+export const InputForm = styled(TextField)(({ theme }) => ({
+  width: '100%',
+  color: theme?.palette?.text?.primary,
 
-export const ButtonForm = styled(Button)(() => ({
-  '& button:first-child': {
-    paddingg: 5,
-
-    '& svg': {
-      cursor: 'pointer',
-      color: '#6674BB',
-    },
-    '&:hover': {
-      opacity: 1,
-      background: '#aaaaaa60',
-    },
+  '& .MuiInputLabel-formControl': {
+    color: theme?.palette?.text?.primary,
+    fontWeight: 700,
   },
+}));
 
-  '& button:last-child': {
-    background: '#6674BB',
-    color: '#fff',
-    transition: '0.3s all ease',
+export const ButtonForm = styled(Button)(({ theme }) => ({
+  background: theme?.palette?.common?.white,
+  color: theme?.palette?.text?.secondary,
+  fontWeight: 700,
+  fontSize: 16,
 
-    '&:hover': {
-      background: '#6674BB',
-      opacity: 0.6,
-    },
+  '&:hover': {
+    background: theme?.palette?.common?.white,
+    opacity: 0.7,
   },
 }));
