@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 import Cookies from 'universal-cookie';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import {
   IUserLogin,
@@ -42,17 +43,17 @@ const UserProvider = ({ children }: IUserContextProvider) => {
 
   useMemo(async () => {
     const authToken = await cookie.get(TOKEN.AUTH_TOKEN);
-
     if (!authToken) return;
 
-    setUserId(authToken);
-    const userResponse = await userService?.recoveryUser(
-      `${authToken}`,
-    );
+    const { id } = jwt.verify(
+      authToken,
+      `${process.env.NEXT_PUBLIC_JWT_KEY}`,
+    ) as JwtPayload;
 
-    if (userResponse) {
-      setUser(userResponse);
-    }
+    setUserId(id);
+    const userResponse = await userService?.recoveryUser(id);
+
+    if (userResponse) setUser(userResponse as IUserProps);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -66,7 +67,7 @@ const UserProvider = ({ children }: IUserContextProvider) => {
           password: event?.password,
         });
 
-        cookie.set(TOKEN.AUTH_TOKEN, `${userData?.id}`, {
+        cookie.set(TOKEN.AUTH_TOKEN, `${userData?.acessToken}`, {
           maxAge: 60 * 60 * 24,
         });
 
