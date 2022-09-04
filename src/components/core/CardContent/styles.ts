@@ -77,9 +77,18 @@ export const Description = styled('p')(() => ({
   fontSize: 12,
 }));
 
-export const ContentImage = styled('div')(() => ({
+export const ContentImage = styled(Box)(() => ({
   width: '100%',
   minHeight: 150,
   maxHeight: 200,
   position: 'relative',
+}));
+
+export const ContentButtons = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  width: '100%',
+  position: 'relative',
+  flexDirection: 'row',
 }));

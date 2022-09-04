@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface ICardProps {
   id?: string;
   title?: string;
@@ -9,4 +11,5 @@ export interface ICardProps {
   type?: string;
   handleClick?(slug?: string, type?: string): void;
   isPriority?: boolean;
+  playButton?: ReactNode;
 }

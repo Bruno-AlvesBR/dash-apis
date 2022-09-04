@@ -3,7 +3,13 @@ import Image from 'next/image';
 
 import { ICardProps } from '@/interfaces/ICardProps';
 
-import { Card, Title, Description, ContentImage } from './styles';
+import {
+  Card,
+  Title,
+  Description,
+  ContentImage,
+  ContentButtons,
+} from './styles';
 
 export const CardContent: React.FC<ICardProps> = ({
   title,
@@ -14,6 +20,7 @@ export const CardContent: React.FC<ICardProps> = ({
   handleClick,
   contentCreatedAt,
   isPriority = false,
+  playButton,
 }) => (
   <Card data-testid="card-content">
     {contentCreatedAt}
@@ -30,12 +37,15 @@ export const CardContent: React.FC<ICardProps> = ({
     )}
     <Title data-testid="title-card">{title}</Title>
     <Description>{description}</Description>
-    <Button
-      data-testid="edit-button-card"
-      variant="contained"
-      onClick={() => handleClick(slug, type)}
-    >
-      Editar
-    </Button>
+    <ContentButtons>
+      <Button
+        data-testid="edit-button-card"
+        variant="contained"
+        onClick={() => handleClick(slug, type)}
+      >
+        Editar
+      </Button>
+      {playButton}
+    </ContentButtons>
   </Card>
 );

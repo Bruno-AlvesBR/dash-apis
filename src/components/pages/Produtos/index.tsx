@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
+import Button from '@mui/material/Button';
 
 import { IProductProps } from '@/interfaces/IProductProps';
 import { CardContent } from '@/components/core/CardContent';
@@ -9,6 +10,8 @@ import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { useUser } from '@/hooks/User';
 import { useLogin } from '@/hooks/Login';
 import { IVideoProps } from '@/interfaces/IVideoProps';
+import { IContentProps } from '@/interfaces/IPlayerProps';
+import { usePlayer } from '@/hooks/player';
 
 import { Container } from '@/styles/theme';
 
@@ -28,6 +31,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
     useUser(),
     useLogin(),
   ];
+  const { handleTogglePlay } = usePlayer();
 
   const handleClick = useCallback(
     (slug?: string, type?: string) => {
@@ -44,6 +48,16 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
 
     return createdAt && contentDate;
   };
+
+  const playButtonContent = (content: IContentProps) => (
+    <Button
+      data-testid="play-content-card"
+      variant="contained"
+      onClick={() => handleTogglePlay(content)}
+    >
+      Ouvir
+    </Button>
+  );
 
   const FoodContent: React.FC = () => (
     <CarrouselDynamic
@@ -88,6 +102,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           handleClick={handleClick}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
           isPriority
+          playButton={playButtonContent({ ...item })}
         />
       ))}
     </CarrouselDynamic>
