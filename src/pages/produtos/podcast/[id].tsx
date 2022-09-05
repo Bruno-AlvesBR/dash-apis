@@ -17,7 +17,9 @@ const Podcast: NextPage<IPodcastSlugProps> = ({ podcast }) => {
 
   return (
     <Container>
-      <HeadPage title="Podcast" />
+      <HeadPage>
+        <title>Podcast</title>
+      </HeadPage>
       <DynamicPodcastForm
         handlePodcastSubmit={handleUpdatePodcast}
         podcast={podcast}

@@ -10,7 +10,9 @@ export const LoggedHome: React.FC = () => {
 
   return (
     <Container>
-      <HeadPage />
+      <HeadPage>
+        <title>Home</title>
+      </HeadPage>
       <ContainerApresentation>
         <Title variant="h1">
           Dashboard para gerenciamento da api.

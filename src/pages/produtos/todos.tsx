@@ -29,17 +29,20 @@ const Todos: NextPage<IProductsContentProps> = ({
 
   return (
     <>
-    <HeadPage title="Todos" />
-    {!isLoading ? (
-    <ProductsContent
-      podcasts={podcasts}
-      foods={foods}
-      videos={videos}
-    />
-  ) : (
-    <CircularProgress style={{ margin: 'auto' }} />
-  )}</>
-  )
+      <HeadPage>
+        <title>Todos</title>
+      </HeadPage>
+      {!isLoading ? (
+        <ProductsContent
+          podcasts={podcasts}
+          foods={foods}
+          videos={videos}
+        />
+      ) : (
+        <CircularProgress style={{ margin: 'auto' }} />
+      )}
+    </>
+  );
 };
 
 export default Todos;

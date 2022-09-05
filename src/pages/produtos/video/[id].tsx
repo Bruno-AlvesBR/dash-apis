@@ -17,7 +17,9 @@ const Video: NextPage<IVideoSlugProps> = ({ video }) => {
 
   return (
     <Container>
-      <HeadPage title="Video" />
+      <HeadPage>
+        <title>Video</title>
+      </HeadPage>
       <DynamicVideoForm
         handleVideoSubmit={handleUpdateVideo}
         video={video}

@@ -15,7 +15,9 @@ const Ecommerce: NextPage<IProductSlugProps> = ({ food }) => {
 
   return (
     <Container>
-      <HeadPage title="E-commerce" />
+      <HeadPage>
+        <title>E-commerce</title>
+      </HeadPage>
       <DynamicFoodForm
         handleProductSubmit={handleUpdateProduct}
         product={food}

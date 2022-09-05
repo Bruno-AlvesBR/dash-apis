@@ -72,7 +72,9 @@ const Dash: React.FC = () => {
 
   return (
     <Container>
-      <HeadPage title={`${formType || 'Select'}`} />
+      <HeadPage>
+        <title>{formType.split(' ')[0] || 'Select'}</title>
+      </HeadPage>
       {!selectCompleted ? (
         <SelectDynamicForms />
       ) : (

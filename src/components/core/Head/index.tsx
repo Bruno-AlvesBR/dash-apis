@@ -1,14 +1,12 @@
 import Head from 'next/head';
-import { memo } from 'react';
+import { ReactNode } from 'react';
 
 interface IHeadProps {
-  title?: string;
+  children?: ReactNode;
 }
 
-const HeadPage: React.FC<IHeadProps> = ({ title }) => (
-  <Head>
-    <title>Dash {title && `| ${title}`}</title>
-  </Head>
+const HeadPage: React.FC<IHeadProps> = ({ children }) => (
+  <Head>{children}</Head>
 );
 
-export default memo(HeadPage);
+export default HeadPage;
