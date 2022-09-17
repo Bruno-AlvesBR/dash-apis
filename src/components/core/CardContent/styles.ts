@@ -84,11 +84,21 @@ export const ContentImage = styled(Box)(() => ({
   position: 'relative',
 }));
 
-export const ContentButtons = styled(Box)(() => ({
+export const ContentButtons = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   width: '100%',
   position: 'relative',
   flexDirection: 'row',
+
+  '& > button': {
+    background: theme?.palette?.common?.white,
+    transition: '.2s all ease',
+
+    '&:hover': {
+      background: theme?.palette?.common?.white,
+      opacity: 0.8,
+    },
+  },
 }));

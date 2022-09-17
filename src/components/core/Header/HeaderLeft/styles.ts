@@ -51,7 +51,7 @@ export const ContentUserName = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: 200,
   height: 'fit-content',
-  padding: '30px 0px',
+  padding: 30,
   background: theme?.palette?.common?.white,
   borderRadius: 10,
   marginTop: 70,
@@ -62,7 +62,9 @@ export const ContentUserName = styled(Box)(({ theme }) => ({
   position: 'relative',
 
   '& h2': {
-    borderBottom: '1px solid #000',
+    borderBottom: `1px solid ${theme?.palette?.common?.black}`,
+    width: '100%',
+    textAlign: 'center',
     marginBottom: 15,
     paddingBottom: 5,
     color: theme?.palette?.text?.secondary,
@@ -70,9 +72,11 @@ export const ContentUserName = styled(Box)(({ theme }) => ({
 
   '& > button': {
     transition: '.2s all ease',
-    margin: 'auto',
+    margin: 'auto 0px',
     color: theme?.palette?.text?.primary,
     background: theme?.palette?.common?.black,
+    minWidth: 0,
+    fontSize: 14,
 
     '&:hover': {
       background: theme?.palette?.common?.black,

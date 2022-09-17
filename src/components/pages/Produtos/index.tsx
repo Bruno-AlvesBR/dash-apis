@@ -49,21 +49,23 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
     return createdAt && contentDate;
   };
 
-  const playButtonContent = (content: IContentProps) => (
-    <Button
-      data-testid="play-content-card"
-      variant="contained"
-      onClick={() => handleTogglePlay(content)}
-    >
-      Ouvir
-    </Button>
-  );
+  const playButtonContent = (content: IContentProps) =>
+    content?.file?.url && (
+      <Button
+        data-testid="play-content-card"
+        variant="contained"
+        onClick={() => handleTogglePlay(content)}
+      >
+        Ouvir
+      </Button>
+    );
 
   const FoodContent: React.FC = () => (
     <CarrouselDynamic
       mobileWidth={275}
       desktopWidth={315}
       title="E-commerce"
+      url="https://ecommerce-foods.vercel.app/"
     >
       {foods?.map(item => (
         <CardContent
@@ -114,6 +116,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
         desktopWidth={275}
         mobileWidth={315}
         title="Videos"
+        url="https://filmech.vercel.app/"
       >
         {videos?.map(item => (
           <CardContent

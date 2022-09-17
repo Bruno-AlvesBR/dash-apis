@@ -45,17 +45,6 @@ const MenuLeft: React.FC = () => {
 
   const handleOpenLogin = () => setOpenDialog(true);
 
-  const loggedButtonComponent = useMemo(
-    () => (
-      <>
-        <h2>{user?.name?.firstName}</h2>
-        <Button onClick={() => handleLogout()}>Deslogar</Button>
-      </>
-    ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user],
-  );
-
   const handleToggleMode = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       localStorage.setItem('isDark', `${event.target.checked}`);
@@ -94,7 +83,10 @@ const MenuLeft: React.FC = () => {
             {!user?.id ? (
               <Button onClick={handleOpenLogin}>Logar</Button>
             ) : (
-              loggedButtonComponent
+              <>
+                <h2>{user?.name?.firstName}</h2>
+                <Button onClick={handleLogout}>Deslogar</Button>
+              </>
             )}
           </ContentUserName>
         </Content>

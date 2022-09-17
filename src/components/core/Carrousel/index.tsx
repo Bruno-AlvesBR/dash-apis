@@ -11,6 +11,8 @@ interface ICarrousel {
   desktopWidth: number;
   mobileWidth: number;
   title?: string;
+  onClickRedirect?(): void;
+  url?: string;
 }
 
 const Carrousel: React.FC<ICarrousel> = ({
@@ -18,6 +20,8 @@ const Carrousel: React.FC<ICarrousel> = ({
   desktopWidth,
   mobileWidth,
   title,
+  onClickRedirect,
+  url,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -31,7 +35,6 @@ const Carrousel: React.FC<ICarrousel> = ({
     const { scrollLeft } = listRef.current;
 
     const clientWidth = !isMobile ? desktopWidth : mobileWidth;
-
     const valueScroll = event === 'next' ? clientWidth : -clientWidth;
 
     if (process.env.NODE_ENV !== 'test') {
@@ -44,7 +47,12 @@ const Carrousel: React.FC<ICarrousel> = ({
 
   return (
     <Container data-testid="carrousel">
-      <HeaderCarrousel handleScroll={handleScroll} title={title} />
+      <HeaderCarrousel
+        handleScroll={handleScroll}
+        title={title}
+        onClickRedirect={onClickRedirect}
+        url={url}
+      />
       <div ref={contentRef}>
         <Content horizontal nativeMobileScroll innerRef={listRef}>
           {children}
