@@ -16,6 +16,7 @@ import {
   TOKEN,
 } from '@/interfaces/IUserProps';
 import { userService } from '@/services/index';
+import { useLogin } from './Login';
 
 export interface IUserContextProps {
   onsubmit?(event: any): void;
@@ -34,6 +35,7 @@ const UserContext = createContext({} as IUserContextProps);
 
 const UserProvider = ({ children }: IUserContextProvider) => {
   const cookie = new Cookies();
+  const { setOpenDialog } = useLogin();
 
   const [user, setUser] = useState<IUserProps | null>(null);
   const [userId, setUserId] = useState<string>();
@@ -45,15 +47,17 @@ const UserProvider = ({ children }: IUserContextProvider) => {
     const authToken = await cookie.get(TOKEN.AUTH_TOKEN);
     if (!authToken) return;
 
-    const { id } = jwt.verify(
+    const { _id } = jwt.verify(
       authToken,
       `${process.env.NEXT_PUBLIC_JWT_KEY}`,
     ) as JwtPayload;
 
-    setUserId(id);
-    const userResponse = await userService?.recoveryUser(id);
+    if (_id) {
+      setUserId(_id);
+      const userResponse = await userService?.recoveryUser(`${_id}`);
 
-    if (userResponse) setUser(userResponse as IUserProps);
+      if (userResponse) setUser(userResponse as IUserProps);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -62,28 +66,27 @@ const UserProvider = ({ children }: IUserContextProvider) => {
       try {
         setIsLoadingUser(true);
 
-        const userData = await userService.login({
+        const userData: IUserProps = await userService.login({
           email: event?.email,
           password: event?.password,
         });
 
+        if (String(userData)?.length <= 0 && !userData) return;
+
         cookie.set(TOKEN.AUTH_TOKEN, `${userData?.acessToken}`, {
           maxAge: 60 * 60 * 24,
         });
-
-        if (!userData) return;
 
         if (!userData?.admin) {
           setNoAdmin(true);
         } else {
           setUserId(userData?.id);
           setUser(userData);
+          setOpenDialog(false);
         }
       } catch (err) {
         setIsLoadingUser(false);
         setIsInvalid(true);
-
-        console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

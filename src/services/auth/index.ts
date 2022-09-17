@@ -18,8 +18,8 @@ export const login = async ({
   return userResponse?.data || {};
 };
 
-export const recoveryUser = async (user: string) => {
-  const userResponse = await api.get(`user/${user}`);
+export const recoveryUser = async (_id: string) => {
+  const userResponse = await api.get(`user/${_id}`);
 
   return userResponse?.data || [];
 };

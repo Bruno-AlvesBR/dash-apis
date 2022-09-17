@@ -1,4 +1,5 @@
 export interface IUserProps {
+  _id?: string;
   id?: string;
   name?: {
     firstName?: string;
@@ -20,6 +21,7 @@ export interface IUserProps {
 }
 
 export interface IUserRegister {
+  _id?: string;
   id?: string;
   firstName?: IUserProps;
   lastName?: IUserProps;
@@ -29,6 +31,7 @@ export interface IUserRegister {
 }
 
 export interface IUserLogin {
+  _id?: string;
   id?: string;
   email?: string;
   password?: string;
@@ -45,5 +48,5 @@ export interface IUser {
 }
 
 export enum TOKEN {
-  AUTH_TOKEN='authUserId'
+  AUTH_TOKEN = 'authUserId',
 }
