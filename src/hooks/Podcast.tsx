@@ -46,26 +46,28 @@ const PodcastProvider = ({ children }: IPodcastProviderProps) => {
   const handleCreatePodcast = useCallback(
     async ({ ...event }: IPodcastCreate) => {
       try {
-        if (user?.id) {
+        if (user?.id && user?.admin) {
           const podcastResponse = await podcastService.create(event);
 
           if (!podcastResponse && !podcastResponse?.id) return;
 
           setPodcastData(podcastResponse);
           router.push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
         }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id],
+    [user?.id && user?.admin],
   );
 
   const handleUpdatePodcast = useCallback(
     async ({ ...event }: IPodcastUpdate) => {
       try {
-        if (user?.id) {
+        if (user?.id && user?.admin) {
           const podcastResponse = await podcastService.update(
             event?.id,
             event,
@@ -74,31 +76,35 @@ const PodcastProvider = ({ children }: IPodcastProviderProps) => {
           if (!podcastResponse && !podcastResponse?.id) return;
 
           router.push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
         }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id],
+    [user?.id && user?.admin],
   );
 
   const handleRemovePodcast = useCallback(
     async (id: string) => {
       try {
-        if (user?.id) {
+        if (user?.id && user?.admin) {
           const podcastResponse = await podcastService.remove(id);
 
           if (!podcastResponse && !podcastResponse?.id) return;
 
           router.push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
         }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id],
+    [user?.id && user?.admin],
   );
 
   return (

@@ -23,7 +23,7 @@ export const SnackbarContext = createContext(
 );
 
 const SnackbarProvider = ({ children }: ISnackbarProvider) => {
-  const { noAdmin, isInvalid } = useUser();
+  const { isInvalid } = useUser();
   const [openSnackbar, setOpenSnackBar] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [alert, setAlert] = useState<string>('sucess');
@@ -33,10 +33,10 @@ const SnackbarProvider = ({ children }: ISnackbarProvider) => {
   const handleCloseSnackBar = () => setOpenSnackBar(false);
 
   useEffect(() => {
-    if (noAdmin || isInvalid) {
+    if (isInvalid) {
       setOpenSnackBar(true);
     }
-  }, [isInvalid, noAdmin]);
+  }, [isInvalid]);
 
   const handleOpenSnackbar = (
     message: string,

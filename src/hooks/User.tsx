@@ -22,7 +22,6 @@ export interface IUserContextProps {
   onsubmit?(event: any): void;
   user?: IUserProps;
   userId?: string;
-  noAdmin?: boolean;
   isInvalid?: boolean;
   isLoadingUser?: boolean;
 }
@@ -33,13 +32,14 @@ export interface IUserContextProvider {
 
 const UserContext = createContext({} as IUserContextProps);
 
-const UserProvider = ({ children }: IUserContextProvider) => {
+const UserProvider: React.FC<IUserContextProvider> = ({
+  children,
+}) => {
   const cookie = new Cookies();
   const { setOpenDialog } = useLogin();
 
   const [user, setUser] = useState<IUserProps | null>(null);
   const [userId, setUserId] = useState<string>();
-  const [noAdmin, setNoAdmin] = useState<boolean>(false);
   const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const [isLoadingUser, setIsLoadingUser] = useState<boolean>();
 
@@ -77,24 +77,24 @@ const UserProvider = ({ children }: IUserContextProvider) => {
           maxAge: 60 * 60 * 24,
         });
 
-        if (!userData?.admin) {
-          setNoAdmin(true);
-        } else {
-          setUserId(userData?.id);
-          setUser(userData);
-          setOpenDialog(false);
-        }
+        setUserId(userData?.id);
+        setUser(userData);
+        setOpenDialog(false);
       } catch (err) {
         setIsLoadingUser(false);
         setIsInvalid(true);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id],
+    [setOpenDialog],
   );
 
   useEffect(() => {
-    localStorage.setItem('userName', user?.name?.firstName);
+    const userName = localStorage.getItem('userName');
+
+    if (!userName) {
+      localStorage.setItem('userName', user?.name?.firstName);
+    }
   }, [user?.name]);
 
   return (
@@ -102,7 +102,6 @@ const UserProvider = ({ children }: IUserContextProvider) => {
       value={{
         onsubmit,
         user,
-        noAdmin,
         isInvalid,
         userId,
         isLoadingUser,

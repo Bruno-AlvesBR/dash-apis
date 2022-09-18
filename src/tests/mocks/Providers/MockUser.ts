@@ -7,7 +7,6 @@ export const MockUser = () => {
     onsubmit: jest.fn(),
     user: {} as IUserProps,
     userId: faker.datatype.uuid(),
-    noAdmin: faker.datatype.boolean(),
     isInvalid: faker.datatype.boolean(),
     isLoadingUser: faker.datatype.boolean(),
   };

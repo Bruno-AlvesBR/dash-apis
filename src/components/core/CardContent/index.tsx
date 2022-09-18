@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button';
 import Image from 'next/image';
+import Link from '@/components/ui/Link';
 
 import { ICardProps } from '@/interfaces/ICardProps';
 
@@ -14,13 +15,12 @@ import {
 export const CardContent: React.FC<ICardProps> = ({
   title,
   desktopSrc,
-  slug,
-  type,
   description,
-  handleClick,
+  onClick,
   contentCreatedAt,
   isPriority = false,
   playButton,
+  url,
 }) => (
   <Card data-testid="card-content">
     {contentCreatedAt}
@@ -38,13 +38,12 @@ export const CardContent: React.FC<ICardProps> = ({
     <Title data-testid="title-card">{title}</Title>
     <Description>{description}</Description>
     <ContentButtons>
-      <Button
-        data-testid="edit-button-card"
-        variant="contained"
-        onClick={() => handleClick(slug, type)}
-      >
-        Editar
-      </Button>
+      <Link onClick={onClick} href={url}>
+        <Button data-testid="edit-button-card" variant="contained">
+          Editar
+        </Button>
+      </Link>
+
       {playButton}
     </ContentButtons>
   </Card>

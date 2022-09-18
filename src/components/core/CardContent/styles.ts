@@ -87,14 +87,19 @@ export const ContentImage = styled(Box)(() => ({
 export const ContentButtons = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   width: '100%',
   position: 'relative',
   flexDirection: 'row',
 
-  '& > button': {
+  '& > button': { marginLeft: 20 },
+
+  '& > a, button': {
     background: theme?.palette?.common?.white,
     transition: '.2s all ease',
+    color: theme?.palette?.text?.secondary,
+    fontWeight: 600,
+    width: '100%',
 
     '&:hover': {
       background: theme?.palette?.common?.white,

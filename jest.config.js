@@ -5,7 +5,7 @@ const createJestConfig = nextJest({
 });
 
 const customJestConfig = {
-  bail: 1,
+  bail: true,
   verbose: true,
   silent: true,
   rootDir: process.cwd(),

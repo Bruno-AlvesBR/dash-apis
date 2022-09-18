@@ -1,4 +1,5 @@
 export interface IPodcastProps {
+  _id?: string;
   id?: string;
   title?: string;
   members?: string[];
@@ -14,6 +15,7 @@ export interface IPodcastProps {
 }
 
 export interface IPodcastCreate {
+  _id?: string;
   id?: string;
   title?: string;
   members?: string[];
@@ -25,6 +27,7 @@ export interface IPodcastCreate {
 }
 
 export interface IPodcastUpdate {
+  _id?: string;
   id?: string;
   title?: string;
   members?: string[];

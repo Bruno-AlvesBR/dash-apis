@@ -1,14 +1,10 @@
-import { useCallback } from 'react';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
 
 import { IProductProps } from '@/interfaces/IProductProps';
 import { CardContent } from '@/components/core/CardContent';
 import CarrouselDynamic from '@/components/core/Carrousel/dynamic';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
-import { useUser } from '@/hooks/User';
-import { useLogin } from '@/hooks/Login';
 import { IVideoProps } from '@/interfaces/IVideoProps';
 import { IContentProps } from '@/interfaces/IPlayerProps';
 import { usePlayer } from '@/hooks/player';
@@ -26,22 +22,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
   podcasts,
   videos,
 }) => {
-  const [router, { user }, { setOpenDialog }] = [
-    useRouter(),
-    useUser(),
-    useLogin(),
-  ];
   const { handleTogglePlay } = usePlayer();
-
-  const handleClick = useCallback(
-    (slug?: string, type?: string) => {
-      if (user?.id) return router.push(`/produtos/${type}/${slug}`);
-
-      setOpenDialog(true);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [setOpenDialog, user?.id],
-  );
 
   const contentCreatedAt = (createdAt?: string): string => {
     const contentDate = dayjs(createdAt).format('DD MMM YYYY');
@@ -75,9 +56,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           description={item?.description}
           desktopSrc={item?.image?.desktopSrc}
           createdAt={item?.createdAt}
-          slug={item?.slug}
-          type="ecommerce"
-          handleClick={handleClick}
+          url={`/produtos/ecommerce/${item?.slug}`}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
           isPriority
         />
@@ -99,9 +78,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           description={item?.description}
           desktopSrc={item?.thumbnail}
           createdAt={item?.createdAt}
-          slug={item?.id}
-          type="podcast"
-          handleClick={handleClick}
+          url={`/produtos/podcast/${item?._id}`}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
           isPriority
           playButton={playButtonContent({ ...item })}
@@ -124,9 +101,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
             id={item?.id}
             title={item?.title}
             desktopSrc={item?.file?.image}
-            slug={item?.id}
-            type="video"
-            handleClick={handleClick}
+            url={`/produtos/video/${item?.id}`}
             contentCreatedAt={contentCreatedAt(item?.createdAt)}
           />
         ))}

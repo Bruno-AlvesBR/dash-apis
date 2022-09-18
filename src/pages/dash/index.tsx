@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import ProductsDynamicForm from '@/components/core/Forms/Foods/dynamic';
 import PodcastDynamicForm from '@/components/core/Forms/Podcast/dynamic';
@@ -63,7 +63,9 @@ const Dash: React.FC = () => {
     [handleCreatePodcast, handleCreateProduct, handleCreateVideo],
   );
 
-  useEffect(() => {
+  useMemo(async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -73,7 +75,9 @@ const Dash: React.FC = () => {
   return (
     <Container>
       <HeadPage>
-        <title>{formType.split(' ')[0] || 'Select'}</title>
+        <title>
+          {(formType && formType.split(' ')[0]) || 'Select'}
+        </title>
       </HeadPage>
       {!selectCompleted ? (
         <SelectDynamicForms />

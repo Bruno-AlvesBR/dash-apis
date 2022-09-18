@@ -33,34 +33,40 @@ const VideoProvider: React.FC<IVideoProviderProps> = ({
   const handleCreateVideo = useCallback(
     async (data: IVideoBody) => {
       try {
-        if (user?.id) {
+        if (user?.id && user?.admin) {
           const videoData = await videoService.create(data);
 
           if (!videoData && !videoData?.id) return;
 
           push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
         }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id],
+    [user?.id && user?.admin],
   );
 
   const handleUpdateVideo = useCallback(
     async (data: IVideoBody) => {
       try {
-        const updatedVideo = await videoService.update(
-          data?.id,
-          data,
-        );
+        if (user?.id && user?.admin) {
+          const updatedVideo = await videoService.update(
+            data?.id,
+            data,
+          );
 
-        if (!updatedVideo && !updatedVideo?.id) return;
+          if (!updatedVideo && !updatedVideo?.id) return;
 
-        setOpenSnackBar(true);
+          setOpenSnackBar(true);
 
-        push('/produtos/todos');
+          push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
+        }
       } catch (err) {
         console.log(err);
       }
@@ -72,11 +78,15 @@ const VideoProvider: React.FC<IVideoProviderProps> = ({
   const handleDeleteVideo = useCallback(
     async (id: string) => {
       try {
-        const deletedVideo = await videoService.remove(id);
+        if (user?.id && user?.admin) {
+          const deletedVideo = await videoService.remove(id);
 
-        if (!deletedVideo && !deletedVideo?.id) return;
+          if (!deletedVideo && !deletedVideo?.id) return;
 
-        push('/produtos/todos');
+          push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
+        }
       } catch (err) {
         console.log(err);
       }

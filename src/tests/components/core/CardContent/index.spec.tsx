@@ -12,11 +12,7 @@ interface IMockProps {
   router: NextRouter;
 }
 
-const makesut = (router = createMockRouter({})): IMockProps => {
-  const handleClick = (slug?: string, type?: string) => {
-    router.push(`/produtos/${type}/${slug}`);
-  };
-
+const makesut = (router = createMockRouter({})) => {
   render(
     <RouterContext.Provider value={router}>
       <CardContent
@@ -25,20 +21,19 @@ const makesut = (router = createMockRouter({})): IMockProps => {
         description={MockCardList[0]?.description}
         desktopSrc=""
         createdAt={MockCardList[0]?.createdAt}
-        slug={MockCardList[0]?.slug}
-        type={MockCardList[0]?.type}
-        handleClick={handleClick}
+        url={MockCardList[0]?.url}
       />
     </RouterContext.Provider>,
   );
 
   return {
     MockCardList,
-    router,
   };
 };
 
 describe('Card Carrousel - Unit tests', () => {
+  beforeAll(() => jest.clearAllMocks());
+
   it('Should be able to render this component', () => {
     makesut();
 
@@ -54,15 +49,15 @@ describe('Card Carrousel - Unit tests', () => {
   });
 
   it('Should be able to be redirected after click in edit', () => {
-    const { router, MockCardList } = makesut();
+    const { MockCardList } = makesut();
 
-    const button = fireEvent.click(
-      screen.getByTestId('edit-button-card'),
-    );
+    const editButton = screen.getByTestId('edit-button-card');
+    expect(editButton).toBeInTheDocument();
 
-    expect(button).toBe(true);
-    expect(router.push).toBeCalledWith(
-      `/produtos/${MockCardList[0]?.type}/${MockCardList[0]?.slug}`,
+    fireEvent.click(editButton);
+    expect(editButton.closest('a')).toHaveAttribute(
+      'href',
+      MockCardList[0]?.url,
     );
   });
 });

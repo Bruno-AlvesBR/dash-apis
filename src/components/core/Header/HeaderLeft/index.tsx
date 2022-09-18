@@ -37,6 +37,7 @@ const MenuLeft: React.FC = () => {
 
   const handleLogout = () => {
     cookie.remove(TOKEN.AUTH_TOKEN);
+    cookie.remove('userName');
 
     if (!cookie.get(TOKEN.AUTH_TOKEN)) {
       router.reload();
@@ -85,7 +86,9 @@ const MenuLeft: React.FC = () => {
             ) : (
               <>
                 <h2>{user?.name?.firstName}</h2>
-                <Button onClick={handleLogout}>Deslogar</Button>
+                <Button onClick={() => handleLogout()}>
+                  Deslogar
+                </Button>
               </>
             )}
           </ContentUserName>

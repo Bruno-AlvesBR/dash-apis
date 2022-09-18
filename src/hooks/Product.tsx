@@ -48,26 +48,28 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   const handleCreateProduct = useCallback(
     async ({ ...event }: IFoodCreate) => {
       try {
-        if (user?.id) {
+        if (user?.id && user?.admin) {
           const foodData = await foodService.create(event);
 
           if (!foodData && !foodData?.id) return;
 
           setProductData(foodData);
           router.push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
         }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id],
+    [user?.id && user?.admin],
   );
 
   const handleUpdateProduct = useCallback(
     async ({ ...event }: IProductUpdate) => {
       try {
-        if (user?.id) {
+        if (user?.id && user?.admin) {
           const productResponse = await foodService.update(
             event?.id,
             event,
@@ -76,31 +78,35 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
           if (!productResponse && !productResponse?.id) return;
 
           router.push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
         }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id],
+    [user?.id && user?.admin],
   );
 
   const handleRemoveProduct = useCallback(
     async (id: string) => {
       try {
-        if (user?.id) {
+        if (user?.id && user?.admin) {
           const productResponse = await foodService.remove(id);
 
           if (!productResponse && !productResponse?.id) return;
 
           router.push('/produtos/todos');
+        } else {
+          window.alert('Permition denied!');
         }
       } catch (err) {
         console.log(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id],
+    [user?.id && user?.admin],
   );
 
   return (
