@@ -8,10 +8,10 @@ import { useUser } from '@/hooks/User';
 import { Container, Title, ButtonSelect } from './styles';
 
 const SelectForms: React.FC = () => {
-  const [
-    { setSelectCompleted, setFormType, formType },
-    { user },
-  ] = [useFood(), useUser()];
+  const [{ setSelectCompleted, setFormType, formType }, { user }] = [
+    useFood(),
+    useUser(),
+  ];
 
   const handleSelectValue = (event: any) => {
     if (event) {
@@ -21,7 +21,7 @@ const SelectForms: React.FC = () => {
   };
 
   const handleClick = () => {
-    return user?.id && formType && setSelectCompleted(true);
+    formType && setSelectCompleted(true);
   };
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const SelectForms: React.FC = () => {
   );
 };
 
-export default memo(SelectForms);
+export default SelectForms;
