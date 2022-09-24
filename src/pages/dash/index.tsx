@@ -66,10 +66,12 @@ const Dash: React.FC = () => {
   useMemo(async () => {
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    if (typeof window !== ('undefined' || undefined)) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
   }, []);
 
   return (
