@@ -10,10 +10,11 @@ import {
   useContext,
   useState,
   useMemo,
+  useEffect,
 } from 'react';
 
 interface IThemeColorProps {
-  toggleColorMode?(): void;
+  toggleColorMode?(value: boolean): void;
   theme?: Theme;
 }
 
@@ -28,16 +29,11 @@ const ThemeColorProvider: React.FC<IThemeColorProviderProps> = ({
 }) => {
   const [mode, setMode] = useState<PaletteMode>('light');
 
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode: PaletteMode) =>
-          prevMode === 'light' ? 'dark' : 'light',
-        );
-      },
-    }),
-    [],
-  );
+  const toggleColorMode = (value: boolean) => {
+    localStorage.setItem('isDark', JSON.stringify(value));
+
+    setMode(() => (value === true ? 'dark' : 'light'));
+  };
 
   const getDesignToken = (mode: PaletteMode) => ({
     palette: {
@@ -79,7 +75,7 @@ const ThemeColorProvider: React.FC<IThemeColorProviderProps> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <ThemeColorContext.Provider value={colorMode}>
+      <ThemeColorContext.Provider value={{ toggleColorMode }}>
         {children}
       </ThemeColorContext.Provider>
     </ThemeProvider>

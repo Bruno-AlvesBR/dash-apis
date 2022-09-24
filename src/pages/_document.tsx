@@ -1,14 +1,9 @@
-/* eslint-disable @next/next/next-script-for-ga */
-/* eslint-disable @next/next/no-sync-scripts */
-import { Children } from 'react';
 import Document, {
   Head,
   Html,
   Main,
   NextScript,
 } from 'next/document';
-import MaterialUISheets from '@mui/styles/ServerStyleSheets';
-import { ServerStyleSheet } from 'styled-components';
 
 interface DocumentProps {
   disableScripts: boolean;
@@ -51,28 +46,3 @@ export default class MyDocument extends Document<DocumentProps> {
     );
   }
 }
-
-MyDocument.getInitialProps = async ctx => {
-  const materialUISheets = new MaterialUISheets();
-  const sheet = new ServerStyleSheet();
-  const originalRenderPage = ctx.renderPage;
-
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: App => rest =>
-        sheet.collectStyles(
-          materialUISheets.collect(<App {...rest} />),
-        ),
-    });
-
-  const initialProps = await Document.getInitialProps(ctx);
-
-  return {
-    ...initialProps,
-    styles: [
-      ...Children.toArray(initialProps.styles),
-      materialUISheets.getStyleElement(),
-      sheet.getStyleElement(),
-    ],
-  };
-};

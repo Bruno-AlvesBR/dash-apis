@@ -16,6 +16,7 @@ import {
   MenuPopUp,
   MenuLink,
 } from './styles';
+import ModeButton from '@/components/core/ModeButton';
 
 interface IHeaderMobileProps {
   menuList: IHeaderProps[];
@@ -42,6 +43,8 @@ const MobileHeader: React.FC<IHeaderMobileProps> = ({ menuList }) => {
 
   return (
     <Container>
+      <ModeButton />
+
       <LoginButton
         onClick={() => {
           !user?.id ? handleOpenLogin() : handleLogout();
@@ -49,6 +52,7 @@ const MobileHeader: React.FC<IHeaderMobileProps> = ({ menuList }) => {
       >
         {!user?.id ? 'Logar' : 'Deslogar'}
       </LoginButton>
+
       <MenuButton onClick={() => setOpenMenu(true)}>
         <MenuIcon />
       </MenuButton>

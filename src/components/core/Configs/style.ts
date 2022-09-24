@@ -1,9 +1,9 @@
 import Dialog from '@mui/material/Dialog';
-import withStyles from '@mui/styles/withStyles';
+import { styled } from '@mui/material';
 
-export const Container = withStyles(() => ({
+export const Container = styled(Dialog)(() => ({
   paper: {
     minWidth: '90vw !important',
     minHeight: '90vh !important',
   },
-}))(Dialog);
+}));
