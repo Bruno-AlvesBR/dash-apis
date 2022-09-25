@@ -1,6 +1,7 @@
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
+import { useEffect, useState } from 'react';
 
 import { useUser } from '@/hooks/User';
 import { TOKEN } from '@/interfaces/IUserProps';
@@ -20,6 +21,8 @@ const MenuLeft: React.FC = () => {
   const { reload } = useRouter();
   const { setOpenDialog } = useLogin();
 
+  const [userName, setUserName] = useState<string>();
+
   const handleLogout = () => {
     cookie.remove(TOKEN.AUTH_TOKEN);
     cookie.remove('userName');
@@ -29,6 +32,12 @@ const MenuLeft: React.FC = () => {
 
   const handleOpenLogin = () => setOpenDialog(true);
 
+  useEffect(() => {
+    const name = localStorage.getItem('userName');
+
+    if (name) setUserName(name);
+  }, [])
+
   return (
     <Container>
       <Content>
@@ -37,11 +46,11 @@ const MenuLeft: React.FC = () => {
         </ContentConfigs>
 
         <ContentUserName>
-          {!user?.id ? (
+          {!user?.id && !userName ? (
             <Button onClick={handleOpenLogin}>Logar</Button>
           ) : (
             <>
-              <h2>{user?.name?.firstName}</h2>
+              <h2>{userName}</h2>
               <Button onClick={() => handleLogout()}>Deslogar</Button>
             </>
           )}
