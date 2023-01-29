@@ -28,4 +28,4 @@ const Link: React.FC<ILinkProps> = ({
   </NextLink>
 );
 
-export default Link;
+export { Link };

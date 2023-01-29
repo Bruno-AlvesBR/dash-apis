@@ -29,8 +29,6 @@ describe('Banner Product - Unit test', () => {
     );
 
     expect(button).toBe(true);
-    expect(router.push).toBeCalledWith(
-      `${process.env.NEXT_PUBLIC_APP}/dash`,
-    );
+    expect(router.push).toBeCalledWith(`/dash`);
   });
 });
