@@ -18,13 +18,8 @@ const Link: React.FC<ILinkProps> = ({
   dataTestId,
   ...props
 }) => (
-  <NextLink
-    data-testid={dataTestId}
-    passHref
-    href={String(href)}
-    {...props}
-  >
-    {children}
+  <NextLink data-testid={dataTestId} passHref href={href}>
+    <a {...props}>{children}</a>
   </NextLink>
 );
 

@@ -4,7 +4,6 @@ import { podcastService } from '@/services/index';
 import DynamicPodcastForm from '@/components/core/Forms/Podcast/dynamic';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { usePodcast } from '@/hooks/Podcast';
-import HeadPage from '@/components/core/Head';
 
 import { Container } from '@/styles/theme';
 
@@ -17,9 +16,6 @@ const Podcast: NextPage<IPodcastSlugProps> = ({ podcast }) => {
 
   return (
     <Container>
-      <HeadPage>
-        <title>Podcast</title>
-      </HeadPage>
       <DynamicPodcastForm
         handlePodcastSubmit={handleUpdatePodcast}
         podcast={podcast}

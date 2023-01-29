@@ -1,9 +1,7 @@
 import CircularProgress from '@mui/material/CircularProgress';
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 
 import ProductsContent from '@/components/pages/Produtos';
-import HeadPage from '@/components/core/Head';
-import { useFood } from '@/hooks/Product';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { IProductProps } from '@/interfaces/IProductProps';
 import {
@@ -20,34 +18,16 @@ export interface IProductsContentProps {
   videos: IVideoProps[];
 }
 
-const Todos: NextPage<IProductsContentProps> = ({
-  foods,
-  podcasts,
-  videos,
-}) => {
-  const { isLoading } = useFood();
-
-  return (
-    <>
-      <HeadPage>
-        <title>Todos</title>
-      </HeadPage>
-      {!isLoading ? (
-        <ProductsContent
-          podcasts={podcasts}
-          foods={foods}
-          videos={videos}
-        />
-      ) : (
-        <CircularProgress style={{ margin: 'auto' }} />
-      )}
-    </>
+const Todos: NextPage<IProductsContentProps> = props =>
+  props ? (
+    <ProductsContent {...props} />
+  ) : (
+    <CircularProgress style={{ margin: 'auto' }} />
   );
-};
 
 export default Todos;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
     const [foods, podcasts, videos] = await Promise.all([
       foodService?.findAll(),
@@ -61,6 +41,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         podcasts,
         videos,
       },
+      revalidate: 600,
     };
   } catch (err) {
     return {
@@ -69,6 +50,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         podcasts: [],
         videos: [],
       },
+      revalidate: 60,
     };
   }
 };

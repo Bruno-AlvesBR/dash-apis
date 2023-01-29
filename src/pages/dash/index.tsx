@@ -4,12 +4,12 @@ import ProductsDynamicForm from '@/components/core/Forms/Foods/dynamic';
 import PodcastDynamicForm from '@/components/core/Forms/Podcast/dynamic';
 import { useFood } from '@/hooks/Product';
 import SelectDynamicForms from '@/components/core/SelectForms/dynamic';
-import HeadPage from '@/components/core/Head';
 import { usePodcast } from '@/hooks/Podcast';
 import VideosDynamicForm from '@/components/core/Forms/Videos/dynamic';
 import { useVideo } from '@/hooks/Videos';
 
 import { Container } from '@/styles/theme';
+import { GetStaticProps } from 'next';
 
 const Dash: React.FC = () => {
   const {
@@ -76,11 +76,6 @@ const Dash: React.FC = () => {
 
   return (
     <Container>
-      <HeadPage>
-        <title>
-          {(formType && formType.split(' ')[0]) || 'Select'}
-        </title>
-      </HeadPage>
       {!selectCompleted ? (
         <SelectDynamicForms />
       ) : (
@@ -91,3 +86,8 @@ const Dash: React.FC = () => {
 };
 
 export default Dash;
+
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {},
+  revalidate: 600,
+});

@@ -1,3 +1,4 @@
+import { Link } from '@/components/ui/Link';
 import { styled } from '@mui/material';
 
 export const Container = styled('div')(({ theme }) => ({
@@ -11,14 +12,20 @@ export const Container = styled('div')(({ theme }) => ({
   color: theme?.palette?.text?.primary,
   margin: '20px 0px',
   borderRadius: 5,
+}));
 
-  '& > button': {
+export const LinkButton = styled(Link)(({ theme }) => ({
+  background: theme?.palette?.common?.white,
+  color: theme?.palette?.text?.secondary,
+  cursor: 'pointer',
+  borderRadius: 4,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  transition: '.25s all ease',
+
+  '&:hover': {
     background: theme?.palette?.common?.white,
-    color: theme?.palette?.text?.secondary,
-
-    '&:hover': {
-      background: theme?.palette?.common?.white,
-      opacity: 0.7,
-    },
+    opacity: 0.7,
   },
 }));

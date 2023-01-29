@@ -47,17 +47,22 @@ const UserProvider: React.FC<IUserContextProvider> = ({
     const authToken = await cookie.get(TOKEN.AUTH_TOKEN);
     if (!authToken) return;
 
-    const { _id } = jwt.verify(
-      authToken,
-      `${process.env.NEXT_PUBLIC_JWT_KEY}`,
-    ) as JwtPayload;
+    if (jwt) {
+      const { _id } = jwt.verify(
+        authToken,
+        `${process.env.NEXT_PUBLIC_JWT_KEY}`,
+      ) as JwtPayload;
 
-    if (_id) {
-      setUserId(_id);
-      const userResponse = await userService?.recoveryUser(`${_id}`);
+      if (_id) {
+        setUserId(_id);
+        const userResponse = await userService?.recoveryUser(
+          `${_id}`,
+        );
 
-      if (userResponse) setUser(userResponse as IUserProps);
+        if (userResponse) setUser(userResponse as IUserProps);
+      }
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -71,11 +76,12 @@ const UserProvider: React.FC<IUserContextProvider> = ({
           password: event?.password,
         });
 
-        if (String(userData)?.length <= 0 && !userData) return;
+        if (!userData || !userData?._id) return;
 
         cookie.set(TOKEN.AUTH_TOKEN, `${userData?.acessToken}`, {
           maxAge: 60 * 60 * 24,
         });
+        cookie.set('userName', userData?.name?.firstName || 'Guest');
 
         setUserId(userData?.id);
         setUser(userData);
@@ -88,14 +94,6 @@ const UserProvider: React.FC<IUserContextProvider> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [setOpenDialog],
   );
-
-  useEffect(() => {
-    const userName = localStorage.getItem('userName');
-
-    if (!userName) {
-      localStorage.setItem('userName', user?.name?.firstName);
-    }
-  }, [user?.name]);
 
   return (
     <UserContext.Provider

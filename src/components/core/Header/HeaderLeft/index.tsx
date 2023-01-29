@@ -17,26 +17,27 @@ import {
 
 const MenuLeft: React.FC = () => {
   const { user } = useUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const cookie = new Cookies();
   const { reload } = useRouter();
   const { setOpenDialog } = useLogin();
 
-  const [userName, setUserName] = useState<string>();
+  const [userName, setUserName] = useState<string>('');
 
   const handleLogout = () => {
     cookie.remove(TOKEN.AUTH_TOKEN);
     cookie.remove('userName');
 
-    if (!cookie.get(TOKEN.AUTH_TOKEN)) reload();
+    reload();
   };
 
   const handleOpenLogin = () => setOpenDialog(true);
 
   useEffect(() => {
-    const name = localStorage.getItem('userName');
+    const name = cookie.get('userName');
 
     if (name) setUserName(name);
-  }, [])
+  }, [cookie]);
 
   return (
     <Container>

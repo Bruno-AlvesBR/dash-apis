@@ -45,7 +45,7 @@ const HeaderTop: React.FC = () => {
         <Link href="/" passHref>
           <LogoButton isSelected={pathname === '/'}>
             <BlurOnIcon />
-            Logo
+            Dashboard
           </LogoButton>
         </Link>
 

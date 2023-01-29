@@ -1,12 +1,29 @@
 import Head from 'next/head';
-import { ReactNode } from 'react';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 
-interface IHeadProps {
-  children?: ReactNode;
-}
+const HeadPages: React.FC = () => {
+  const { pathname } = useRouter();
 
-const HeadPage: React.FC<IHeadProps> = ({ children }) => (
-  <Head>{children}</Head>
-);
+  const pagePath = useMemo(() => {
+    const location = pathname.split('/')[1];
 
-export default HeadPage;
+    const formatedLocationName = location
+      .split('')
+      .map((char, index) =>
+        index === 0 ? char.toUpperCase() : char,
+      );
+
+    if (!formatedLocationName?.length) return 'Dashboard';
+
+    return formatedLocationName;
+  }, [pathname]);
+
+  return (
+    <Head>
+      <title>{pagePath}</title>
+    </Head>
+  );
+};
+
+export { HeadPages };

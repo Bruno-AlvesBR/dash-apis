@@ -4,7 +4,6 @@ import { videoService } from '@/services/index';
 import DynamicVideoForm from '@/components/core/Forms/Videos/dynamic';
 import { useVideo } from '@/hooks/Videos';
 import { IVideoProps } from '@/interfaces/IVideoProps';
-import HeadPage from '@/components/core/Head';
 
 import { Container } from '@/styles/theme';
 
@@ -17,9 +16,6 @@ const Video: NextPage<IVideoSlugProps> = ({ video }) => {
 
   return (
     <Container>
-      <HeadPage>
-        <title>Video</title>
-      </HeadPage>
       <DynamicVideoForm
         handleVideoSubmit={handleUpdateVideo}
         video={video}

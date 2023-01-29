@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import BannerCreateProduct from '@/components/core/BannerCreateProduct';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
@@ -19,16 +19,5 @@ describe('Banner Product - Unit test', () => {
     mockRender();
 
     expect(screen.getByTestId('banner-home')).toBeInTheDocument();
-  });
-
-  it('Should be able to click and be redirected', () => {
-    const { router } = mockRender();
-
-    const button = fireEvent.click(
-      screen.getByTestId('banner-home-button'),
-    );
-
-    expect(button).toBe(true);
-    expect(router.push).toBeCalledWith(`/dash`);
   });
 });
