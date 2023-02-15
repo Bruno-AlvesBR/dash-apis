@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
-import ProductsDynamicForm from '@/components/core/Forms/Foods/dynamic';
-import PodcastDynamicForm from '@/components/core/Forms/Podcast/dynamic';
+import ProductsForm from '@/components/core/Forms/Foods';
+import PodcastForm from '@/components/core/Forms/Podcast';
 import { useFood } from '@/hooks/Product';
-import SelectDynamicForms from '@/components/core/SelectForms/dynamic';
+import SelectDynamicForms from '@/components/core/SelectForms';
 import { usePodcast } from '@/hooks/Podcast';
-import VideosDynamicForm from '@/components/core/Forms/Videos/dynamic';
+import VideosForm from '@/components/core/Forms/Videos';
 import { useVideo } from '@/hooks/Videos';
 
 import { Container } from '@/styles/theme';
@@ -47,17 +47,17 @@ const Dash: React.FC = () => {
     (type: string) =>
       ({
         ecommerce: (
-          <ProductsDynamicForm
+          <ProductsForm
             handleProductSubmit={handleCreateProduct}
           />
         ),
         podcast: (
-          <PodcastDynamicForm
+          <PodcastForm
             handlePodcastSubmit={handleCreatePodcast}
           />
         ),
         videos: (
-          <VideosDynamicForm handleVideoSubmit={handleCreateVideo} />
+          <VideosForm handleVideoSubmit={handleCreateVideo} />
         ),
       }[type]),
     [handleCreatePodcast, handleCreateProduct, handleCreateVideo],

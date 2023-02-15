@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 
 import { videoService } from '@/services/index';
-import DynamicVideoForm from '@/components/core/Forms/Videos/dynamic';
+import Form from '@/components/core/Forms/Videos';
 import { useVideo } from '@/hooks/Videos';
 import { IVideoProps } from '@/interfaces/IVideoProps';
 
@@ -16,10 +16,7 @@ const Video: NextPage<IVideoSlugProps> = ({ video }) => {
 
   return (
     <Container>
-      <DynamicVideoForm
-        handleVideoSubmit={handleUpdateVideo}
-        video={video}
-      />
+      <Form handleVideoSubmit={handleUpdateVideo} video={video} />
     </Container>
   );
 };

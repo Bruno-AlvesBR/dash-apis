@@ -13,7 +13,6 @@ import {
   IProductUpdate,
 } from '@/interfaces/IProductProps';
 import { foodService } from '@/services/index';
-import { useUser } from './User';
 
 interface IFoodContextProps {
   handleCreateProduct?(event: IFoodProps): void;
@@ -35,7 +34,7 @@ interface IFoodProviderProps {
 const FoodContext = createContext({} as IFoodContextProps);
 
 const FoodProvider = ({ children }: IFoodProviderProps) => {
-  const [router, { user }] = [useRouter(), useUser()];
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectCompleted, setSelectCompleted] =
@@ -48,65 +47,55 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   const handleCreateProduct = useCallback(
     async ({ ...event }: IFoodCreate) => {
       try {
-        if (user?.id && user?.admin) {
-          const foodData = await foodService.create(event);
+        const foodData = await foodService.create(event);
 
-          if (!foodData && !foodData?.id) return;
+        if (!foodData && !foodData?.id) return;
 
-          setProductData(foodData);
-          router.push('/produtos/todos');
-        } else {
-          window.alert('Permition denied!');
-        }
+        setProductData(foodData);
+        router.push('/produtos/todos');
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id && user?.admin],
+    [],
   );
 
   const handleUpdateProduct = useCallback(
     async ({ ...event }: IProductUpdate) => {
       try {
-        if (user?.id && user?.admin) {
-          const productResponse = await foodService.update(
-            event?.id,
-            event,
-          );
+        const productResponse = await foodService.update(
+          event?.id,
+          event,
+        );
 
-          if (!productResponse && !productResponse?.id) return;
+        if (!productResponse && !productResponse?.id) return;
 
-          router.push('/produtos/todos');
-        } else {
-          window.alert('Permition denied!');
-        }
+        setProductData(productResponse);
+        router.push('/produtos/todos');
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id && user?.admin],
+    [],
   );
 
   const handleRemoveProduct = useCallback(
     async (id: string) => {
       try {
-        if (user?.id && user?.admin) {
-          const productResponse = await foodService.remove(id);
+        const productResponse = await foodService.remove(id);
 
-          if (!productResponse && !productResponse?.id) return;
+        if (!productResponse && !productResponse?.id) return;
 
-          router.push('/produtos/todos');
-        } else {
-          window.alert('Permition denied!');
-        }
+        setProductData(productResponse);
+        router.push('/produtos/todos');
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id && user?.admin],
+    [],
   );
 
   return (

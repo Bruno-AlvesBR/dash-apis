@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { IVideoBody, IVideoProps } from '@/interfaces/IVideoProps';
 import { useVideo } from '@/hooks/Videos';
 import SnackbarContent from '@/components/core/Snackbar';
+import { useUser } from '@/hooks/User';
 
 import { Container } from '../styles';
 
@@ -24,6 +25,7 @@ const VideosForm: React.FC<IVideoFormProps> = ({
 }) => {
   const { reload, pathname } = useRouter();
   const { handleDeleteVideo } = useVideo();
+  const { user } = useUser();
 
   const validationsForm = yup.object({
     id: yup.string(),
@@ -129,20 +131,29 @@ const VideosForm: React.FC<IVideoFormProps> = ({
       <Box display="flex" alignItems="center">
         {pathname.includes('/produtos/') ? (
           <>
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!user?.admin}
+            >
               Atualizar
             </Button>
             <Button
               variant="contained"
               onClick={() => handleDeleteVideo(video?.id)}
               style={{ marginLeft: 20 }}
+              disabled={!user?.admin}
             >
               Remover
             </Button>
           </>
         ) : (
           <>
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!user?.admin}
+            >
               Criar
             </Button>
             <Button onClick={() => handleRemoveFormStorage()}>

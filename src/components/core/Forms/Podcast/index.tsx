@@ -10,6 +10,7 @@ import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { usePodcast } from '@/hooks/Podcast';
 
 import { Container } from '../styles';
+import { useUser } from '@/hooks/User';
 
 interface IFormProps {
   handlePodcastSubmit(event: any): void;
@@ -20,10 +21,9 @@ const PodcastForm: React.FC<IFormProps> = ({
   handlePodcastSubmit,
   podcast,
 }) => {
-  const [{ handleRemovePodcast }, router] = [
-    usePodcast(),
-    useRouter(),
-  ];
+  const { handleRemovePodcast } = usePodcast();
+  const router = useRouter();
+  const { user } = useUser();
 
   const validateForm = yup.object({
     title: yup.string().required('O título é obrigatório!'),
@@ -144,20 +144,29 @@ const PodcastForm: React.FC<IFormProps> = ({
       <span style={{ display: 'flex', flexDirection: 'row' }}>
         {router.pathname.includes('/produtos/') ? (
           <>
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!user?.admin}
+            >
               Atualizar
             </Button>
             <Button
               variant="contained"
               onClick={() => handleRemovePodcast(podcast?.id)}
               style={{ marginLeft: 20 }}
+              disabled={!user?.admin}
             >
               Remover
             </Button>
           </>
         ) : (
           <>
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!user?.admin}
+            >
               Criar
             </Button>
             <Button onClick={() => handleRemoveFormStorage()}>
