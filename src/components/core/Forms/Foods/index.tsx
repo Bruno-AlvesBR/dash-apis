@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 
 import { IProductProps } from '@/interfaces/IProductProps';
 import { useFood } from '@/hooks/Product';
+import { useUser } from '@/hooks/User';
 
 import { Container } from '../styles';
 
@@ -21,7 +22,9 @@ const EForm: React.FC<IFormProps> = ({
   handleProductSubmit,
   product,
 }) => {
-  const [{ handleRemoveProduct }, router] = [useFood(), useRouter()];
+  const { handleRemoveProduct } = useFood();
+  const router = useRouter();
+  const { user } = useUser();
 
   const validateForm = yup.object({
     title: yup.string().required('O título é obrigatório!'),
@@ -198,20 +201,29 @@ const EForm: React.FC<IFormProps> = ({
       <span style={{ display: 'flex', flexDirection: 'row' }}>
         {router.pathname.includes('/produtos/') ? (
           <>
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!user?.admin}
+            >
               Atualizar
             </Button>
             <Button
               variant="contained"
               onClick={() => handleRemoveProduct(product?.id)}
               style={{ marginLeft: 20 }}
+              disabled={!user?.admin}
             >
               Remover
             </Button>
           </>
         ) : (
           <>
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!user?.admin}
+            >
               Criar
             </Button>
             <Button onClick={() => handleRemoveFormStorage()}>

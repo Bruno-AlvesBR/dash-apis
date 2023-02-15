@@ -48,21 +48,20 @@ const UserProvider: React.FC<IUserContextProvider> = ({
     if (!authToken) return;
 
     if (jwt) {
-      const { _id } = jwt.verify(
+      const { _id: id } = jwt.verify(
         authToken,
         `${process.env.NEXT_PUBLIC_JWT_KEY}`,
       ) as JwtPayload;
 
-      if (_id) {
-        setUserId(_id);
-        const userResponse = await userService?.recoveryUser(
-          `${_id}`,
-        );
+      if (id) {
+        setUserId(id);
+        const userResponse = await userService?.recoveryUser(`${id}`);
+
+        console.log('test', id, userResponse);
 
         if (userResponse) setUser(userResponse as IUserProps);
       }
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

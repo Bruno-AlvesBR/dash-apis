@@ -100,6 +100,7 @@ export const ContentButtons = styled(Box)(({ theme }) => ({
     color: theme?.palette?.text?.secondary,
     fontWeight: 600,
     width: '100%',
+    textDecoration: 'none',
 
     '&:hover': {
       background: theme?.palette?.common?.white,

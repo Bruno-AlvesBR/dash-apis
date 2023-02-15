@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 
 import { IVideoBody } from '@/interfaces/IVideoProps';
 import { videoService } from '@/services/index';
-import { useUser } from './User';
 import { useSnack } from './Snackbar';
 
 interface IVideoContextProps {
@@ -26,69 +25,56 @@ const VideoContext = createContext({} as IVideoContextProps);
 const VideoProvider: React.FC<IVideoProviderProps> = ({
   children,
 }) => {
-  const { user } = useUser();
-  const { push, reload } = useRouter();
+  const { push } = useRouter();
   const { setOpenSnackBar } = useSnack();
 
   const handleCreateVideo = useCallback(
     async (data: IVideoBody) => {
       try {
-        if (user?.id && user?.admin) {
-          const videoData = await videoService.create(data);
+        const videoData = await videoService.create(data);
 
-          if (!videoData && !videoData?.id) return;
+        if (!videoData && !videoData?.id) return;
 
-          push('/produtos/todos');
-        } else {
-          window.alert('Permition denied!');
-        }
+        push('/produtos/todos');
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user?.id && user?.admin],
+    [],
   );
 
   const handleUpdateVideo = useCallback(
     async (data: IVideoBody) => {
       try {
-        if (user?.id && user?.admin) {
-          const updatedVideo = await videoService.update(
-            data?.id,
-            data,
-          );
+        const updatedVideo = await videoService.update(
+          data?.id,
+          data,
+        );
 
-          if (!updatedVideo && !updatedVideo?.id) return;
+        if (!updatedVideo && !updatedVideo?.id) return;
 
-          setOpenSnackBar(true);
+        setOpenSnackBar(true);
 
-          push('/produtos/todos');
-        } else {
-          window.alert('Permition denied!');
-        }
+        push('/produtos/todos');
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [reload, setOpenSnackBar],
+    [],
   );
 
   const handleDeleteVideo = useCallback(
     async (id: string) => {
       try {
-        if (user?.id && user?.admin) {
-          const deletedVideo = await videoService.remove(id);
+        const deletedVideo = await videoService.remove(id);
 
-          if (!deletedVideo && !deletedVideo?.id) return;
+        if (!deletedVideo && !deletedVideo?.id) return;
 
-          push('/produtos/todos');
-        } else {
-          window.alert('Permition denied!');
-        }
+        push('/produtos/todos');
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

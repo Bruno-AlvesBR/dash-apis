@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 
 import { podcastService } from '@/services/index';
-import DynamicPodcastForm from '@/components/core/Forms/Podcast/dynamic';
+import Form from '@/components/core/Forms/Podcast';
 import { IPodcastProps } from '@/interfaces/IPodcastProps';
 import { usePodcast } from '@/hooks/Podcast';
 
@@ -16,7 +16,7 @@ const Podcast: NextPage<IPodcastSlugProps> = ({ podcast }) => {
 
   return (
     <Container>
-      <DynamicPodcastForm
+      <Form
         handlePodcastSubmit={handleUpdatePodcast}
         podcast={podcast}
       />
