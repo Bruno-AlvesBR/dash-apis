@@ -11,6 +11,7 @@ import {
 } from '@/services/index';
 
 import { IVideoProps } from '@/interfaces/IVideoProps';
+import { ProductsAllController } from 'infra/http/products/all';
 
 export interface IProductsContentProps {
   foods: IProductProps[];
@@ -29,18 +30,11 @@ export default Todos;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const [foods, podcasts, videos] = await Promise.all([
-      foodService?.findAll(),
-      podcastService?.findAll(),
-      videoService?.findAll(),
-    ]);
+    const productsAllController = new ProductsAllController();
+    const props = await productsAllController.index();
 
     return {
-      props: {
-        foods,
-        podcasts,
-        videos,
-      },
+      props,
       revalidate: 600,
     };
   } catch (err) {
