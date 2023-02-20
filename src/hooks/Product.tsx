@@ -25,6 +25,8 @@ interface IFoodContextProps {
   isLoading?: boolean;
   selectCompleted?: boolean;
   formType?: string;
+  isPromotion?: boolean;
+  setIsPromotion?(value: boolean): void;
 }
 
 interface IFoodProviderProps {
@@ -37,6 +39,7 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isPromotion, setIsPromotion] = useState<boolean>(false);
   const [selectCompleted, setSelectCompleted] =
     useState<boolean>(false);
   const [formType, setFormType] = useState<string>('');
@@ -47,7 +50,11 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   const handleCreateProduct = useCallback(
     async ({ ...event }: IFoodCreate) => {
       try {
-        const foodData = await foodService.create(event);
+        Object.assign(event, { isPromotion });
+        const foodData = await foodService.create({
+          ...event,
+          isPromotion,
+        });
 
         if (!foodData && !foodData?.id) return;
 
@@ -58,16 +65,17 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [isPromotion],
   );
 
   const handleUpdateProduct = useCallback(
-    async ({ ...event }: IProductUpdate) => {
+    async (event: IProductUpdate) => {
       try {
-        const productResponse = await foodService.update(
-          event?.id,
-          event,
-        );
+        Object.assign(event, { isPromotion });
+        const productResponse = await foodService.update(event?.id, {
+          ...event,
+          isPromotion,
+        });
 
         if (!productResponse && !productResponse?.id) return;
 
@@ -78,7 +86,7 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [isPromotion],
   );
 
   const handleRemoveProduct = useCallback(
@@ -111,6 +119,8 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
         selectCompleted,
         setFormType,
         formType,
+        setIsPromotion,
+        isPromotion,
       }}
     >
       {children}

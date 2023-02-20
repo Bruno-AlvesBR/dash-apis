@@ -6,9 +6,10 @@ export interface IProductProps {
   category?: string[];
   price?: {
     priceNumber?: number;
+    newPriceDiscount?: string;
     installment?: {
       monthInstallment?: number;
-      pricePerMonth?: number;
+      pricePerMonth?: string;
     };
   };
   brand?: string;
@@ -21,6 +22,8 @@ export interface IProductProps {
     mobileSrc?: string;
     desktopSrc?: string;
   };
+  isPromotion?: boolean;
+  discountPercentage?: number;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -32,13 +35,16 @@ export interface IProductCreate {
   category?: string[];
   priceNumber?: number;
   monthInstallment?: number;
-  pricePerMonth?: number;
+  newPriceDiscount?: string;
+  pricePerMonth?: string;
   brand?: string;
   rating?: number;
   freight?: boolean;
   stock?: number;
   manufacture?: string;
   slug?: string;
+  isPromotion?: boolean;
+  discountPercentage?: number;
   mobileSrc?: string;
   desktopSrc?: string;
 }
@@ -50,13 +56,16 @@ export interface IProductUpdate {
   category?: string[];
   priceNumber?: number;
   monthInstallment?: number;
-  pricePerMonth?: number;
+  newPriceDiscount?: string;
+  pricePerMonth?: string;
   brand?: string;
   rating?: number;
   freight?: boolean;
   stock?: number;
   manufacture?: string;
   slug?: string;
+  isPromotion?: boolean;
+  discountPercentage?: number;
   mobileSrc?: string;
   desktopSrc?: string;
 }

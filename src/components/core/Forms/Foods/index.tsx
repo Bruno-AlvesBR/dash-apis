@@ -4,7 +4,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import * as yup from 'yup';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { IProductProps } from '@/interfaces/IProductProps';
@@ -12,6 +12,7 @@ import { useFood } from '@/hooks/Product';
 import { useUser } from '@/hooks/User';
 
 import { Container } from '../styles';
+import { Box } from '@mui/material';
 
 interface IFormProps {
   handleProductSubmit(event: any): void;
@@ -22,7 +23,8 @@ const EForm: React.FC<IFormProps> = ({
   handleProductSubmit,
   product,
 }) => {
-  const { handleRemoveProduct } = useFood();
+  const { handleRemoveProduct, isPromotion, setIsPromotion } =
+    useFood();
   const router = useRouter();
   const { user } = useUser();
 
@@ -47,6 +49,8 @@ const EForm: React.FC<IFormProps> = ({
 
   useEffect(() => {
     if (setValue && product) {
+      setIsPromotion(product?.isPromotion);
+
       setValue('id', product?.id);
       setValue('title', product?.title);
       setValue('description', product?.description);
@@ -56,20 +60,28 @@ const EForm: React.FC<IFormProps> = ({
       setValue('desktopSrc', product?.image?.desktopSrc);
       setValue('mobileSrc', product?.image?.mobileSrc);
       setValue('manufacture', product?.manufacture);
-      setValue('priceNumber', product?.price?.priceNumber);
+      setValue(
+        'priceNumber',
+        String(product?.price?.priceNumber).replace('R$', ''),
+      );
       setValue(
         'monthInstallment',
         product?.price?.installment?.monthInstallment,
       );
       setValue(
         'pricePerMonth',
-        product?.price?.installment?.pricePerMonth,
+        String(product?.price?.installment?.pricePerMonth).replace(
+          'R$',
+          '',
+        ),
       );
+      setValue('isPromotion', product?.isPromotion);
+      setValue('discountPercentage', product?.discountPercentage);
       setValue('rating', product?.rating);
       setValue('slug', product?.slug);
       setValue('stock', product?.stock);
     }
-  }, [product, setValue]);
+  }, [product, setIsPromotion, setValue]);
 
   const handleRemoveFormStorage = () => {
     localStorage.removeItem('formulario');
@@ -128,14 +140,28 @@ const EForm: React.FC<IFormProps> = ({
         placeholder="Meses de parcelamento"
         {...register('monthInstallment')}
       />
-      <TextField
-        variant="outlined"
-        name="pricePerMonth"
-        type="number"
-        label="Preço por mês"
-        placeholder="Preço por mês"
-        {...register('pricePerMonth')}
-      />
+      <Box display="flex" alignItems="center">
+        <p>Tem alguma promoção?</p>
+        <Switch
+          name="isPromotion"
+          type="checkbox"
+          onChange={event => setIsPromotion(event.target.checked)}
+          {...(!!isPromotion &&
+            product?.isPromotion && {
+              checked: product?.isPromotion,
+            })}
+        />
+      </Box>
+      {isPromotion && (
+        <TextField
+          variant="outlined"
+          name="discountPercentage"
+          type="number"
+          label="Porcentagem de desconto"
+          placeholder="Porcentagem de desconto"
+          {...register('discountPercentage')}
+        />
+      )}
       <TextField
         variant="outlined"
         name="brand"

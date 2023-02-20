@@ -7,6 +7,7 @@ export const Container = styled('form')(({ theme }) => ({
   justifyContent: 'center',
   width: '100%',
   gap: 15,
+  position: 'relative',
 
   '& button': {
     margin: 10,

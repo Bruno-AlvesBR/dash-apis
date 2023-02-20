@@ -1,12 +1,12 @@
-import { IFoodProps } from '@/interfaces/IFoodsProps';
 import { foodService } from '@/services/index';
 import { Container } from '@/styles/theme';
 import { GetServerSideProps, NextPage } from 'next';
 import Form from '@/components/core/Forms/Foods';
 import { useFood } from '@/hooks/Product';
+import { IProductProps } from '@/interfaces/IProductProps';
 
 interface IProductSlugProps {
-  food?: IFoodProps;
+  food?: IProductProps;
 }
 
 const Ecommerce: NextPage<IProductSlugProps> = ({ food }) => {

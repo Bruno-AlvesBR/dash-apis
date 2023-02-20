@@ -5,10 +5,11 @@ export interface IFoodProps {
   description?: string;
   category?: string[];
   price?: {
-    number?: number;
+    number?: string;
+    newPriceDiscount?: string;
     installment?: {
       month?: number;
-      pricePerMonth?: number;
+      pricePerMonth?: string;
     };
   };
   brand?: string;
@@ -21,6 +22,8 @@ export interface IFoodProps {
     mobileSrc?: string;
     desktopSrc?: string;
   };
+  isPromotion?: boolean;
+  discountPercentage?: number;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -41,6 +44,8 @@ export interface IFoodCreate {
   slug?: string;
   mobileSrc?: string;
   desktopSrc?: string;
+  isPromotion?: boolean;
+  discountPercentage?: number;
 }
 
 export interface IFoods {
