@@ -115,7 +115,7 @@ const EForm: React.FC<IFormProps> = ({
       <TextField
         variant="outlined"
         name="priceNumber"
-        type="number"
+        type="text"
         label="Preço"
         placeholder={errors.priceNumber?.message ?? 'Preço'}
         {...register('priceNumber')}
