@@ -11,7 +11,7 @@ export const create = async ({
 };
 
 export const findAll = async (): Promise<IProductProps[]> => {
-  const foodResponse = await api.get('product/foods');
+  const foodResponse = await api.get('product');
 
   return foodResponse?.data || [];
 };
