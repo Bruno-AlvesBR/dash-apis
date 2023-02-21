@@ -11,7 +11,7 @@ export const LoggedHome: React.FC = () => (
 
       <Description variant="h3">
         Projeto usado para gerenciar o site de e-commerce de alimentos{' '}
-        <Link href={process.env.NEXT_PUBLIC_URL_FOODS}>
+        <Link href={process.env.NEXT_PUBLIC_ECOMMERCE_URL}>
           (e-foods)
         </Link>
       </Description>
