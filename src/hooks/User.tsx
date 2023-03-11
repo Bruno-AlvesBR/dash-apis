@@ -57,8 +57,6 @@ const UserProvider: React.FC<IUserContextProvider> = ({
         setUserId(id);
         const userResponse = await userService?.recoveryUser(`${id}`);
 
-        console.log('test', id, userResponse);
-
         if (userResponse) setUser(userResponse as IUserProps);
       }
     }

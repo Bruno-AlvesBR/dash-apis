@@ -6,13 +6,14 @@ import Button from '@mui/material/Button';
 import * as yup from 'yup';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { Box } from '@mui/material';
 
 import { IProductProps } from '@/interfaces/IProductProps';
+import { productFormList } from '../Lists/product';
 import { useFood } from '@/hooks/Product';
 import { useUser } from '@/hooks/User';
 
-import { Container } from '../styles';
-import { Box } from '@mui/material';
+import { Container, ContentImages } from '../styles';
 
 interface IFormProps {
   handleProductSubmit(event: any): void;
@@ -27,6 +28,15 @@ const EForm: React.FC<IFormProps> = ({
     useFood();
   const router = useRouter();
   const { user } = useUser();
+
+  const [fieldQuantity, setFieldQuantity] = useState(
+    product?.images?.length || 0,
+  );
+  const [imagesField, setImagesField] = useState(
+    product?.images?.length > 0
+      ? product?.images?.map((_, index) => `image-${index}`)
+      : ['image-1'],
+  );
 
   const validateForm = yup.object({
     title: yup.string().required('O título é obrigatório!'),
@@ -51,37 +61,32 @@ const EForm: React.FC<IFormProps> = ({
     if (setValue && product) {
       setIsPromotion(product?.isPromotion);
 
-      setValue('id', product?.id);
-      setValue('title', product?.title);
-      setValue('description', product?.description);
-      setValue('brand', product?.brand);
-      setValue('category', product?.category);
-      setValue('freight', product?.freight);
-      setValue('desktopSrc', product?.image?.desktopSrc);
-      setValue('mobileSrc', product?.image?.mobileSrc);
-      setValue('manufacture', product?.manufacture);
-      setValue(
-        'priceNumber',
-        String(product?.price?.priceNumber).replace('R$', ''),
-      );
-      setValue(
-        'monthInstallment',
-        product?.price?.installment?.monthInstallment,
-      );
-      setValue(
-        'pricePerMonth',
-        String(product?.price?.installment?.pricePerMonth).replace(
-          'R$',
-          '',
-        ),
-      );
-      setValue('isPromotion', product?.isPromotion);
-      setValue('discountPercentage', product?.discountPercentage);
-      setValue('rating', product?.rating);
-      setValue('slug', product?.slug);
-      setValue('stock', product?.stock);
+      productFormList.map(item => {
+        const altPrices =
+          item?.alternativePaths?.second &&
+          product[item?.alternativePaths?.first][
+            item?.alternativePaths?.second
+          ][item?.label];
+
+        const altInstallments =
+          item?.alternativePaths?.first &&
+          product[item?.alternativePaths?.first][item?.label];
+
+        const productAttribute =
+          item?.alternativePaths && item?.alternativePaths?.first
+            ? altPrices || altInstallments
+            : product[item?.label];
+
+        setValue(item.label, productAttribute);
+      });
+      setValue('isPromotion', product.isPromotion);
+      setValue('discountPercentage', product.discountPercentage);
+
+      imagesField.map((image, index) => {
+        setValue(image, product.images[index]);
+      });
     }
-  }, [product, setIsPromotion, setValue]);
+  }, [product, setIsPromotion, setValue, imagesField, fieldQuantity]);
 
   const handleRemoveFormStorage = () => {
     localStorage.removeItem('formulario');
@@ -89,57 +94,40 @@ const EForm: React.FC<IFormProps> = ({
     router.reload();
   };
 
+  const handleAddNewField = () => {
+    setFieldQuantity(fieldQuantity + 1);
+
+    setImagesField([...imagesField, `image-${fieldQuantity}`]);
+  };
+
+  const handleRemoveNewField = () => {
+    setFieldQuantity(fieldQuantity - 1);
+
+    const removedLastField = imagesField.pop();
+    const filtteredFields = imagesField.filter(
+      item => item !== removedLastField,
+    );
+
+    setImagesField(filtteredFields);
+  };
+
   return (
     <Container onSubmit={handleSubmit(handleProductSubmit)}>
-      <TextField
-        variant="outlined"
-        name="id"
-        type="text"
-        label="id"
-        placeholder="id"
-        disabled
-        {...register('id')}
-      />
-      <TextField
-        variant="outlined"
-        name="title"
-        type="text"
-        label="Título"
-        placeholder={errors.title?.message ?? 'Título'}
-        {...register('title')}
-      />
-      <TextField
-        variant="outlined"
-        name="description"
-        type="text"
-        label="Descrição"
-        placeholder="Descrição"
-        {...register('description')}
-      />
-      <TextField
-        variant="outlined"
-        name="category"
-        type="text"
-        label="Categoria"
-        placeholder="Categoria"
-        {...register('category')}
-      />
-      <TextField
-        variant="outlined"
-        name="priceNumber"
-        type="text"
-        label="Preço"
-        placeholder={errors.priceNumber?.message ?? 'Preço'}
-        {...register('priceNumber')}
-      />
-      <TextField
-        variant="outlined"
-        name="monthInstallment"
-        type="number"
-        label="Meses de parcelamento"
-        placeholder="Meses de parcelamento"
-        {...register('monthInstallment')}
-      />
+      {productFormList.map((item, index) => (
+        <TextField
+          key={index}
+          variant="outlined"
+          name={item?.label}
+          type={item?.fieldType}
+          label={errors[item?.label]?.message ?? item?.title}
+          placeholder={item?.title}
+          disabled={item?.disabled}
+          error={!!errors[item?.label]?.message}
+          fullWidth
+          {...register(item?.label)}
+        />
+      ))}
+
       <Box display="flex" alignItems="center">
         <p>Tem alguma promoção?</p>
         <Switch
@@ -162,67 +150,28 @@ const EForm: React.FC<IFormProps> = ({
           {...register('discountPercentage')}
         />
       )}
-      <TextField
-        variant="outlined"
-        name="brand"
-        type="text"
-        label="Marca"
-        placeholder="Marca"
-        {...register('brand')}
-      />
-      <TextField
-        variant="outlined"
-        name="rating"
-        type="number"
-        label="Avaliação"
-        placeholder="Avaliação"
-        {...register('rating')}
-      />
-      <TextField
-        variant="outlined"
-        name="stock"
-        type="number"
-        label="Estoque"
-        placeholder={errors.stock?.message ?? 'Estoque'}
-        {...register('stock')}
-      />
-      <TextField
-        variant="outlined"
-        name="manufacture"
-        type="text"
-        label="Fabricante"
-        placeholder={errors.manufacture?.message ?? 'Fabricante'}
-        {...register('manufacture')}
-      />
-      <TextField
-        variant="outlined"
-        name="slug"
-        type="text"
-        label="Slug"
-        placeholder={errors.slug?.message ?? 'Slug'}
-        {...register('slug')}
-      />
-      <TextField
-        variant="outlined"
-        name="desktopSrc"
-        type="text"
-        label="Imagem"
-        placeholder="Imagem"
-        {...register('desktopSrc')}
-      />
-      <TextField
-        variant="outlined"
-        name="mobileSrc"
-        type="text"
-        label="Thumbnail"
-        placeholder="Thumbnail"
-        {...register('mobileSrc')}
-      />
-      <Switch
-        defaultChecked
-        name="freight"
-        {...register('freight')}
-      />
+
+      <ContentImages>
+        {imagesField?.map(image => (
+          <TextField
+            key={image}
+            variant="outlined"
+            name={image}
+            type="text"
+            label="Imagem"
+            placeholder="Imagem"
+            fullWidth
+            {...register(image)}
+          />
+        ))}
+
+        <Button type="button" onClick={handleRemoveNewField}>
+          -
+        </Button>
+        <Button type="button" onClick={handleAddNewField}>
+          +
+        </Button>
+      </ContentImages>
 
       <span style={{ display: 'flex', flexDirection: 'row' }}>
         {router.pathname.includes('/produtos/') ? (

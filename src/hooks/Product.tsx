@@ -13,6 +13,7 @@ import {
   IProductUpdate,
 } from '@/interfaces/IProductProps';
 import { foodService } from '@/services/index';
+import { handleFormatProductSending } from '@/utils/formt/product';
 
 interface IFoodContextProps {
   handleCreateProduct?(event: IFoodProps): void;
@@ -71,9 +72,18 @@ const FoodProvider = ({ children }: IFoodProviderProps) => {
   const handleUpdateProduct = useCallback(
     async (event: IProductUpdate) => {
       try {
-        Object.assign(event, { isPromotion });
+        const imagesDomainMatch = Object.values(event).filter(item =>
+          String(item).includes('iili.io'),
+        );
+        Object.assign(event, {
+          isPromotion,
+          images: imagesDomainMatch,
+        });
+
+        const product = handleFormatProductSending(event);
+
         const productResponse = await foodService.update(event?.id, {
-          ...event,
+          ...product,
           isPromotion,
         });
 

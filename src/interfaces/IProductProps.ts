@@ -18,10 +18,7 @@ export interface IProductProps {
   stock?: number;
   manufacture?: string;
   slug?: string;
-  image?: {
-    mobileSrc?: string;
-    desktopSrc?: string;
-  };
+  images?: Array<string>;
   isPromotion?: boolean;
   discountPercentage?: number;
   createdAt?: string;
@@ -45,8 +42,7 @@ export interface IProductCreate {
   slug?: string;
   isPromotion?: boolean;
   discountPercentage?: number;
-  mobileSrc?: string;
-  desktopSrc?: string;
+  images?: Array<string>;
 }
 
 export interface IProductUpdate {
@@ -54,7 +50,7 @@ export interface IProductUpdate {
   title?: string;
   description?: string;
   category?: string[];
-  priceNumber?: number;
+  priceNumber?: string;
   monthInstallment?: number;
   newPriceDiscount?: string;
   pricePerMonth?: string;

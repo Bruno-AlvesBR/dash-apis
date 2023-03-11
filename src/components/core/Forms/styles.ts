@@ -1,4 +1,5 @@
 import { styled } from '@mui/material';
+import Box from '@mui/material/Box';
 
 export const Container = styled('form')(({ theme }) => ({
   zIndex: 99,
@@ -32,4 +33,9 @@ export const Container = styled('form')(({ theme }) => ({
     color: theme?.palette?.text?.primary,
     fontWeight: 700,
   },
+}));
+
+export const ContentImages = styled(Box)(() => ({
+  display: 'flex',
+  gap: 6,
 }));

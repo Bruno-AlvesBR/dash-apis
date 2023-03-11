@@ -54,7 +54,9 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           id={item?.id}
           title={item?.title}
           description={item?.description}
-          desktopSrc={item?.image?.desktopSrc}
+          image={{
+            url: item?.images[0] || '',
+          }}
           createdAt={item?.createdAt}
           url={`/produtos/ecommerce/${item?.slug}`}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
@@ -76,7 +78,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
           id={item?.id}
           title={item?.title}
           description={item?.description}
-          desktopSrc={item?.thumbnail}
+          image={{ url: item?.thumbnail }}
           createdAt={item?.createdAt}
           url={`/produtos/podcast/${item?._id}`}
           contentCreatedAt={contentCreatedAt(item?.createdAt)}
@@ -100,7 +102,7 @@ const ProductsContent: React.FC<IProductsContentProps> = ({
             key={item?.id}
             id={item?.id}
             title={item?.title}
-            desktopSrc={item?.file?.image}
+            image={{ url: item?.file?.image }}
             url={`/produtos/video/${item?.id}`}
             contentCreatedAt={contentCreatedAt(item?.createdAt)}
           />

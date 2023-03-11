@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export interface ICardProps {
   id?: string;
@@ -6,6 +6,7 @@ export interface ICardProps {
   description?: string;
   desktopSrc?: string;
   createdAt?: string;
+  image?: { url: string };
   contentCreatedAt?: string;
   onClick?(): void;
   isPriority?: boolean;
