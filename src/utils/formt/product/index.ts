@@ -4,7 +4,7 @@ const handleFormatProductSending = (
   event: IProductUpdate,
 ): IProductUpdate => {
   const defaultReplace = (attribute: string) =>
-    String(attribute).replaceAll('R$', '');
+    String(attribute).replaceAll('R$', '').trim();
 
   const product = {
     ...event,
