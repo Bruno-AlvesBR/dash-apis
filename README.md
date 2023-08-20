@@ -3,5 +3,7 @@
 ## Informações sobre o projeto:
 
 ```
- - Projeto ainda em fase de produção!
+ - If you need to test the system, consider use tihs account:
+  - email: test@gmail.com
+  - password: test
 ```
